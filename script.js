@@ -1,6 +1,9 @@
 const $ = selector => document.querySelector(selector);
 const T = THREE;
 
+/* ==========================================================================
+   1. Application Content Data (Updated with Reyaa Divakar's CV & Links)
+   ========================================================================== */
 const D = {
   resume: {
     title: 'Resume & Education',
@@ -12,15 +15,15 @@ const D = {
     ],
     rows: [
       ['2026–Pres.', 'Undergraduate Research Assistant', 'MIRRORLabs (Mines Interactive Robotics Research)'],
-      ['2025', 'Summer Shadow Program Intern', 'Burns & McDonnell[cite: 4]'],
-      ['2024', 'Aerospace Intern', 'Colorado Space Business Roundtable (CSBR/ASA)[cite: 4]'],
-      ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit[cite: 6]']
+      ['2025', 'Summer Shadow Program Intern', 'Burns & McDonnell'],
+      ['2024', 'Aerospace Intern', 'Colorado Space Business Roundtable (CSBR/ASA)'],
+      ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit']
     ]
   },
   github: {
     title: 'GitHub & Projects',
     code: 'GITHUB.SYS',
-    intro: 'Robotics, computer vision, and hardware engineering projects[cite: 5].',
+    intro: 'Robotics, computer vision, and hardware engineering projects.',
     cards: [
       ['The Kraken Sound Sensor', 'Acoustic search-and-rescue sensing platform to detect human voice frequencies under rubble.', 'ROBOTICS · MINES'],
       ['Lucky Charm AI Vision', 'Python & OpenCV computer vision assistant running on a Raspberry Pi hardware stack.', 'PYTHON · OPENCV'],
@@ -29,31 +32,31 @@ const D = {
     ],
     rows: [
       ['Focus', 'Autonomous Robotics & Sensor Fusion', 'primary'],
-      ['Profile', 'github.com/Cloudie-Rey', 'repository[cite: 4]']
+      ['Profile', 'github.com/Cloudie-Rey', 'repository']
     ]
   },
   business: {
     title: 'Experience & Leadership',
     code: 'VENTURES.DAT',
-    intro: 'Industry internships, non-profit founding, and professional interpretation work[cite: 4, 5, 6].',
+    intro: 'Industry internships, non-profit founding, and professional interpretation work.',
     cards: [
       ['Code Connect', 'Co-founded and led an educational non-profit providing 70+ instructional hours to 80+ students.', 'FOUNDER'],
       ['Nexus Language', 'Employed as a paid professional on-site Tamil interpreter for schools and developmental screenings.', 'INTERPRETER'],
-      ['Jetson Accelerator', 'Selected for a 7% acceptance rate startup accelerator; executed mobile QA testing and MVP strategy.', 'STARTUP INTERN[cite: 5]']
+      ['Jetson Accelerator', 'Selected for a 7% acceptance rate startup accelerator; executed mobile QA testing and MVP strategy.', 'STARTUP INTERN']
     ],
     rows: [
       ['Community', 'Tamil Association of Colorado Youth Committee Designer', 'LEAD'],
-      ['Client Acq.', 'FlexContent B2B client research and SEO technical blogging', 'INTERN[cite: 4]']
+      ['Client Acq.', 'FlexContent B2B client research and SEO technical blogging', 'INTERN']
     ]
   },
   games: {
     title: 'Games & Playable Projects',
     code: 'ARCADE.BIN',
-    intro: 'Award-winning interactive video game design and cooperative puzzle mechanics built in Unity[cite: 5].',
+    intro: 'Award-winning interactive video game design and cooperative puzzle mechanics built in Unity.',
     cards: [
       ['Internal Reflection', 'Two-player cooperative puzzle game focusing on communication mechanics.', 'UNITY · TSA 2025'],
-      ['State 1st Place', 'Awarded 1st Place at the TSA State Conference for Video Game Design.', 'AWARD[cite: 6]'],
-      ['National 3rd Place', 'Awarded 3rd Place at the TSA National Conference for Video Game Design.', 'NATIONAL[cite: 5]']
+      ['State 1st Place', 'Awarded 1st Place at the TSA State Conference for Video Game Design.', 'AWARD'],
+      ['National 3rd Place', 'Awarded 3rd Place at the TSA National Conference for Video Game Design.', 'NATIONAL']
     ],
     rows: [
       ['Platform', 'Unity Game Engine & Digital Animation', 'development']
@@ -62,36 +65,40 @@ const D = {
   youtube: {
     title: 'YouTube & Digital Media',
     code: 'REEL.MOV',
-    intro: 'Content creation, video editing, and digital media production[cite: 5].',
+    intro: 'Content creation, video editing, and digital media production across multiple channels.',
     cards: [
-      ['Digital Media Channels', 'Manage and produce content covering humor, creative digital media, art, and tech.', 'CONTENT'],
-      ['TSA Digital Video', '1st Place District Conference award for Digital Video Production.', 'AWARDS[cite: 6]']
+      ['Creative Cloudz', 'Main content channel covering humor, creative digital media, art, and tech.', 'MAIN CHANNEL'],
+      ['Creative Cloudz Tamil', 'Tamil content channel for creative digital media and storytelling.', 'TAMIL CHANNEL'],
+      ['TSA Digital Video', '1st Place District Conference award for Digital Video Production.', 'AWARDS']
     ],
     rows: [
-      ['Focus', 'Video Editing & Creative Storytelling', 'media[cite: 5]']
-    ]
+      ['Primary Channel', 'youtube.com/@CreativeCloudz1k', 'watch'],
+      ['Tamil Channel', 'youtube.com/@CreativeCloudzTamil1B', 'watch']
+    ],
+    link: ['Visit My YouTube Channels', 'https://www.youtube.com/@CreativeCloudz1k']
   },
   music: {
-    title: 'Certifications & Interests',
+    title: 'Spotify & Interests',
     code: 'MEDIA.WAV',
-    intro: 'Technical certifications, research security training, and musical performance[cite: 6].',
+    intro: 'Technical certifications, research security training, and workshop playlists on Spotify.',
     cards: [
-      ['SolidWorks CSWA', 'Mechanical CAD modeling certification track.', 'CAD[cite: 6]'],
-      ['Electrical Hardware', '525F Multimeter Electrical Hardware Certification for diagnostics and safety.', 'SAFETY[cite: 6]'],
-      ['Trinity College London', 'Initial & Grade Three Electric Keyboard Certifications.', 'MUSIC[cite: 6]']
+      ['SolidWorks CSWA', 'Mechanical CAD modeling certification track.', 'CAD'],
+      ['Electrical Hardware', '525F Multimeter Electrical Hardware Certification for diagnostics and safety.', 'SAFETY'],
+      ['Trinity College London', 'Initial & Grade Three Electric Keyboard Certifications.', 'MUSIC']
     ],
     rows: [
-      ['Compliance', 'Export Control & Research Security Certified', 'federal[cite: 6]']
-    ]
+      ['Platform', 'Spotify Profile & Playlists', 'audio']
+    ],
+    link: ['Open My Spotify', 'https://open.spotify.com/user/wqk1adqxm5k3t590fr3vapvk2?si=e0890aedb5d7452c']
   },
   contact: {
     title: 'Contact & Transmission',
     code: 'CHANNEL.ENC',
     intro: 'Get in touch for robotics collaborations, research inquiries, or engineering projects.',
     rows: [
-      ['EMAIL', 'reyaadivakar@gmail.com / mines.edu', 'OPEN[cite: 4]'],
-      ['LOCATION', 'Parker / Golden, CO', 'LOCAL[cite: 4]'],
-      ['LINKEDIN', 'linkedin.com/in/reyaa-divakar', 'CONNECT[cite: 4]']
+      ['EMAIL', 'reyaadivakar@gmail.com / mines.edu', 'OPEN'],
+      ['LOCATION', 'Parker / Golden, CO', 'LOCAL'],
+      ['LINKEDIN', 'linkedin.com/in/reyaa-divakar', 'CONNECT']
     ]
   }
 };
@@ -133,13 +140,13 @@ function switchTab(id) {
       <div class="sec hero">
         <div class="code">// WORKSHOP INDEX</div>
         <h1>Reyaa Divakar<br>Robotics & Mechanical Engineering.</h1>
-        <p>Undergraduate at Colorado School of Mines[cite: 4]. Building autonomous robotics, mechatronics systems, and web platforms[cite: 4, 5].</p>
+        <p>Undergraduate at Colorado School of Mines. Building autonomous robotics, mechatronics systems, and web platforms.</p>
       </div>
       <div class="stats">
         <div><b>3.9+</b><span>STEM focus</span></div>
-        <div><b>1st</b><span>TSA State Winner[cite: 6]</span></div>
-        <div><b>80+</b><span>Students Taught[cite: 6]</span></div>
-        <div><b>5+</b><span>Tech Internships[cite: 4, 5]</span></div>
+        <div><b>1st</b><span>TSA State Winner</span></div>
+        <div><b>80+</b><span>Students Taught</span></div>
+        <div><b>5+</b><span>Tech Internships</span></div>
       </div>
       <div class="sec">
         <table>
@@ -672,4 +679,7 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     add(group, new T.SphereGeometry(0.05, 8, 6), metalMat, foot.x, 0.05, foot.z);
   }
 
-  add(group, C(0.08, 0.08, 0.
+  add(group, C(0.08, 0.08, 0.18), metalMat, 0, 1.85, 0);
+  add(group, C(0.04, 0.04, 1.3), metalMat, 0, 2.5, 0);
+  add(group, new T.SphereGeometry(0.08, 12, 10), metalMat, 0, 3.15, 0);
+  add(group, B(0.07, 0.16, 0.05), darkMat, 0, 3
