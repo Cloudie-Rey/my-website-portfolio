@@ -2,101 +2,99 @@ const $ = selector => document.querySelector(selector);
 const T = THREE;
 
 /* ==========================================================================
-   1. Application Content Data
+   1. Application Content Data (Updated with Reyaa Divakar's CV)
    ========================================================================== */
 const D = {
   resume: {
-    title: 'Resume & Credentials',
+    title: 'Resume & Education',
     code: 'RESUME.EXE',
-    intro: 'Systems engineer who builds machines, software and the occasional company. Replace this with your own summary.',
+    intro: 'Mechanical Engineering undergraduate at the Colorado School of Mines with a concentration in Automation and Controls, active in robotics research and hardware fabrication[cite: 4].',
     cards: [
-      ['Certifications', 'PE track · AWS · CNC safety', 'CREDENTIALS'],
-      ['Core skills', 'C++ · TypeScript · Rust · CAD · embedded', 'STACK']
+      ['Education', 'Colorado School of Mines · B.S. Mechanical Engineering (Aug 2026 – May 2029)', 'DEGREE'],
+      ['Core Skills', 'Python, MATLAB, C#, Arduino, Raspberry Pi, SolidWorks, OpenCV', 'STACK']
     ],
     rows: [
-      ['2023–now', 'Senior Engineer', 'Company or Lab'],
-      ['2020–2023', 'Full-Stack Developer', 'Studio Name'],
-      ['2016–2020', 'B.S. Mechanical Engineering', 'University']
+      ['2026–Pres.', 'Undergraduate Research Assistant', 'MIRRORLabs (Mines Interactive Robotics Research)[cite: 4]'],
+      ['2025', 'Summer Shadow Program Intern', 'Burns & McDonnell[cite: 4]'],
+      ['2024', 'Aerospace Intern', 'Colorado Space Business Roundtable (CSBR/ASA)[cite: 4]'],
+      ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit[cite: 6]']
     ]
   },
   github: {
-    title: 'GitHub & Software',
+    title: 'GitHub & Projects',
     code: 'GITHUB.SYS',
-    intro: 'Open-source tools, firmware and web experiments.',
+    intro: 'Robotics, computer vision, and hardware engineering projects[cite: 5].',
     cards: [
-      ['arc-core', 'Realtime motor-control firmware.', 'RUST · 1.2k stars'],
-      ['bench-ui', 'Dashboard kit for lab instruments.', 'TYPESCRIPT · 640 stars'],
-      ['cable-tidy', 'CLI that audits wiring diagrams.', 'PYTHON · 210 stars'],
-      ['gantry-sim', 'Browser CNC toolpath simulator.', 'WEBGL · 380 stars']
+      ['The Kraken Sound Sensor', 'Acoustic search-and-rescue sensing platform to detect human voice frequencies under rubble.', 'ROBOTICS · MINES'],
+      ['Lucky Charm AI Vision', 'Python & OpenCV computer vision assistant running on a Raspberry Pi hardware stack.', 'PYTHON · OPENCV'],
+      ['TSA UAV Drone', 'Custom drone with mechanical claw payload (3rd Place Districts Bronze).', 'DRONE DESIGN'],
+      ['Code Connect Platform', 'Official web platform deployed via Vercel with GitHub version control.', 'WEBGL/JS']
     ],
     rows: [
-      ['Commits / yr', '2,400', 'public + private'],
-      ['Languages', 'TS · Rust · Python · C++', 'primary']
+      ['Focus', 'Autonomous Robotics & Sensor Fusion', 'primary'],
+      ['Profile', 'github.com/Cloudie-Rey', 'repository[cite: 4]']
     ]
   },
   business: {
-    title: 'Business & Ventures',
+    title: 'Experience & Leadership',
     code: 'VENTURES.DAT',
-    intro: 'Companies and products built from the workshop floor.',
+    intro: 'Industry internships, non-profit founding, and professional interpretation work[cite: 4, 5, 6].',
     cards: [
-      ['Volt Works LLC', 'Custom machining and prototyping studio.', 'FOUNDER'],
-      ['Spark Labs', 'Hardware subscription for makers.', 'CO-FOUNDER'],
-      ['Consulting', 'Embedded systems and product engineering.', 'OPEN']
+      ['Code Connect', 'Co-founded and led an educational non-profit providing 70+ instructional hours to 80+ students.', 'FOUNDER'],
+      ['Nexus Language', 'Employed as a paid professional on-site Tamil interpreter for schools and developmental screenings.', 'INTERPRETER'],
+      ['Jetson Accelerator', 'Selected for a 7% acceptance rate startup accelerator; executed mobile QA testing and MVP strategy.', 'STARTUP INTERN[cite: 5]']
     ],
     rows: [
-      ['Founded', '2021', 'Volt Works'],
-      ['Clients', '40+', 'industrial and indie']
+      ['Community', 'Tamil Association of Colorado Youth Committee Designer', 'LEAD'],
+      ['Client Acq.', 'FlexContent B2B client research and SEO technical blogging', 'INTERN[cite: 4]']
     ]
   },
   games: {
     title: 'Games & Playable Projects',
     code: 'ARCADE.BIN',
-    intro: 'Small games you can play in the browser.',
+    intro: 'Award-winning interactive video game design and cooperative puzzle mechanics built in Unity[cite: 5].',
     cards: [
-      ['Neon Dock', 'Arcade crane-puzzle in 60 seconds.', 'PLAYABLE'],
-      ['Cable Panic', 'Untangle wires before the power blows.', 'PLAYABLE'],
-      ['Mech Garage', 'Build and pilot a suit. In progress.', 'PROTOTYPE']
+      ['Internal Reflection', 'Two-player cooperative puzzle game focusing on communication mechanics.', 'UNITY · TSA 2025'],
+      ['State 1st Place', 'Awarded 1st Place at the TSA State Conference for Video Game Design.', 'AWARD[cite: 6]'],
+      ['National 3rd Place', 'Awarded 3rd Place at the TSA National Conference for Video Game Design.', 'NATIONAL[cite: 5]']
     ],
     rows: [
-      ['Jams entered', '12', 'Ludum Dare and others']
+      ['Platform', 'Unity Game Engine & Digital Animation', 'development']
     ]
   },
   youtube: {
-    title: 'YouTube & Content',
+    title: 'YouTube & Digital Media',
     code: 'REEL.MOV',
-    intro: 'Build logs, teardowns and shop tours.',
+    intro: 'Content creation, video editing, and digital media production[cite: 5].',
     cards: [
-      ['Build Logs', 'Weekly progress on the exo-suit.', 'CHANNEL'],
-      ['Teardowns', 'What is inside old arcade cabinets.', 'SERIES'],
-      ['Shop Tour', 'The full garage walkthrough.', 'VIDEO']
+      ['Digital Media Channels', 'Manage and produce content covering humor, creative digital media, art, and tech.', 'CONTENT'],
+      ['TSA Digital Video', '1st Place District Conference award for Digital Video Production.', 'AWARDS[cite: 6]']
     ],
     rows: [
-      ['Subscribers', '24k', 'placeholder'],
-      ['Uploads', 'Fridays', 'weekly']
+      ['Focus', 'Video Editing & Creative Storytelling', 'media[cite: 5]']
     ]
   },
   music: {
-    title: 'Music & Spotify',
-    code: 'HEADPHONES.WAV',
-    intro: 'What plays in the workshop: playlists for building, focus and late-night soldering.',
+    title: 'Certifications & Interests',
+    code: 'MEDIA.WAV',
+    intro: 'Technical certifications, research security training, and musical performance[cite: 6].',
     cards: [
-      ['Workshop Radio', 'Lo-fi and synthwave for long builds.', 'PLAYLIST'],
-      ['Focus Mode', 'Instrumentals for deep work.', 'PLAYLIST'],
-      ['Late Night Solder', 'Dark ambient and electronic.', 'PLAYLIST']
+      ['SolidWorks CSWA', 'Mechanical CAD modeling certification track.', 'CAD[cite: 6]'],
+      ['Electrical Hardware', '525F Multimeter Electrical Hardware Certification for diagnostics and safety.', 'SAFETY[cite: 6]'],
+      ['Trinity College London', 'Initial & Grade Three Electric Keyboard Certifications.', 'MUSIC[cite: 6]']
     ],
     rows: [
-      ['Platform', 'Spotify', 'link below']
-    ],
-    link: ['Open my Spotify', 'https://open.spotify.com']
+      ['Compliance', 'Export Control & Research Security Certified', 'federal[cite: 6]']
+    ]
   },
   contact: {
     title: 'Contact & Transmission',
     code: 'CHANNEL.ENC',
-    intro: 'Encrypted line is open. Tell me what you want to build.',
+    intro: 'Get in touch for robotics collaborations, research inquiries, or engineering projects.',
     rows: [
-      ['EMAIL', 'you@example.com', 'OPEN'],
-      ['LOCATION', 'Golden, CO', 'LOCAL'],
-      ['RESPONSE', 'Within 48 hours', 'TYPICAL']
+      ['EMAIL', 'reyaadivakar@gmail.com / mines.edu', 'OPEN[cite: 4]'],
+      ['LOCATION', 'Parker / Golden, CO', 'LOCAL[cite: 4]'],
+      ['LINKEDIN', 'linkedin.com/in/reyaa-divakar', 'CONNECT[cite: 4]']
     ]
   }
 };
@@ -120,7 +118,7 @@ const renderSection = key => {
 const TABS = [
   ['ov', 'Overview'],
   ['eng', 'Engineering / Code', ['github']],
-  ['biz', 'Business', ['business']],
+  ['biz', 'Experience', ['business']],
   ['med', 'Media / Games', ['games', 'youtube', 'music']],
   ['res', 'Resume', ['resume']],
   ['con', 'Contact', ['contact']]
@@ -137,14 +135,14 @@ function switchTab(id) {
     panel.innerHTML = `
       <div class="sec hero">
         <div class="code">// WORKSHOP INDEX</div>
-        <h1>Precision builds,<br>from circuit to company.</h1>
-        <p>Engineer, founder and maker. Everything below is also in the 3D workshop.</p>
+        <h1>Reyaa Divakar<br>Robotics & Mechanical Engineering.</h1>
+        <p>Undergraduate at Colorado School of Mines[cite: 4]. Building autonomous robotics, mechatronics systems, and web platforms[cite: 4, 5].</p>
       </div>
       <div class="stats">
-        <div><b>12</b><span>years building</span></div>
-        <div><b>40+</b><span>client projects</span></div>
-        <div><b>24k</b><span>subscribers</span></div>
-        <div><b>6</b><span>live projects</span></div>
+        <div><b>3.9+</b><span>STEM focus</span></div>
+        <div><b>1st</b><span>TSA State Winner[cite: 6]</span></div>
+        <div><b>80+</b><span>Students Taught[cite: 6]</span></div>
+        <div><b>5+</b><span>Tech Internships[cite: 4, 5]</span></div>
       </div>
       <div class="sec">
         <table>
@@ -677,393 +675,4 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     add(group, new T.SphereGeometry(0.05, 8, 6), metalMat, foot.x, 0.05, foot.z);
   }
 
-  add(group, C(0.08, 0.08, 0.18), metalMat, 0, 1.85, 0);
-  add(group, C(0.04, 0.04, 1.3), metalMat, 0, 2.5, 0);
-  add(group, new T.SphereGeometry(0.08, 12, 10), metalMat, 0, 3.15, 0);
-  add(group, B(0.07, 0.16, 0.05), darkMat, 0, 3.25, -0.03);
-
-  add(group, new T.TorusGeometry(0.45, 0.07, 10, 40), darkMat, 0, 3.7, -0.05);
-  add(group, new T.TorusGeometry(0.45, 0.045, 10, 40), new T.MeshBasicMaterial({ color: 0xfff6e0 }), 0, 3.7, 0, 0);
-
-  add(group, B(0.04, 0.24, 0.04), darkMat, 0, 4.03, 0);
-  add(group, B(0.2, 0.4, 0.04), M(0x0b0c10), 0, 3.7, 0.03);
-  add(group, C(0.02, 0.02, 0.02), GL, 0, 3.85, 0.06, 0).rotation.x = Math.PI / 2;
-
-  const ringLight = new T.PointLight(0xfff0d8, 0.9, 6);
-  ringLight.position.set(0, 3.7, 0.9);
-  group.add(ringLight);
-
-  group.position.set(7.1, 0, 2.6);
-  group.rotation.y = -0.9;
-  registerObject('cam', 'youtube', 'RING-LIGHT CAM RIG', group, [7.1, 3.7, 2.6], [4.6, 3.9, 4.6], 1);
-}
-
-// 8. Holographic Business Card
-const holoCardGroup = new T.Group();
-{
-  add(holoCardGroup, C(0.5, 0.6, 0.9), M(0x1d2133), 0, 0.45, 0);
-  add(holoCardGroup, C(0.4, 0.4, 0.04), GL, 0, 0.92, 0, 0);
-
-  const cardMesh = new T.Mesh(
-    new T.PlaneGeometry(1.7, 1),
-    new T.MeshBasicMaterial({
-      map: createTexture(340, 200, (ctx, w, h) => {
-        ctx.fillStyle = 'rgba(0,60,80,.55)';
-        ctx.fillRect(0, 0, w, h);
-        ctx.strokeStyle = '#00f3ff';
-        ctx.lineWidth = 4;
-        ctx.strokeRect(4, 4, w - 8, h - 8);
-        ctx.fillStyle = '#00f3ff';
-        ctx.font = '700 30px monospace';
-        ctx.fillText('YOUR NAME', 24, 80);
-        ctx.fillStyle = '#fff';
-        ctx.font = '16px monospace';
-        ctx.fillText('ENGINEER · FOUNDER · MAKER', 24, 115);
-        ctx.fillText('you@example.com', 24, 160);
-      }),
-      transparent: true,
-      blending: T.AdditiveBlending,
-      side: T.DoubleSide,
-      depthWrite: false
-    })
-  );
-  cardMesh.position.y = 1.9;
-  cardMesh.userData.noInk = 1;
-  holoCardGroup.add(cardMesh);
-  holoCardGroup.userData.card = cardMesh;
-
-  const beamMesh = new T.Mesh(
-    new T.ConeGeometry(0.5, 1, 20, 1, true),
-    new T.MeshBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.12, depthWrite: false, side: T.DoubleSide })
-  );
-  beamMesh.position.y = 1.4;
-  beamMesh.userData.noInk = 1;
-  holoCardGroup.add(beamMesh);
-
-  holoCardGroup.position.set(3.4, 0, 2);
-  registerObject('card', 'contact', 'HOLOGRAPHIC BUSINESS CARD', holoCardGroup, [3.4, 1.9, 2], [3.4, 2.4, 5.2], 1.1);
-}
-
-// 9. Headphones -> Spotify Link
-{
-  const group = new T.Group();
-  const whiteMat = M(0xf0f4fa);
-  add(group, C(0.16, 0.18, 0.04), new T.MeshBasicMaterial({ color: 0x8ec5f5 }), 0, 0.02, 0, 0);
-  add(group, C(0.025, 0.025, 0.8), M(0xdfe8f3), 0, 0.4, 0);
-  add(group, new T.TorusGeometry(0.3, 0.04, 8, 24, Math.PI), whiteMat, 0, 0.52, 0);
-
-  [-1, 1].forEach(side => {
-    add(group, C(0.14, 0.14, 0.1, 20), whiteMat, side * 0.3, 0.5, 0).rotation.z = Math.PI / 2;
-    add(group, new T.TorusGeometry(0.1, 0.018, 6, 18), new T.MeshBasicMaterial({ color: 0x1db954 }), side * 0.36, 0.5, 0, 0).rotation.y = Math.PI / 2;
-  });
-
-  group.position.set(1.35, 1.9, -2.5);
-  group.rotation.y = 0.35;
-  registerObject('hp', 'music', 'HEADPHONES // SPOTIFY', group, [1.35, 2.4, -2.5], [1.6, 3, -0.3], 2.7);
-}
-
-// 10. Gym Corner
-{
-  const group = new T.Group();
-  const darkMat = M(0x15171c);
-  const hexMat = M(0x20232b);
-  const tealMat = M(0x2fb6b0);
-
-  const pushBoardTexture = createTexture(256, 160, (ctx, w, h) => {
-    ctx.fillStyle = '#222a3d';
-    ctx.fillRect(0, 0, w, h);
-    [
-      ['#ff4d4d', 50, 40],
-      ['#ffa63b', 50, 120],
-      ['#4dff7a', 128, 40],
-      ['#3b8bff', 128, 120],
-      ['#b04dff', 206, 40],
-      ['#ffe14d', 206, 120]
-    ].forEach(c => {
-      ctx.fillStyle = c[0];
-      ctx.beginPath();
-      ctx.arc(c[1], c[2], 20, 0, 7);
-      ctx.fill();
-    });
-  });
-
-  add(group, B(5, 0.06, 4.2), M(0x2b3245), 5.8, 0.03, 5.2);
-
-  const rackGroup = new T.Group();
-  [-1, 1].forEach(a => [-1, 1].forEach(b => add(rackGroup, B(0.08, 1.9, 0.08), darkMat, a * 1.55, 0.95, b * 0.28)));
-  [-1, 1].forEach(a => add(rackGroup, B(0.08, 0.08, 0.64), darkMat, a * 1.55, 1.9, 0));
-  [0.3, 0.95, 1.5].forEach(y => add(rackGroup, B(3.2, 0.04, 0.56), darkMat, 0, y, 0));
-
-  for (let i = 0; i < 5; i++) {
-    const x = -1.2 + i * 0.6;
-    add(rackGroup, C(0.03, 0.03, 0.38), hexMat, x, 0.46, 0).rotation.z = Math.PI / 2;
-    [-1, 1].forEach(s => add(rackGroup, C(0.15, 0.15, 0.1, 6), hexMat, x + s * 0.19, 0.46, 0).rotation.z = Math.PI / 2);
-  }
-
-  [-1.1, -0.3, 0.5].forEach(x => {
-    add(rackGroup, new T.SphereGeometry(0.17, 14, 10), tealMat, x, 1.14, 0);
-    add(rackGroup, new T.TorusGeometry(0.1, 0.025, 6, 14, Math.PI), tealMat, x, 1.28, 0);
-  });
-
-  for (let i = 0; i < 7; i++) {
-    const x = -1.2 + i * 0.4;
-    const colorMat = M([0x4cb35a, 0x3fa650, 0x58c068][i % 3]);
-    add(rackGroup, C(0.025, 0.025, 0.3), hexMat, x, 1.6, 0).rotation.z = Math.PI / 2;
-    [-1, 1].forEach(s => add(rackGroup, C(0.09, 0.09, 0.08, 6), colorMat, x + s * 0.15, 1.6, 0).rotation.z = Math.PI / 2);
-  }
-
-  add(rackGroup, B(0.06, 0.05, 0.62), darkMat, 1.6, 1.45, 0);
-  add(rackGroup, B(0.06, 0.05, 0.62), darkMat, -1.6, 1.45, 0);
-
-  [-0.12, 0.12].forEach(z => {
-    add(rackGroup, new T.SphereGeometry(0.1, 10, 8), M(0xd04050), 1.7, 1.2, z).scale.set(1, 1.2, 0.9);
-    add(rackGroup, C(0.06, 0.06, 0.08), M(0xf4f7fb), 1.7, 1.34, z);
-    add(rackGroup, C(0.015, 0.015, 0.1), hexMat, 1.7, 1.4, z);
-  });
-
-  add(rackGroup, new T.TorusGeometry(0.22, 0.012, 6, 20), hexMat, -1.7, 1.2, 0, 0).rotation.y = Math.PI / 2;
-  [-0.15, 0.15].forEach(z => add(rackGroup, C(0.025, 0.025, 0.3), M(0x2d6cdf), -1.7, 0.82, z));
-
-  rackGroup.position.set(8.3, 0, 5.2);
-  rackGroup.rotation.y = -Math.PI / 2;
-  group.add(rackGroup);
-
-  add(group, B(0.9, 0.05, 0.55), MT(pushBoardTexture), 5.1, 0.09, 5.4).rotation.y = 0.2;
-
-  const ballGroup = new T.Group();
-  add(ballGroup, new T.SphereGeometry(0.22, 18, 12), M(0x8a4b22)).scale.set(1.7, 0.95, 0.95);
-  add(ballGroup, B(0.28, 0.02, 0.04), M(0xf4f7fb), 0, 0.2, 0);
-  [-1, 1].forEach(side => add(ballGroup, new T.TorusGeometry(0.18, 0.012, 6, 16), M(0xf4f7fb), side * 0.2, 0, 0).rotation.y = Math.PI / 2);
-
-  ballGroup.position.set(4, 0.21, 6.6);
-  ballGroup.rotation.y = 0.5;
-  group.add(ballGroup);
-
-  scene.add(group);
-}
-
-// 11. LED Neon Signs
-const createVector = (x, y) => new T.Vector3(x, y, 0);
-const createSegment = (start, end) => new T.LineCurve3(createVector(...start), createVector(...end));
-
-const buildNeonSign = (items, lightColor, x, y, z, rotY, w, h) => {
-  const group = new T.Group();
-  group.position.set(x, y, z);
-  group.rotation.y = rotY;
-  add(group, B(w, h, 0.05), M(0x0e1220), 0, 0, -0.06);
-
-  items.forEach(item => {
-    const tubeGeo = new T.TubeGeometry(item[0], item[0].isLineCurve3 ? 1 : 48, 0.04, 6, !!item[0].closed);
-    group.add(new T.Mesh(tubeGeo, new T.MeshBasicMaterial({ color: item[1] })));
-  });
-
-  const neonLight = new T.PointLight(lightColor, 0.4, 6);
-  neonLight.position.z = 0.7;
-  group.add(neonLight);
-  scene.add(group);
-  return group;
-};
-
-{
-  const cloudPoints = [
-    [-1.1, 0], [-1.5, 0.3], [-1.35, 0.75], [-0.9, 0.85], [-0.65, 1.3],
-    [-0.1, 1.5], [0.4, 1.3], [0.6, 0.95], [1.1, 0.95], [1.5, 0.6],
-    [1.3, 0.1], [0.9, 0], [0, -0.05]
-  ].map(p => createVector(p[0] * 0.85 - 0.1, p[1] * 0.85 - 0.25));
-
-  const lightningPoints = [
-    [0.1, -0.1], [-0.3, -0.75], [-0.08, -0.75], [-0.22, -1.4],
-    [0.3, -0.6], [0.07, -0.6], [0.1, -0.1]
-  ].map(p => [p[0] - 0.1, p[1] + 0.35]);
-
-  const items = [[new T.CatmullRomCurve3(cloudPoints, true), 0xbfeaff]].concat(
-    lightningPoints.slice(1).map((p, i) => [createSegment(lightningPoints[i], p), 0xffe14d])
-  );
-
-  buildNeonSign(items, 0x9fd8ff, -6.2, 4.1, -5.8, 0, 3.2, 2.9);
-}
-
-{
-  const points = [[0.2, 1.3], [-0.5, 0], [-0.05, 0], [-0.3, -1.3], [0.5, 0.25], [0.05, 0.25], [0.2, 1.3]];
-  const items = points.slice(1).map((p, i) => [createSegment(points[i], p), 0x00f3ff]);
-  buildNeonSign(items, 0x00f3ff, 7.4, 4.6, -5.8, 0, 1.8, 3.1);
-}
-
-{
-  const rainbowItems = [[1.2, 0xff3b3b], [1, 0xffa63b], [0.8, 0x4dff7a], [0.6, 0x3b8bff], [0.4, 0xb04dff]].map(arc => {
-    const points = [];
-    for (let i = 0; i <= 20; i++) {
-      const t = (i / 20) * Math.PI;
-      points.push(createVector(Math.cos(t) * arc[0], Math.sin(t) * arc[0] - 0.6));
-    }
-    return [new T.CatmullRomCurve3(points), arc[1]];
-  });
-  buildNeonSign(rainbowItems, 0xff8ad0, 8.78, 4.6, 4.6, -Math.PI / 2, 3, 1.8);
-}
-
-/* ==========================================================================
-   8. Cel-Shaded Outline Material Pass
-   ========================================================================== */
-const inkMaterial = new T.MeshBasicMaterial({ color: 0x05070c, side: T.BackSide });
-scene.traverse(obj => {
-  if (obj.isMesh && obj.material.isMeshToonMaterial && !obj.userData.noInk) {
-    const outlineMesh = new T.Mesh(obj.geometry, inkMaterial);
-    outlineMesh.scale.setScalar(1.05);
-    obj.add(outlineMesh);
-  }
-});
-
-/* ==========================================================================
-   9. 2D HTML Labels & Dynamic 3D Overlay Mapping
-   ========================================================================== */
-const labelsContainer = $('#labels');
-OBJS.forEach((obj, index) => {
-  const labelElem = document.createElement('div');
-  labelElem.className = 'lbl';
-  labelElem.innerHTML = `<i></i>0${index + 1} ${obj.label}`;
-  labelElem.onclick = () => focusObject(obj);
-  labelsContainer.appendChild(labelElem);
-  obj.el = labelElem;
-  obj.lp = obj.a.clone().add(new T.Vector3(0, obj.off, 0));
-});
-
-/* ==========================================================================
-   10. Camera Focus & Modal Interactions
-   ========================================================================== */
-let tween = null;
-const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-function animateCamera(targetPos, targetLookAt, onComplete) {
-  tween = {
-    t0: performance.now(),
-    p0: cam.position.clone(),
-    t0v: ctl.target.clone(),
-    p1: targetPos,
-    t1: targetLookAt,
-    cb: onComplete
-  };
-  ctl.enabled = false;
-}
-
-function focusObject(obj) {
-  closeModal();
-  animateCamera(obj.c, obj.a, () => openModal(obj.key));
-  $('#back').hidden = false;
-  $('#labels').classList.add('foc');
-}
-
-function openModal(key) {
-  $('#mb').innerHTML = renderSection(key);
-  $('#modal').classList.add('on');
-}
-
-function closeModal() {
-  $('#modal').classList.remove('on');
-}
-
-function resetToHome() {
-  closeModal();
-  animateCamera(homePos(), HT);
-  $('#back').hidden = true;
-  $('#labels').classList.remove('foc');
-}
-
-$('#mx').onclick = closeModal;
-$('#back').onclick = resetToHome;
-addEventListener('keydown', e => e.key === 'Escape' && closeModal());
-
-/* ==========================================================================
-   11. Raycasting & Object Picking Controls
-   ========================================================================== */
-const raycaster = new T.Raycaster();
-const mouseVector = new T.Vector2();
-let dragStartPos = null;
-
-function pickObject(event) {
-  const rect = ren.domElement.getBoundingClientRect();
-  mouseVector.set(
-    ((event.clientX - rect.left) / rect.width) * 2 - 1,
-    -((event.clientY - rect.top) / rect.height) * 2 + 1
-  );
-  raycaster.setFromCamera(mouseVector, cam);
-  
-  const intersects = raycaster.intersectObjects(OBJS.map(o => o.g), true)[0];
-  if (!intersects) return null;
-
-  let parentNode = intersects.object;
-  while (parentNode && !parentNode.userData.oid) {
-    parentNode = parentNode.parent;
-  }
-  return parentNode && OBJS.find(o => o.id === parentNode.userData.oid);
-}
-
-ren.domElement.addEventListener('pointerdown', e => dragStartPos = [e.clientX, e.clientY]);
-ren.domElement.addEventListener('pointerup', e => {
-  if (dragStartPos && Math.hypot(e.clientX - dragStartPos[0], e.clientY - dragStartPos[1]) < 5) {
-    const clickedObj = pickObject(e);
-    if (clickedObj) focusObject(clickedObj);
-  }
-});
-ren.domElement.addEventListener('pointermove', e => {
-  ren.domElement.style.cursor = pickObject(e) ? 'pointer' : 'grab';
-});
-
-/* ==========================================================================
-   12. Window Resize & Rendering Loop
-   ========================================================================== */
-function handleResize() {
-  ren.setSize(W(), H());
-  cam.aspect = W() / H();
-  cam.updateProjectionMatrix();
-  if (!tween && $('#back').hidden) {
-    cam.position.copy(homePos());
-  }
-}
-addEventListener('resize', handleResize);
-handleResize();
-
-const tempProjVec = new T.Vector3();
-
-function renderLoop() {
-  requestAnimationFrame(renderLoop);
-  if (mode !== '3d') return;
-
-  const time = performance.now() / 1000;
-
-  clouds.forEach(cloud => {
-    cloud.position.x += cloud.userData.v * 0.008;
-    if (cloud.position.x > 9) cloud.position.x = -9;
-  });
-
-  OBJS[0].g.userData.el.intensity = 0.9 + Math.sin(time * 2) * 0.3;
-
-  holoCardGroup.userData.card.rotation.y = time * 0.8;
-  holoCardGroup.userData.card.position.y = 1.9 + Math.sin(time * 1.6) * 0.08;
-
-  if (tween) {
-    const progress = Math.min((performance.now() - tween.t0) / 1200, 1);
-    const easedProgress = easeInOutCubic(progress);
-
-    cam.position.lerpVectors(tween.p0, tween.p1, easedProgress);
-    ctl.target.lerpVectors(tween.t0v, tween.t1, easedProgress);
-
-    if (progress >= 1) {
-      ctl.enabled = true;
-      const callback = tween.cb;
-      tween = null;
-      if (callback) callback();
-    }
-  }
-
-  ctl.update();
-
-  OBJS.forEach(obj => {
-    tempProjVec.copy(obj.lp).project(cam);
-    obj.el.style.display = tempProjVec.z < 1 ? 'flex' : 'none';
-    obj.el.style.transform = `translate(-50%, -100%) translate(${(tempProjVec.x * 0.5 + 0.5) * W()}px, ${(-tempProjVec.y * 0.5 + 0.5) * H()}px)`;
-  });
-
-  ren.render(scene, cam);
-}
-
-renderLoop();
+  add(group, C(0.08, 0.08, 0.
