@@ -12,7 +12,7 @@ const D = {
     cards: [
       ['Education', 'Colorado School of Mines · B.S. Mechanical Engineering (Aug 2026 – May 2029)', 'DEGREE'],
       ['Core Skills', 'Python, MATLAB, C#, Arduino, Raspberry Pi, SolidWorks, OpenCV', 'STACK']
-    ],
+      ['Certifications & Training', 'SolidWorks CSWA (CAD), 525F Multimeter Electrical Hardware (Safety), and Trinity College London Electric Keyboard Certifications.', 'CREDENTIALS']
     rows: [
       ['2026–Pres.', 'Undergraduate Research Assistant', 'MIRRORLabs (Mines Interactive Robotics Research)'],
       ['2025', 'Summer Shadow Program Intern', 'Burns & McDonnell'],
@@ -21,8 +21,8 @@ const D = {
     ]
   },
   github: {
-    title: 'GitHub & Projects',
-    code: 'GITHUB.SYS',
+    title: 'Technical Projects',
+    code: 'TECH.SYS',
     intro: 'Robotics, computer vision, and hardware engineering projects.',
     cards: [
       ['The Kraken Sound Sensor', 'Acoustic search-and-rescue sensing platform to detect human voice frequencies under rubble.', 'ROBOTICS · MINES'],
@@ -63,8 +63,8 @@ const D = {
     ]
   },
   youtube: {
-    title: 'YouTube & Digital Media',
-    code: 'REEL.MOV',
+    title: 'Content Creation Projects',
+    code: 'CREATIVE.MOV',
     intro: 'Content creation, video editing, and digital media production across multiple channels.',
     cards: [
       ['Creative Cloudz', 'Main content channel covering humor, creative digital media, art, and tech.', 'MAIN CHANNEL'],
@@ -79,7 +79,7 @@ const D = {
   },
   music: {
     title: 'Spotify & Interests',
-    code: 'MEDIA.WAV',
+    code: 'MUSIC.WAV',
     intro: 'Technical certifications, research security training, and workshop playlists on Spotify.',
     cards: [
       ['SolidWorks CSWA', 'Mechanical CAD modeling certification track.', 'CAD'],
