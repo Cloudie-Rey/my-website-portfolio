@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>VOLT//WORKS</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <div class="brand"><b>⚡</b> VOLT<span>//WORKS</span></div>
+    <nav class="sw">
+      <button id="b3" class="on">3D Workshop View</button>
+      <button id="bg">Professional Grid View</button>
+    </nav>
+    <div class="st">● SYSTEMS ONLINE</div>
+  </header>
+
+  <!-- Main Display View Canvas -->
+  <main>
+    <!-- 3D Interactive Canvas Scene -->
+    <section id="v3d" class="view on">
+      <div id="stage"></div>
+      <div id="labels"></div>
+      <div class="hint">Drag to orbit · scroll to zoom · click an object</div>
+      <button id="back" hidden>← Back to workshop</button>
+      
+      <!-- Interactive Slide-out Modal -->
+      <aside id="modal">
+        <button class="x" id="mx" aria-label="Close">×</button>
+        <div id="mb"></div>
+      </aside>
+    </section>
+
+    <!-- Professional Modular Grid View -->
+    <section id="vgrid" class="view">
+      <div class="gw">
+        <nav id="side"></nav>
+        <div id="panel"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
