@@ -265,7 +265,7 @@ const addRod = (group, start, end, radius, mat) => {
 scene.add(new T.AmbientLight(0xdbe8ff, 0.38));
 scene.add(new T.HemisphereLight(0xcfe3ff, 0x8a7a6a, 0.28));
 
-const dirLight = new T.DirectionalLight(0xffffff, 0.55);
+const dirLight = new T.DirectionalLight(0xffffff, 0.1);
 dirLight.position.set(8, 14, 10);
 scene.add(dirLight);
 
