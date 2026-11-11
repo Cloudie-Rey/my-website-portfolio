@@ -96,7 +96,7 @@ const D = {
     code: 'CHANNEL.ENC',
     intro: 'Get in touch for robotics collaborations, research inquiries, or engineering projects.',
     rows: [
-      ['EMAIL', 'reyaadivakar@gmail.com / mines.edu', 'OPEN'],
+      ['EMAIL', 'reyaadivakar@gmail.com / reyaadivakar_divakar@mines.edu', 'OPEN'],
       ['LOCATION', 'Parker / Golden, CO', 'LOCAL'],
       ['GITHUB', '<a href="https://github.com/Cloudie-Rey" target="_blank" rel="noopener">github.com/Cloudie-Rey</a>', 'CODE'],
       ['LINKEDIN', '<a href="https://linkedin.com/in/reyaa-divakar" target="_blank" rel="noopener">linkedin.com/in/reyaa-divakar</a>', 'CONNECT']
