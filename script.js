@@ -62,7 +62,7 @@ const D = {
       ['Platform', 'Unity Game Engine & Digital Animation', 'development']
     ]
   },
-  youtube: {
+ youtube: {
     title: 'YouTube & Digital Media',
     code: 'REEL.MOV',
     intro: 'Content creation, video editing, and digital media production across multiple channels.',
@@ -72,10 +72,10 @@ const D = {
       ['TSA Digital Video', '1st Place District Conference award for Digital Video Production.', 'AWARDS']
     ],
     rows: [
-      ['Primary Channel', 'youtube.com/@CreativeCloudz1k', 'watch'],
-      ['Tamil Channel', 'youtube.com/@CreativeCloudzTamil1B', 'watch']
+      ['Primary Channel', '<a href="https://www.youtube.com/@CreativeCloudz1k" target="_blank" rel="noopener">youtube.com/@CreativeCloudz1k</a>', 'watch'],
+      ['Tamil Channel', '<a href="https://www.youtube.com/@CreativeCloudzTamil1B" target="_blank" rel="noopener">youtube.com/@CreativeCloudzTamil1B</a>', 'watch']
     ],
-    link: ['Visit My YouTube Channels', 'https://www.youtube.com/@CreativeCloudz1k']
+    link: ['Visit My Main Channel', 'https://www.youtube.com/@CreativeCloudz1k']
   },
   music: {
     title: 'Spotify & Interests',
@@ -87,7 +87,7 @@ const D = {
       ['Trinity College London', 'Initial & Grade Three Electric Keyboard Certifications.', 'MUSIC']
     ],
     rows: [
-      ['Platform', 'Spotify Profile & Playlists', 'audio']
+      ['Platform', '<a href="https://open.spotify.com/user/wqk1adqxm5k3t590fr3vapvk2?si=e0890aedb5d7452c" target="_blank" rel="noopener">Open Spotify Profile</a>', 'audio']
     ],
     link: ['Open My Spotify', 'https://open.spotify.com/user/wqk1adqxm5k3t590fr3vapvk2?si=e0890aedb5d7452c']
   },
@@ -98,11 +98,10 @@ const D = {
     rows: [
       ['EMAIL', 'reyaadivakar@gmail.com / mines.edu', 'OPEN'],
       ['LOCATION', 'Parker / Golden, CO', 'LOCAL'],
-      ['LINKEDIN', 'linkedin.com/in/reyaa-divakar', 'CONNECT']
+      ['GITHUB', '<a href="https://github.com/Cloudie-Rey" target="_blank" rel="noopener">github.com/Cloudie-Rey</a>', 'CODE'],
+      ['LINKEDIN', '<a href="https://linkedin.com/in/reyaa-divakar" target="_blank" rel="noopener">linkedin.com/in/reyaa-divakar</a>', 'CONNECT']
     ]
-  }
-};
-
+  };
 const renderSection = key => {
   const s = D[key];
   return `
