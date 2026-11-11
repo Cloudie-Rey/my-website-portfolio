@@ -32,7 +32,7 @@ const D = {
     ],
     rows: [
       ['Focus', 'Autonomous Robotics & Sensor Fusion', 'primary'],
-      ['Profile', 'github.com/Cloudie-Rey', 'repository']
+      ['Profile', '<a href="https://github.com/Cloudie-Rey" target="_blank" rel="noopener">github.com/Cloudie-Rey</a>', 'repository']
     ]
   },
   business: {
@@ -62,7 +62,7 @@ const D = {
       ['Platform', 'Unity Game Engine & Digital Animation', 'development']
     ]
   },
- youtube: {
+  youtube: {
     title: 'YouTube & Digital Media',
     code: 'REEL.MOV',
     intro: 'Content creation, video editing, and digital media production across multiple channels.',
@@ -101,7 +101,9 @@ const D = {
       ['GITHUB', '<a href="https://github.com/Cloudie-Rey" target="_blank" rel="noopener">github.com/Cloudie-Rey</a>', 'CODE'],
       ['LINKEDIN', '<a href="https://linkedin.com/in/reyaa-divakar" target="_blank" rel="noopener">linkedin.com/in/reyaa-divakar</a>', 'CONNECT']
     ]
-  };
+  }
+};
+
 const renderSection = key => {
   const s = D[key];
   return `
@@ -264,7 +266,7 @@ const addRod = (group, start, end, radius, mat) => {
 scene.add(new T.AmbientLight(0xdbe8ff, 0.38));
 scene.add(new T.HemisphereLight(0xcfe3ff, 0x8a7a6a, 0.28));
 
-const dirLight = new T.DirectionalLight(0xffffff, 0.1);
+const dirLight = new T.DirectionalLight(0xffffff, 0.55);
 dirLight.position.set(8, 14, 10);
 scene.add(dirLight);
 
