@@ -5,20 +5,22 @@ const T = THREE;
    1. Application Content Data (Updated with Reyaa Divakar's CV & Links)
    ========================================================================== */
 const D = {
-  resume: {
+ resume: {
     title: 'Resume & Education',
     code: 'RESUME.EXE',
     intro: 'Mechanical Engineering undergraduate at the Colorado School of Mines with a concentration in Automation and Controls, active in robotics research and hardware fabrication.',
     cards: [
       ['Education', 'Colorado School of Mines · B.S. Mechanical Engineering (Aug 2026 – May 2029)', 'DEGREE'],
       ['Core Skills', 'Python, MATLAB, C#, Arduino, Raspberry Pi, SolidWorks, OpenCV', 'STACK']
-      ['Certifications & Training', 'SolidWorks CSWA (CAD), 525F Multimeter Electrical Hardware (Safety), and Trinity College London Electric Keyboard Certifications.', 'CREDENTIALS']
+    ],
     rows: [
       ['2026–Pres.', 'Undergraduate Research Assistant', 'MIRRORLabs (Mines Interactive Robotics Research)'],
       ['2025', 'Summer Shadow Program Intern', 'Burns & McDonnell'],
       ['2024', 'Aerospace Intern', 'Colorado Space Business Roundtable (CSBR/ASA)'],
       ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit']
-    ]
+    ],
+    link: ['Download PDF Resume', 'resume.pdf']
+    link: ['Download PDF CV', 'CV.pdf'] 
   },
   github: {
     title: 'Technical Projects',
