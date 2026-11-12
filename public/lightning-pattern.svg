@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" fill="none">
+  <defs>
+    <path id="bolt" d="M42 2 13 39h18l-8 33 36-45H40L42 2Z"/>
+  </defs>
+  <g fill="none" stroke="#55c8e8" stroke-opacity=".18" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#bolt" transform="translate(4 3) scale(.55)"/>
+    <use href="#bolt" transform="translate(68 -2) scale(.52)"/>
+    <use href="#bolt" transform="translate(132 4) scale(.58)"/>
+    <use href="#bolt" transform="translate(8 66) scale(.52)"/>
+    <use href="#bolt" transform="translate(72 62) scale(.6)"/>
+    <use href="#bolt" transform="translate(132 68) scale(.54)"/>
+    <use href="#bolt" transform="translate(2 130) scale(.58)"/>
+    <use href="#bolt" transform="translate(68 126) scale(.53)"/>
+    <use href="#bolt" transform="translate(134 132) scale(.56)"/>
+  </g>
+</svg>

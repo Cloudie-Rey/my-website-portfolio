@@ -33,6 +33,10 @@
       <div id="stage"></div>
       <div id="labels"></div>
       <div class="hint">Drag to orbit · scroll to zoom · click on a number and explore!</div>
+      <div id="holiday-message" class="holiday-message" role="status" aria-live="polite" hidden>
+        <span>Happy birthday to the dev! 🎂</span>
+        <button id="holiday-message-close" type="button" aria-label="Dismiss message">×</button>
+      </div>
       <div id="object-controls" hidden>
         <button id="back" type="button">← Back to workshop</button>
         <nav id="object-nav" aria-label="Navigate between workshop items">
@@ -67,6 +71,6 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
   <!-- Application Logic -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

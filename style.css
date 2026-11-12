@@ -119,6 +119,10 @@ main {
 #stage {
   position: absolute;
   inset: 0;
+  background-color: #080b14;
+  background-image: url('/lightning-pattern.svg');
+  background-size: 192px 192px;
+  background-repeat: repeat;
 }
 
 #stage canvas {
@@ -165,6 +169,33 @@ main {
   animation: pulse 1.6s infinite;
 }
 
+.lbl.seasonal-marker {
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  padding: 0;
+  border-color: #e6b84f;
+  border-radius: 50%;
+  background: rgba(31, 23, 45, 0.88);
+  box-shadow: 0 0 10px rgba(230, 184, 79, 0.55);
+  color: #ffd76b;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  appearance: none;
+}
+
+.lbl.seasonal-marker:hover {
+  background: rgba(230, 184, 79, 0.28);
+  box-shadow: 0 0 14px rgba(255, 215, 107, 0.75);
+  color: #fff1bd;
+}
+
+.lbl.seasonal-marker:focus-visible {
+  outline: 2px solid #fff1bd;
+  outline-offset: 3px;
+}
+
 .lbl-name {
   min-width: 0;
   max-width: 0;
@@ -207,6 +238,40 @@ main {
   border: 1px solid var(--ln);
   pointer-events: none;
   white-space: nowrap;
+}
+
+.holiday-message {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100% - 32px);
+  padding: 10px 14px;
+  transform: translateX(-50%);
+  border: 1px solid #f2c14e;
+  border-radius: 12px;
+  background: rgba(31, 23, 45, 0.92);
+  box-shadow: 0 0 24px rgba(242, 193, 78, 0.35);
+  color: #fff1c8;
+  font-weight: 800;
+  text-align: center;
+}
+
+.holiday-message[hidden] {
+  display: none;
+}
+
+.holiday-message button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 #object-controls {
