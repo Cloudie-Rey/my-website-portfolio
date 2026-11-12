@@ -1065,11 +1065,6 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   group.add(mug);
   addBlackLabPlush(group, -2.15, 1.9, -2.45, 0.65);
 
-  addRod(group, [-2.35, 1.9, -2.95], [-2.35, 2.7, -2.95], 0.035, whiteMat);
-  addRod(group, [-2.35, 2.7, -2.95], [-1.3, 2.55, -2.95], 0.03, whiteMat);
-  add(group, C(0.06, 0.06, 0.26), darkMat, -1.3, 2.4, -2.95);
-  add(group, C(0.16, 0.16, 0.02, 20), darkMat, -1.3, 2.4, -2.78).rotation.x = Math.PI / 2;
-
   [
     [-2.1, 2.05, -3.1, 0.16],
     [-1.92, 2, -3.05, 0.12],
