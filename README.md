@@ -1,28 +1,37 @@
-# Personal Portfolio
+# Reyaa Divakar — Interactive Portfolio
 
-## Holiday scene preview
+An interactive portfolio built around a 3D workshop. Explore mechanical engineering, robotics, education, and creative work through a room that responds to the seasons.
 
-Start the local development server with `npm run dev`, then add a date override to the local URL to preview a theme without changing your computer's clock:
+**Live portfolio:** [reyaadivakar.com](https://reyaadivakar.com)
 
-- `?holidayDate=2026-11-26` — Thanksgiving
-- `?holidayDate=2026-11-27` — Christmas season
-- `?holidayDate=2026-12-31&holidayHour=23` — New Year's Eve at night
-- `?holidayDate=2026-11-07` — Diwali eve, including the diya
-- `?holidayDate=2026-04-04` — Easter weekend and spring petals
-- `?holidayDate=2026-02-15` — birthday
-- `?holidayDate=2026-06-12` — Alvin's birthday
+## Explore
 
-The overrides work while running the Vite development server, including forwarded Codespaces previews, and are disabled in production builds. `holidayHour` accepts an hour from `0` to `23`; without it, the scene uses the browser's local time. Holiday date rules are covered by `npm test`. Diwali dates are maintained in `holiday-calendar.js`; add the observed date for each new year there.
+- **Interactive View:** Drag to orbit the workshop, scroll to zoom, and select numbered markers to explore portfolio items.
+- **Classic View:** Switch to a conventional, easy-to-scan portfolio layout.
+- **Seasonal scenes:** The workshop changes with the visitor's local date, with decorations and animations for holidays and birthdays.
+- **Animated details:** The window scenery, room lighting, and ambient effects bring the workshop to life.
 
-## Birthday email
+## Built with
 
-Clicking the birthday cake sends a fixed notification through a Cloudflare Pages Function and Resend. The recipient and Resend API key are read only by the server; they are not included in the browser bundle.
+- JavaScript, HTML, and CSS
+- Three.js for the 3D workshop
+- Vite for local development and production builds
+- Cloudflare Pages Functions and Resend for the optional birthday email interaction
 
-To enable delivery:
+## Run locally
 
-1. Verify `reyaadivakar.com` with Resend and use `birthday@reyaadivakar.com` as the sender.
-2. In Cloudflare Pages project settings, add `RESEND_API_KEY` and `BIRTHDAY_TO_EMAIL` as secrets, and set `BIRTHDAY_FROM_EMAIL` for both Preview and Production.
-3. Create a Cloudflare KV namespace and bind it to the Pages project as `BIRTHDAY_EMAIL_LIMIT` under Functions. This limits repeat sends from the same IP.
-4. Redeploy after setting the variables and binding.
+```bash
+git clone https://github.com/Cloudie-Rey/my-website-portfolio.git
+cd my-website-portfolio
+npm install
+npm run dev
+```
 
-Run `npm test` to test the function's origin check, Resend request, and rate limit without sending a real email. A live test requires the Cloudflare settings above and a verified sender domain.
+To check a production build and run the automated tests:
+
+```bash
+npm run build
+npm test
+```
+
+For holiday previews, date rules, and optional birthday-email configuration, see the [developer notes](README.developer.md).
