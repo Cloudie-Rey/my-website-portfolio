@@ -6,7 +6,7 @@ An interactive portfolio built around a 3D workshop. Explore mechanical engineer
 
 ## Explore
 
-- **Interactive View:** Drag to orbit the workshop, scroll to zoom, and select numbered markers to explore portfolio items. The window Changes based on user time!
+- **Interactive View:** Drag to orbit the workshop, scroll to zoom, and select numbered markers to explore portfolio items. The window changes based on user time!
 - **Classic View:** Switch to a conventional, easy-to-scan portfolio layout.
 - **Seasonal scenes:** The workshop changes with the visitor's local date, with decorations and animations for holidays and birthdays.
 - **Animated details:** The window scenery, room lighting, and ambient effects bring the workshop to life.
