@@ -1393,6 +1393,14 @@ const shelfDrawingTexture = createTexture(128, 160, (ctx, w, h) => {
     ctx.fillStyle = '#00f3ff';
     ctx.fillRect(0, 128, 256, 3);
   });
+  const tvImage = new Image();
+  tvImage.onload = () => {
+    const ctx = tvTexture.image.getContext('2d');
+    ctx.drawImage(tvImage, 0, 0, tvTexture.image.width, tvTexture.image.height);
+    tvTexture.needsUpdate = true;
+  };
+  tvImage.onerror = () => console.error('The TV screenshot failed to load.');
+  tvImage.src = new URL('minecraft-tv.png', document.baseURI).href;
 
   add(group, C(2.3, 2.3, 0.05, 40), M(0xf4f4f0), -5.4, 0.03, -2.25);
   add(group, B(3.2, 0.55, 0.7), darkMat, -5.4, 0.28, -5.5);
