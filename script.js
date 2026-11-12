@@ -1790,8 +1790,20 @@ function updateObjectNavigation() {
 }
 
 function moveFocusBy(offset) {
-  const nextObject = OBJS[focusedObjectIndex + offset];
-  if (nextObject) focusObject(nextObject);
+  const currentObject = OBJS[focusedObjectIndex];
+  const nextIndex = focusedObjectIndex + offset;
+  const nextObject = OBJS[nextIndex];
+  if (!currentObject || !nextObject) return;
+
+  const translation = nextObject.a.clone().sub(currentObject.a);
+  focusedObjectIndex = nextIndex;
+  updateObjectNavigation();
+  closeModal();
+  animateCamera(
+    cam.position.clone().add(translation),
+    ctl.target.clone().add(translation),
+    () => openModal(nextObject.key)
+  );
 }
 
 function animateCamera(targetPos, targetLookAt, onComplete) {
