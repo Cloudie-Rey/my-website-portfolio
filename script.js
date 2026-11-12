@@ -17,10 +17,10 @@ const D = {
       ['2024', 'Aerospace Intern', 'Colorado Space Business Roundtable (CSBR/ASA)'],
       ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit'],
     ],
-  links: [
-  ['Download Resume', './Resume.pdf'],
-  ['Download CV', './CV.pdf']
-]
+   links: [
+      ['Download Resume', 'public/Resume.pdf'],
+      ['Download CV', 'public/CV.pdf']
+    ]
   },
   github: {
     title: 'Technical Projects',
