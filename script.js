@@ -1888,7 +1888,7 @@ function handleResize() {
   ren.setSize(W(), H());
   cam.aspect = W() / H();
   cam.updateProjectionMatrix();
-  if (!tween && $('#back').hidden) {
+  if (!tween && $('#object-controls').hidden) {
     cam.position.copy(homePos());
   }
 }
