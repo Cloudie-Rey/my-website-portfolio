@@ -1776,7 +1776,23 @@ OBJS.forEach(obj => {
    10. Camera Focus & Modal Interactions
    ========================================================================== */
 let tween = null;
+let focusedObjectIndex = -1;
 const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+function updateObjectNavigation() {
+  const controls = $('#object-controls');
+  controls.hidden = focusedObjectIndex < 0;
+  if (controls.hidden) return;
+
+  $('#object-position').textContent = `${focusedObjectIndex + 1} / ${OBJS.length}`;
+  $('#object-prev').disabled = focusedObjectIndex === 0;
+  $('#object-next').disabled = focusedObjectIndex === OBJS.length - 1;
+}
+
+function moveFocusBy(offset) {
+  const nextObject = OBJS[focusedObjectIndex + offset];
+  if (nextObject) focusObject(nextObject);
+}
 
 function animateCamera(targetPos, targetLookAt, onComplete) {
   tween = {
@@ -1791,9 +1807,10 @@ function animateCamera(targetPos, targetLookAt, onComplete) {
 }
 
 function focusObject(obj) {
+  focusedObjectIndex = OBJS.indexOf(obj);
+  updateObjectNavigation();
   closeModal();
   animateCamera(obj.c, obj.a, () => openModal(obj.key));
-  $('#back').hidden = false;
   $('#labels').classList.add('foc');
 }
 
@@ -1816,12 +1833,15 @@ function closeModal() {
 function resetToHome() {
   closeModal();
   animateCamera(homePos(), HT);
-  $('#back').hidden = true;
+  focusedObjectIndex = -1;
+  updateObjectNavigation();
   $('#labels').classList.remove('foc');
 }
 
 $('#mx').onclick = closeModal;
 $('#back').onclick = resetToHome;
+$('#object-prev').onclick = () => moveFocusBy(-1);
+$('#object-next').onclick = () => moveFocusBy(1);
 addEventListener('keydown', e => e.key === 'Escape' && closeModal());
 
 /* ==========================================================================

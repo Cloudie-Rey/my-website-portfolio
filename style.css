@@ -201,24 +201,60 @@ main {
   white-space: nowrap;
 }
 
-#back {
+#object-controls {
   position: absolute;
   left: 16px;
   bottom: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#object-controls[hidden] {
+  display: none;
+}
+
+#back,
+#object-nav button {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
   font-size: 12px;
   background: var(--gl);
   color: var(--cy);
   border: 1px solid var(--cy);
-  padding: 8px 14px;
+  padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-#back:hover {
+#object-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--ln);
+  border-radius: 8px;
+  background: var(--gl);
+  backdrop-filter: blur(6px);
+}
+
+#object-position {
+  min-width: 38px;
+  color: var(--tx);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-align: center;
+}
+
+#object-controls button:hover:not(:disabled) {
   background: rgba(0, 243, 255, 0.2);
+}
+
+#object-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 #spotify-toggle {
@@ -603,6 +639,19 @@ tr.go:hover td {
 
   .hint {
     display: none;
+  }
+
+  #object-controls {
+    top: 56px;
+    bottom: auto;
+    left: 12px;
+    gap: 5px;
+  }
+
+  #back,
+  #object-nav button {
+    padding: 8px;
+    font-size: 11px;
   }
 
   .sw button {

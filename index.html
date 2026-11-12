@@ -33,7 +33,14 @@
       <div id="stage"></div>
       <div id="labels"></div>
       <div class="hint">Drag to orbit · scroll to zoom · click on a number and explore!</div>
-      <button id="back" hidden>← Back to workshop</button>
+      <div id="object-controls" hidden>
+        <button id="back" type="button">← Back to workshop</button>
+        <nav id="object-nav" aria-label="Navigate between workshop items">
+          <button id="object-prev" type="button" aria-label="Previous item" title="Previous item">←</button>
+          <span id="object-position" aria-live="polite"></span>
+          <button id="object-next" type="button" aria-label="Next item" title="Next item">→</button>
+        </nav>
+      </div>
       <button id="spotify-toggle" aria-pressed="false" disabled>Loading music...</button>
       
       <!-- Interactive Slide-out Modal -->
