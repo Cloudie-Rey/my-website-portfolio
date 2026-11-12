@@ -88,7 +88,7 @@ const D = {
   },
   funfacts: {
     title: 'Other Fun Facts',
-    code: 'EXTRA.FACTS',
+    code: 'EXTRA.MD',
     intro: 'I also love sports, fitness, and art!',
     cards: [
       ['Sports Skills', 'Rugby (district team), volleyball (now recreational), martial arts (Taekwondo; self-taught Muay Thai and kickboxing), and basketball (my first sport).', 'SPORTS'],
