@@ -120,7 +120,7 @@ main {
   position: absolute;
   inset: 0;
   background-color: #080b14;
-  background-image: url('/lightning-pattern.svg');
+  background-image: url('./lightning-pattern.svg');
   background-size: 192px 192px;
   background-repeat: repeat;
 }
@@ -537,7 +537,7 @@ tr.go:hover td {
 
 #vgrid {
   background-color: var(--bg);
-  background-image: url('/cloud-outline.svg');
+  background-image: url('./cloud-outline.svg');
   background-size: 420px 300px;
   background-repeat: repeat;
 }

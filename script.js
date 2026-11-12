@@ -2,7 +2,9 @@ import { getHolidayThemes } from './holiday-calendar.js';
 
 const $ = selector => document.querySelector(selector);
 const T = window.THREE;
-const isLocalDevelopment = import.meta.env?.DEV === true;
+const isLocalDevelopment = location.hostname === 'localhost'
+  || location.hostname === '127.0.0.1'
+  || location.hostname.endsWith('.app.github.dev');
 
 
 const D = {
