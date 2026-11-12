@@ -3825,6 +3825,7 @@ function openModal(key) {
   $('#mb').innerHTML = renderSection(key, false);
   const showSpotifyPlayer = key === 'music';
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
+  spotifyToggle.classList.toggle('spotify-toggle-near-player', showSpotifyPlayer);
   spotifyPlayer.setAttribute('aria-hidden', String(!showSpotifyPlayer));
   $('#modal').classList.toggle('has-spotify-player', showSpotifyPlayer);
   $('#modal').classList.add('on');
@@ -3834,6 +3835,7 @@ function closeModal() {
   $('#modal').classList.remove('on');
   $('#modal').classList.remove('has-spotify-player');
   spotifyPlayer.classList.add('spotify-player-offscreen');
+  spotifyToggle.classList.remove('spotify-toggle-near-player');
   spotifyPlayer.setAttribute('aria-hidden', 'true');
 }
 

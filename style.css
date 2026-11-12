@@ -350,6 +350,14 @@ main {
   background: rgba(0, 243, 255, 0.2);
 }
 
+#spotify-toggle.spotify-toggle-near-player {
+  position: fixed;
+  top: auto;
+  right: 40px;
+  bottom: 408px;
+  left: auto;
+}
+
 #modal {
   position: absolute;
   right: 20px;
@@ -708,6 +716,11 @@ tr.go:hover td {
     right: 32px;
     bottom: 32px;
     width: calc(100vw - 64px);
+  }
+
+  #spotify-toggle.spotify-toggle-near-player {
+    right: 32px;
+    bottom: 400px;
   }
 
   .hint {
