@@ -146,7 +146,7 @@ function switchTab(id) {
       <div class="sec hero">
         <div class="code">// MYSPACE.PY</div>
         <h1>Reyaa Divakar<br>Robotics & Mechanical Engineering.</h1>
-        <p>Hi! Welcome to my humble abode! I'm working on learning and creating all the time! Take a look at my work by clicking where ever your cursiosity takes you!</p>
+        <p>Hi! Welcome to my humble abode! I'm learning and creating all the time! Take a look at my work by clicking where ever your cursiosity takes you!</p>
       </div>
       <div class="traits" aria-label="Personal strengths">
         <span>Creative</span>
