@@ -1775,6 +1775,7 @@ OBJS.forEach(obj => {
 /* ==========================================================================
    10. Camera Focus & Modal Interactions
    ========================================================================== */
+const NAV_OBJECTS = [...OBJS].sort((a, b) => a.displayNumber - b.displayNumber);
 let tween = null;
 let focusedObjectIndex = -1;
 const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -1784,26 +1785,14 @@ function updateObjectNavigation() {
   controls.hidden = focusedObjectIndex < 0;
   if (controls.hidden) return;
 
-  $('#object-position').textContent = `${focusedObjectIndex + 1} / ${OBJS.length}`;
+  $('#object-position').textContent = `${NAV_OBJECTS[focusedObjectIndex].displayNumber} / ${NAV_OBJECTS.length}`;
   $('#object-prev').disabled = focusedObjectIndex === 0;
-  $('#object-next').disabled = focusedObjectIndex === OBJS.length - 1;
+  $('#object-next').disabled = focusedObjectIndex === NAV_OBJECTS.length - 1;
 }
 
 function moveFocusBy(offset) {
-  const currentObject = OBJS[focusedObjectIndex];
-  const nextIndex = focusedObjectIndex + offset;
-  const nextObject = OBJS[nextIndex];
-  if (!currentObject || !nextObject) return;
-
-  const translation = nextObject.a.clone().sub(currentObject.a);
-  focusedObjectIndex = nextIndex;
-  updateObjectNavigation();
-  closeModal();
-  animateCamera(
-    cam.position.clone().add(translation),
-    ctl.target.clone().add(translation),
-    () => openModal(nextObject.key)
-  );
+  const nextObject = NAV_OBJECTS[focusedObjectIndex + offset];
+  if (nextObject) focusObject(nextObject);
 }
 
 function animateCamera(targetPos, targetLookAt, onComplete) {
@@ -1819,7 +1808,7 @@ function animateCamera(targetPos, targetLookAt, onComplete) {
 }
 
 function focusObject(obj) {
-  focusedObjectIndex = OBJS.indexOf(obj);
+  focusedObjectIndex = NAV_OBJECTS.indexOf(obj);
   updateObjectNavigation();
   closeModal();
   animateCamera(obj.c, obj.a, () => openModal(obj.key));
