@@ -105,7 +105,7 @@ const D = {
   }
 };
 
-const renderSection = key => {
+const renderSection = (key, includeSpotifyEmbed = true) => {
   const s = D[key];
   return `
     <div class="sec">
@@ -116,9 +116,131 @@ const renderSection = key => {
       ${s.rows ? `<table>${s.rows.map(r => `<tr>${r.map((x, i) => `<td${i ? '' : ' class="k"'}>${x}</td>`).join('')}</tr>`).join('')}</table>` : ''}
       ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
       ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
-      ${s.embed ? `<div class="spotify-embed"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
+      ${includeSpotifyEmbed && s.embed ? `<div class="spotify-embed spotify-embed-inline"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
       ${s.link ? `<a class="btn" href="${s.link[1]}" target="_blank" rel="noopener">${s.link[0]}</a>` : ''}
     </div>`;
+};
+
+const spotifyPlayer = $('#spotify-player');
+const spotifyToggle = $('#spotify-toggle');
+let spotifyController = null;
+let spotifyIsReady = false;
+let spotifyPlayRequested = false;
+let spotifyFallbackActive = false;
+let spotifyInitTimeout = null;
+let monitorMusicTexture = null;
+const monitorTrackTitle = 'Robotics Lab Playlist';
+let monitorIsPlaying = false;
+
+function drawMusicMonitor(ctx, width, height, time) {
+  ctx.fillStyle = '#07130f';
+  ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = '#1db954';
+  ctx.font = '700 17px monospace';
+  ctx.fillText('SPOTIFY', 14, 24);
+  ctx.fillStyle = '#d8ffe3';
+  ctx.font = '12px monospace';
+  ctx.fillText('PLAYLIST', 14, 45);
+  ctx.font = '700 14px sans-serif';
+  const title = monitorTrackTitle.length > 30
+    ? `${monitorTrackTitle.slice(0, 27)}...`
+    : monitorTrackTitle;
+  ctx.fillText(title, 14, 68, width - 28);
+
+  const barCount = 20;
+  const barWidth = 7;
+  const gap = 4;
+  const startX = (width - barCount * (barWidth + gap) + gap) / 2;
+  for (let i = 0; i < barCount; i++) {
+    const level = monitorIsPlaying
+      ? 0.15 + (Math.sin(time * 5 + i * 0.8) + 1) * 0.35
+      : 0.08;
+    const barHeight = 6 + level * 44;
+    ctx.fillStyle = i % 3 === 0 ? '#b5ffce' : '#1db954';
+    ctx.fillRect(startX + i * (barWidth + gap), 130 - barHeight, barWidth, barHeight);
+  }
+}
+
+function refreshMusicMonitor(time = 0) {
+  if (!monitorMusicTexture) return;
+  drawMusicMonitor(
+    monitorMusicTexture.image.getContext('2d'),
+    monitorMusicTexture.image.width,
+    monitorMusicTexture.image.height,
+    time
+  );
+  monitorMusicTexture.needsUpdate = true;
+}
+
+window.onSpotifyIframeApiReady = IFrameAPI => {
+  IFrameAPI.createController($('#spotify-iframe'), {
+    uri: 'spotify:playlist:7yAEFdpcnLQORa9ztKNFs6',
+    width: 352,
+    height: 352
+  }, controller => {
+    spotifyController = controller;
+    spotifyToggle.disabled = false;
+    spotifyToggle.textContent = monitorIsPlaying ? 'Pause music' : 'Play music';
+    controller.addListener('ready', () => {
+      spotifyIsReady = true;
+      spotifyFallbackActive = false;
+      clearTimeout(spotifyInitTimeout);
+      spotifyToggle.disabled = false;
+      spotifyToggle.textContent = monitorIsPlaying ? 'Pause music' : 'Play music';
+      if (spotifyPlayRequested) controller.resume();
+    });
+    controller.addListener('playback_update', event => {
+      monitorIsPlaying = !event.data.isPaused;
+      if (monitorIsPlaying) spotifyPlayRequested = false;
+      spotifyToggle.textContent = event.data.isPaused ? 'Play music' : 'Pause music';
+      spotifyToggle.setAttribute('aria-pressed', String(!event.data.isPaused));
+    });
+    controller.addListener('playback_started', () => {
+      monitorIsPlaying = true;
+      spotifyPlayRequested = false;
+      spotifyToggle.textContent = 'Pause music';
+      spotifyToggle.setAttribute('aria-pressed', 'true');
+    });
+  });
+};
+
+const spotifyApiScript = document.createElement('script');
+spotifyApiScript.src = 'https://open.spotify.com/embed/iframe-api/v1';
+spotifyApiScript.async = true;
+spotifyApiScript.addEventListener('error', () => {
+  clearTimeout(spotifyInitTimeout);
+  spotifyFallbackActive = true;
+  console.error('Spotify Embed API failed to load; playlist controls are unavailable.');
+  spotifyToggle.disabled = false;
+  spotifyToggle.textContent = 'Open Spotify';
+});
+spotifyInitTimeout = window.setTimeout(() => {
+  if (spotifyIsReady) return;
+  spotifyFallbackActive = true;
+  console.error('Spotify Embed did not become ready; opening the playlist directly instead.');
+  spotifyToggle.disabled = false;
+  spotifyToggle.textContent = 'Open Spotify';
+}, 15000);
+document.body.appendChild(spotifyApiScript);
+
+spotifyToggle.onclick = () => {
+  if (spotifyFallbackActive) {
+    window.open(D.music.link[1], '_blank', 'noopener,noreferrer');
+    return;
+  }
+  if (!spotifyController || !spotifyIsReady) {
+    spotifyPlayRequested = true;
+    spotifyController?.resume();
+    return;
+  }
+  if (monitorIsPlaying) {
+    spotifyPlayRequested = false;
+    spotifyController.pause();
+  } else {
+    spotifyPlayRequested = true;
+    spotifyController.resume();
+    if (spotifyIsReady) spotifyPlayRequested = false;
+  }
 };
 
 /* ==========================================================================
@@ -160,7 +282,7 @@ function switchTab(id) {
         </table>
       </div>`;
   } else {
-    panel.innerHTML = activeTab[2].map(renderSection).join('');
+    panel.innerHTML = activeTab[2].map(key => renderSection(key)).join('');
   }
   panel.scrollTop = 0;
 }
@@ -247,6 +369,284 @@ const createTexture = (w, h, drawFn) => {
   canvas.height = h;
   drawFn(canvas.getContext('2d'), w, h);
   return new T.CanvasTexture(canvas);
+};
+
+const mixHexColors = (from, to, amount) => {
+  const a = [1, 3, 5].map(start => parseInt(from.slice(start, start + 2), 16));
+  const b = [1, 3, 5].map(start => parseInt(to.slice(start, start + 2), 16));
+  return `#${a.map((channel, index) => Math.round(channel + (b[index] - channel) * amount)
+    .toString(16).padStart(2, '0')).join('')}`;
+};
+
+const drawCadMonitor = (ctx, width, height) => {
+  ctx.fillStyle = '#111824';
+  ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = '#202b3b';
+  ctx.fillRect(0, 0, width, 18);
+  ctx.fillStyle = '#d6e5f4';
+  ctx.font = '700 9px monospace';
+  ctx.fillText('CAD  /  BOB.SLDPRT', 7, 12);
+
+  ctx.fillStyle = '#1a2433';
+  ctx.fillRect(0, 18, 30, height - 18);
+  ctx.fillStyle = '#71849c';
+  ctx.font = '6px monospace';
+  ['MODEL', 'JOINTS', 'ASSEMBLY', 'RENDER'].forEach((label, index) => {
+    ctx.fillText(label, 3, 33 + index * 13);
+  });
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(30, 18, width - 30, height - 18);
+  ctx.clip();
+  ctx.strokeStyle = 'rgba(126, 158, 194, 0.16)';
+  ctx.lineWidth = 0.6;
+  for (let x = 40; x < width; x += 16) {
+    ctx.beginPath();
+    ctx.moveTo(x, 18);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+  }
+  for (let y = 26; y < height; y += 16) {
+    ctx.beginPath();
+    ctx.moveTo(30, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = '#77dcf3';
+  ctx.fillStyle = 'rgba(50, 149, 208, 0.22)';
+  ctx.lineWidth = 1.5;
+  const drawPart = (points, offsetX = 7, offsetY = -5) => {
+    const back = points.map(([x, y]) => [x + offsetX, y + offsetY]);
+    ctx.beginPath();
+    points.forEach(([x, y], index) => index ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    back.forEach(([x, y], index) => index ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    ctx.closePath();
+    ctx.stroke();
+    points.forEach(([x, y], index) => {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(back[index][0], back[index][1]);
+      ctx.stroke();
+    });
+  };
+  const joint = (x, y, radius = 3) => {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#172d40';
+    ctx.fill();
+    ctx.strokeStyle = '#a4f3ff';
+    ctx.stroke();
+  };
+
+  drawPart([[111, 34], [130, 34], [136, 41], [134, 54], [108, 54], [106, 41]]);
+  ctx.beginPath();
+  ctx.moveTo(111, 43);
+  ctx.lineTo(133, 43);
+  ctx.strokeStyle = '#b5ffce';
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(120, 54);
+  ctx.lineTo(120, 61);
+  ctx.strokeStyle = '#77dcf3';
+  ctx.stroke();
+
+  drawPart([[102, 61], [138, 61], [147, 78], [140, 99], [100, 99], [93, 78]]);
+  ctx.beginPath();
+  ctx.moveTo(102, 68);
+  ctx.lineTo(138, 68);
+  ctx.lineTo(134, 79);
+  ctx.lineTo(106, 79);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(120, 87, 5, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(96, 67);
+  ctx.lineTo(82, 83);
+  ctx.lineTo(77, 104);
+  ctx.moveTo(144, 67);
+  ctx.lineTo(158, 83);
+  ctx.lineTo(163, 104);
+  ctx.stroke();
+  ctx.lineWidth = 1.5;
+  joint(96, 67, 4);
+  joint(144, 67, 4);
+  joint(82, 83, 4);
+  joint(158, 83, 4);
+  drawPart([[73, 101], [81, 103], [80, 115], [72, 114]], 4, -3);
+  drawPart([[160, 101], [168, 103], [169, 114], [161, 115]], 4, -3);
+
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(107, 98);
+  ctx.lineTo(101, 114);
+  ctx.lineTo(99, 132);
+  ctx.moveTo(133, 98);
+  ctx.lineTo(139, 114);
+  ctx.lineTo(141, 132);
+  ctx.stroke();
+  ctx.lineWidth = 1.5;
+  joint(101, 114, 4);
+  joint(139, 114, 4);
+  drawPart([[91, 131], [101, 131], [101, 138], [89, 138]], 4, -2);
+  drawPart([[139, 131], [149, 131], [151, 138], [139, 138]], 4, -2);
+
+  ctx.strokeStyle = '#ff8b79';
+  ctx.beginPath();
+  ctx.moveTo(204, 126);
+  ctx.lineTo(220, 126);
+  ctx.stroke();
+  ctx.strokeStyle = '#8fffc1';
+  ctx.beginPath();
+  ctx.moveTo(204, 126);
+  ctx.lineTo(204, 111);
+  ctx.stroke();
+  ctx.fillStyle = '#9db0c7';
+  ctx.font = '6px monospace';
+  ctx.fillText('X', 222, 128);
+  ctx.fillText('Y', 201, 108);
+  ctx.restore();
+
+  ctx.fillStyle = '#9db0c7';
+  ctx.font = '6px monospace';
+  ctx.fillText('3D VIEW  |  MM', 187, 145);
+};
+
+const drawWindowScenery = (ctx, width, height, hour) => {
+  const skyStops = [
+    { hour: 0, top: '#061027', middle: '#101b3d', horizon: '#29375b' },
+    { hour: 5, top: '#07122c', middle: '#142348', horizon: '#39466a' },
+    { hour: 6.5, top: '#1b315c', middle: '#6786b1', horizon: '#f5ad8b' },
+    { hour: 8, top: '#438fcf', middle: '#91c7eb', horizon: '#d9edf8' },
+    { hour: 12, top: '#368cdb', middle: '#79b9e8', horizon: '#c4e6f8' },
+    { hour: 16.5, top: '#438fcf', middle: '#91c7eb', horizon: '#d9edf8' },
+    { hour: 18.5, top: '#344e89', middle: '#bf8095', horizon: '#ffc28e' },
+    { hour: 20.5, top: '#0c1a3b', middle: '#17294d', horizon: '#354766' },
+    { hour: 24, top: '#061027', middle: '#101b3d', horizon: '#29375b' }
+  ];
+  const nextIndex = skyStops.findIndex(stop => stop.hour >= hour);
+  const end = skyStops[nextIndex < 0 ? skyStops.length - 1 : nextIndex];
+  const start = skyStops[Math.max(0, skyStops.indexOf(end) - 1)];
+  const blend = start === end ? 0 : (hour - start.hour) / (end.hour - start.hour);
+  const palette = {
+    top: mixHexColors(start.top, end.top, blend),
+    middle: mixHexColors(start.middle, end.middle, blend),
+    horizon: mixHexColors(start.horizon, end.horizon, blend)
+  };
+  const smoothstep = (edge0, edge1, value) => {
+    const t = Math.max(0, Math.min(1, (value - edge0) / (edge1 - edge0)));
+    return t * t * (3 - 2 * t);
+  };
+  const daylight = smoothstep(5.5, 8, hour) * (1 - smoothstep(17.5, 20.5, hour));
+  const night = 1 - daylight;
+  const twilight = Math.max(
+    0,
+    1 - Math.abs(hour - 6.5) / 2,
+    1 - Math.abs(hour - 19) / 2.5
+  );
+
+  const gradient = ctx.createLinearGradient(0, 0, 0, height);
+  gradient.addColorStop(0, palette.top);
+  gradient.addColorStop(0.58, palette.middle);
+  gradient.addColorStop(1, palette.horizon);
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+
+  if (daylight > 0.05) {
+    const sunProgress = Math.max(0, Math.min(1, (hour - 6) / 12));
+    const sunX = 45 + sunProgress * (width - 90);
+    const sunY = 138 - Math.sin(sunProgress * Math.PI) * 90;
+    ctx.globalAlpha = daylight;
+    ctx.fillStyle = '#fff2c2';
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 15, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  if (night > 0.05) {
+    for (let i = 0; i < 130; i++) {
+      const x = (i * 137.508) % width;
+      const y = (i * 67.311) % (height * 0.62);
+      const size = i % 9 === 0 ? 1.7 : 0.8;
+      ctx.globalAlpha = night * (0.35 + (i % 5) * 0.13);
+      ctx.fillStyle = i % 6 === 0 ? '#bceaff' : '#f5f8ff';
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = night * 0.28;
+    ctx.shadowColor = '#54ffd1';
+    ctx.shadowBlur = 22;
+    for (let band = 0; band < 4; band++) {
+      const wave = band * 17;
+      const aurora = ctx.createLinearGradient(0, 50, width, 175);
+      aurora.addColorStop(0, 'rgba(43, 255, 177, 0)');
+      aurora.addColorStop(0.35, '#4dffc2');
+      aurora.addColorStop(0.7, '#63dfff');
+      aurora.addColorStop(1, 'rgba(99, 223, 255, 0)');
+      ctx.strokeStyle = aurora;
+      ctx.lineWidth = 12 - band * 2;
+      ctx.beginPath();
+      ctx.moveTo(-20, 98 + wave);
+      ctx.bezierCurveTo(112, 22 + wave, 303, 154 - wave, width + 20, 62 + wave);
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = night;
+    ctx.fillStyle = '#e2efff';
+    ctx.beginPath();
+    ctx.arc(width - 72, 58, 12, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = palette.top;
+    ctx.beginPath();
+    ctx.arc(width - 66, 53, 11, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  const cloudAlpha = daylight * 0.48 + twilight * 0.18;
+  if (cloudAlpha > 0.01) {
+    ctx.fillStyle = `rgba(255, 248, 241, ${cloudAlpha})`;
+    [[75, 85, 52, 18], [112, 82, 35, 14], [410, 105, 54, 17], [450, 102, 32, 13]].forEach(([cx, cy, rx, ry]) => {
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  ctx.fillStyle = mixHexColors('#657aa8', '#101b36', night);
+  ctx.beginPath();
+  ctx.moveTo(0, 235);
+  ctx.lineTo(130, 130);
+  ctx.lineTo(250, 235);
+  ctx.lineTo(360, 145);
+  ctx.lineTo(width, 250);
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = mixHexColors('#8499c5', '#172648', night);
+  ctx.beginPath();
+  ctx.moveTo(0, 270);
+  ctx.lineTo(170, 190);
+  ctx.lineTo(315, 280);
+  ctx.lineTo(430, 205);
+  ctx.lineTo(width, 250);
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+  ctx.fill();
 };
 
 const addRod = (group, start, end, radius, mat) => {
@@ -364,42 +764,21 @@ addRgbLedStrip('z', 15, 8.82, 6.76, 1.5);
   [0.08, 3.4, 0.2, 0, 3.9]
 ].forEach(a => buildWall(a[0], a[1], a[2], a[3], a[4], -5.9, trimMaterial));
 
+const localTime = new Date();
+const getLocalHour = date => date.getHours() + date.getMinutes() / 60;
 const windowScenery = createTexture(512, 360, (ctx, w, h) => {
-  const grad = ctx.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0, '#5b8de0');
-  grad.addColorStop(0.55, '#b7a6e8');
-  grad.addColorStop(1, '#ffd2b8');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, w, h);
-  ctx.fillStyle = 'rgba(255,248,241,.85)';
-  [[75, 85, 52, 18], [112, 82, 35, 14], [410, 105, 54, 17], [450, 102, 32, 13]].forEach(([cx, cy, rx, ry]) => {
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
-    ctx.fill();
-  });
-  ctx.fillStyle = '#6a78b8';
-  ctx.beginPath();
-  ctx.moveTo(0, 235);
-  ctx.lineTo(130, 130);
-  ctx.lineTo(250, 235);
-  ctx.lineTo(360, 145);
-  ctx.lineTo(512, 250);
-  ctx.lineTo(512, 360);
-  ctx.lineTo(0, 360);
-  ctx.closePath();
-  ctx.fill();
-  ctx.fillStyle = '#8596cf';
-  ctx.beginPath();
-  ctx.moveTo(0, 270);
-  ctx.lineTo(170, 190);
-  ctx.lineTo(315, 280);
-  ctx.lineTo(430, 205);
-  ctx.lineTo(512, 250);
-  ctx.lineTo(512, 360);
-  ctx.lineTo(0, 360);
-  ctx.closePath();
-  ctx.fill();
+  drawWindowScenery(ctx, w, h, getLocalHour(localTime));
 });
+let lastWindowMinute = localTime.getHours() * 60 + localTime.getMinutes();
+
+function updateWindowScenery() {
+  const now = new Date();
+  const minute = now.getHours() * 60 + now.getMinutes();
+  if (minute === lastWindowMinute) return;
+  lastWindowMinute = minute;
+  drawWindowScenery(windowScenery.image.getContext('2d'), 512, 360, getLocalHour(now));
+  windowScenery.needsUpdate = true;
+}
 add(
   scene,
   new T.PlaneGeometry(4.65, 3.18),
@@ -447,14 +826,16 @@ buildWall(1.9, 0.3, 4.5, 5.6, 6.6, -3.8, M(0x4a5568));
    7. Interactive 3D Objects Setup & Registration
    ========================================================================== */
 const OBJS = [];
+const animatedMugSteam = [];
 
-function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset = 1.3) {
+function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset = 1.3, displayNumber = OBJS.length + 1) {
   group.userData.oid = id;
   scene.add(group);
   OBJS.push({
     id,
     key,
     label,
+    displayNumber,
     g: group,
     a: new T.Vector3(...anchorPos),
     c: new T.Vector3(...cameraPos),
@@ -505,7 +886,7 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     ], 0.07, cableDark);
   }
 
-  registerObject('exo', 'resume', 'MECH EXO-SUIT', group, [5.6, 2.4, -1.6], [3, 3, 2.8], 2);
+  registerObject('exo', 'github', 'MECH EXO-SUIT', group, [5.6, 2.4, -1.6], [3, 3, 2.8], 2, 2);
 }
 
 // 2. White Workbench Setup
@@ -575,20 +956,16 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   [-1.1, 0.9].forEach((x, i) => {
     const mon = new T.Group();
     add(mon, B(1.9, 1.2, 0.1), darkMat, 0, 0, 0);
+    const screenTexture = createTexture(256, 150, (ctx, w, h) => {
+      if (i === 1) {
+        drawMusicMonitor(ctx, w, h, 0);
+        return;
+      }
+      drawCadMonitor(ctx, w, h);
+    });
+    if (i === 1) monitorMusicTexture = screenTexture;
     add(mon, new T.PlaneGeometry(1.75, 1.05), new T.MeshBasicMaterial({
-      map: createTexture(256, 150, (ctx, w, h) => {
-        const grad = ctx.createLinearGradient(0, 0, 0, h);
-        grad.addColorStop(0, '#7fa8ff');
-        grad.addColorStop(1, '#ffd3cf');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-        ctx.fillStyle = 'rgba(255,255,255,.65)';
-        for (let k = 0; k < 7; k++) {
-          ctx.beginPath();
-          ctx.ellipse(20 + k * 37, 105 + (k % 3) * 12, 38, 15, 0, 0, 7);
-          ctx.fill();
-        }
-      })
+      map: screenTexture
     }), 0, 0, 0.06, 0);
     add(mon, B(0.1, 0.5, 0.1), whiteMat, 0, -0.8, -0.05);
     mon.position.set(x, 2.65, -3.55);
@@ -601,7 +978,91 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   add(group, B(1.2, 0.01, 0.28), M(0x9fd0ff), -0.1, 1.985, -2.7);
   add(group, new T.SphereGeometry(0.09, 10, 8), whiteMat, 0.7, 1.95, -2.65).scale.set(1, 0.5, 1.4);
 
-  add(group, C(0.07, 0.07, 0.13), M(0xffffff), -1.4, 1.97, -2.7);
+  const mug = new T.Group();
+  mug.position.set(-1.72, 1.9 * (1 - 1.65), -2.62);
+  mug.scale.setScalar(1.65);
+  const mugMat = M(0xf4f0e7);
+  add(mug, new T.CylinderGeometry(0.07, 0.065, 0.14, 24, 1, true), mugMat, 0, 1.97, 0);
+  add(mug, C(0.065, 0.065, 0.012, 24), mugMat, 0, 1.905, 0);
+  add(mug, new T.TorusGeometry(0.067, 0.006, 8, 24), mugMat, 0, 2.04, 0).rotation.x = Math.PI / 2;
+  add(mug, new T.TorusGeometry(0.043, 0.009, 8, 20), mugMat, 0.09, 1.97, 0.04);
+
+  const mugLogo = createTexture(64, 64, (ctx, w, h) => {
+    ctx.fillStyle = '#c9aa79';
+    ctx.font = 'bold 52px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('R', w / 2, h / 2 + 2);
+  });
+  add(
+    mug,
+    new T.PlaneGeometry(0.05, 0.065),
+    new T.MeshBasicMaterial({ map: mugLogo, transparent: true, side: T.DoubleSide }),
+    0,
+    1.97,
+    0.074,
+    0
+  );
+  const coffee = add(mug, new T.CircleGeometry(0.057, 24), M(0x503425), 0, 2.025, 0, 0);
+  coffee.rotation.x = -Math.PI / 2;
+  const teaBag = add(mug, B(0.028, 0.008, 0.024), M(0xb99a68), -0.02, 2.027, 0.005);
+  teaBag.rotation.z = -0.18;
+  const teaString = M(0xb9ad91);
+  const teaStringCurve = new T.CatmullRomCurve3([
+    new T.Vector3(-0.02, 2.03, 0.02),
+    new T.Vector3(-0.045, 2.038, 0.045),
+    new T.Vector3(-0.07, 2.02, 0.066),
+    new T.Vector3(-0.078, 1.99, 0.075),
+    new T.Vector3(-0.095, 1.99, 0.084),
+    new T.Vector3(-0.115, 1.993, 0.089)
+  ]);
+  add(mug, new T.TubeGeometry(teaStringCurve, 24, 0.0045, 6, false), teaString);
+  add(mug, B(0.044, 0.035, 0.008), M(0xd8c49e), -0.115, 1.975, 0.083);
+  const teaTag = createTexture(64, 48, (ctx, w, h) => {
+    ctx.fillStyle = '#d8c49e';
+    ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = '#967b53';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(2, 2, w - 4, h - 4);
+    ctx.fillStyle = '#755d3d';
+    ctx.font = 'bold 14px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('TEA', w / 2, 32);
+  });
+  add(
+    mug,
+    new T.PlaneGeometry(0.038, 0.027),
+    new T.MeshBasicMaterial({ map: teaTag, side: T.DoubleSide }),
+    -0.115,
+    1.975,
+    0.09,
+    0
+  );
+
+  const steamGroup = new T.Group();
+  steamGroup.position.set(0, 2.045, 0);
+  for (let i = 0; i < 3; i++) {
+    const phase = i / 3;
+    const baseX = (i - 1) * 0.025;
+    const steamCurve = new T.CatmullRomCurve3([
+      new T.Vector3(baseX, 0, 0.015),
+      new T.Vector3(baseX + 0.012, 0.07, 0.015),
+      new T.Vector3(baseX - 0.012, 0.14, 0.015),
+      new T.Vector3(baseX + 0.012, 0.21, 0.015),
+      new T.Vector3(baseX - 0.008, 0.28, 0.015)
+    ]);
+    const material = new T.MeshBasicMaterial({
+      color: 0xf4f7ff,
+      transparent: true,
+      opacity: 0,
+      depthWrite: false
+    });
+    const wisp = new T.Mesh(new T.TubeGeometry(steamCurve, 20, 0.007, 6, false), material);
+    steamGroup.add(wisp);
+    animatedMugSteam.push({ wisp, material, phase, baseX });
+  }
+  mug.add(steamGroup);
+  group.add(mug);
   addBlackLabPlush(group, -2.15, 1.9, -2.45, 0.65);
 
   addRod(group, [-2.35, 1.9, -2.95], [-2.35, 2.7, -2.95], 0.035, whiteMat);
@@ -622,7 +1083,7 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   group.position.z = -1.3;
   group.add(monitorsGroup);
   monitorsGroup.userData.oid = 'mon';
-  registerObject('mon', 'github', 'DUAL-MONITOR WORKBENCH', group, [-0.1, 2.7, -4.7], [-0.1, 3.2, -0.4], 1.6);
+  registerObject('mon', 'resume', 'DUAL-MONITOR WORKBENCH', group, [-0.1, 2.7, -4.7], [-0.1, 3.2, -0.4], 1.6, 1);
 }
 
 // 3. Desk Chair & Rug
@@ -1283,10 +1744,10 @@ scene.traverse(obj => {
    9. 2D HTML Labels & Dynamic 3D Overlay Mapping
    ========================================================================== */
 const labelsContainer = $('#labels');
-OBJS.forEach((obj, index) => {
+OBJS.forEach(obj => {
   const labelElem = document.createElement('div');
   labelElem.className = 'lbl';
-  labelElem.innerHTML = `<i></i><span class="lbl-number">${index + 1}</span><span class="lbl-name">${obj.label}</span>`;
+  labelElem.innerHTML = `<i></i><span class="lbl-number">${obj.displayNumber}</span><span class="lbl-name">${obj.label}</span>`;
   labelElem.onclick = () => focusObject(obj);
   labelsContainer.appendChild(labelElem);
   obj.el = labelElem;
@@ -1319,12 +1780,19 @@ function focusObject(obj) {
 }
 
 function openModal(key) {
-  $('#mb').innerHTML = renderSection(key);
+  $('#mb').innerHTML = renderSection(key, false);
+  const showSpotifyPlayer = key === 'music';
+  spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
+  spotifyPlayer.setAttribute('aria-hidden', String(!showSpotifyPlayer));
+  $('#modal').classList.toggle('has-spotify-player', showSpotifyPlayer);
   $('#modal').classList.add('on');
 }
 
 function closeModal() {
   $('#modal').classList.remove('on');
+  $('#modal').classList.remove('has-spotify-player');
+  spotifyPlayer.classList.add('spotify-player-offscreen');
+  spotifyPlayer.setAttribute('aria-hidden', 'true');
 }
 
 function resetToHome() {
@@ -1395,6 +1863,14 @@ function renderLoop() {
   if (mode !== '3d') return;
 
   const time = performance.now() / 1000;
+
+  updateWindowScenery();
+  refreshMusicMonitor(time);
+  animatedMugSteam.forEach(({ wisp, material, phase, baseX }) => {
+    const cycle = (time * 0.2 + phase) % 1;
+    wisp.position.set(baseX + Math.sin(time * 1.4 + phase * 6) * 0.012, cycle * 0.08, 0);
+    material.opacity = Math.sin(cycle * Math.PI) * 0.55;
+  });
 
   rgbLedSegments.forEach(({ material, offset }) => {
     material.color.setHSL((time * 0.12 + offset) % 1, 0.95, 0.55);

@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Reyaa Divakar</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,14 +32,18 @@
     <section id="v3d" class="view on">
       <div id="stage"></div>
       <div id="labels"></div>
-      <div class="hint">Drag to orbit · scroll to zoom · click an object</div>
+      <div class="hint">Drag to orbit · scroll to zoom · click on a number and explore!</div>
       <button id="back" hidden>← Back to workshop</button>
+      <button id="spotify-toggle" aria-pressed="false" disabled>Loading music...</button>
       
       <!-- Interactive Slide-out Modal -->
       <aside id="modal">
         <button class="x" id="mx" aria-label="Close">×</button>
         <div id="mb"></div>
       </aside>
+      <div id="spotify-player" class="spotify-embed spotify-player-offscreen" aria-hidden="true">
+        <div id="spotify-iframe"></div>
+      </div>
     </section>
 
     <!-- Professional Modular Grid View -->
