@@ -2,6 +2,7 @@ import { getHolidayThemes } from './holiday-calendar.js';
 
 const $ = selector => document.querySelector(selector);
 const T = window.THREE;
+const isLocalDevelopment = import.meta.env?.DEV === true;
 
 
 const D = {
@@ -937,7 +938,6 @@ addRgbLedStrip('z', 15, 8.82, 6.76, 1.5);
 ].forEach(a => buildWall(a[0], a[1], a[2], a[3], a[4], -5.9, trimMaterial));
 
 const getHolidayDateOverride = () => {
-  const isLocalDevelopment = import.meta.env.DEV;
   const value = new URLSearchParams(location.search).get('holidayDate');
   if (!isLocalDevelopment || !value) return null;
 
@@ -963,7 +963,6 @@ const getHolidayDateOverride = () => {
 
 const holidayDateOverride = getHolidayDateOverride();
 const getHolidayHourOverride = () => {
-  const isLocalDevelopment = import.meta.env.DEV;
   const value = new URLSearchParams(location.search).get('holidayHour');
   if (!isLocalDevelopment || !value) return null;
 
