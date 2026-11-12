@@ -165,6 +165,14 @@ main {
   animation: pulse 1.6s infinite;
 }
 
+.lbl-name {
+  display: none;
+}
+
+.lbl:hover .lbl-name {
+  display: inline;
+}
+
 .lbl:hover {
   background: rgba(0, 243, 255, 0.25);
 }
@@ -273,7 +281,7 @@ main {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 12px;
   margin: 16px 0;
 }
@@ -330,6 +338,22 @@ td.k {
   white-space: nowrap;
 }
 
+.spotify-embed {
+  width: min(100%, 520px);
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(29, 185, 84, 0.45);
+  border-radius: 12px;
+  background: #121212;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+}
+
+.spotify-embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
 tr.go {
   cursor: pointer;
 }
@@ -339,10 +363,10 @@ tr.go:hover td {
 }
 
 #vgrid {
-  background: radial-gradient(900px 400px at 80% -10%, rgba(0, 243, 255, 0.1), transparent),
-              linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px) 0 0 / 48px 48px,
-              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px) 0 0 / 48px 48px,
-              var(--bg);
+  background-color: var(--bg);
+  background-image: url('/cloud-outline.svg');
+  background-size: 420px 300px;
+  background-repeat: repeat;
 }
 
 .gw {
@@ -388,7 +412,7 @@ tr.go:hover td {
 
 #panel .sec {
   margin-bottom: 36px;
-  max-width: 980px;
+  max-width: none;
 }
 
 .hero h1 {
@@ -402,17 +426,22 @@ tr.go:hover td {
   font-size: 16px;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
   margin: 20px 0;
+  color: var(--cy);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 700;
 }
 
-.stats div {
+.traits span {
+  padding: 8px 14px;
   border: 1px solid var(--ln);
-  padding: 12px;
-  border-radius: 8px;
+  border-radius: 999px;
+  background: rgba(0, 243, 255, 0.06);
 }
 
 .stats b {
@@ -446,6 +475,23 @@ tr.go:hover td {
 .btn:hover {
   background: #1db954;
   color: #04110a;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.action-buttons .btn {
+  margin-top: 0;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
 }
 
 @media (max-width: 700px) {

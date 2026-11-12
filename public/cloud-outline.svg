@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 600" fill="none">
+  <defs>
+    <path id="cloud" d="M206 455C125 455 66 399 66 327c0-63 42-110 105-128 0-59 46-98 105-98 21 0 37 2 54 10 25-59 71-93 126-93 75 0 125 58 130 137 108 6 187 64 187 172 0 73-59 128-136 128H206Z"/>
+  </defs>
+  <g fill="none" stroke="#55c8e8" stroke-opacity=".1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#cloud" transform="translate(2 17) scale(.42)"/>
+    <use href="#cloud" transform="translate(422 17) scale(.42)"/>
+    <use href="#cloud" transform="translate(2 317) scale(.42)"/>
+    <use href="#cloud" transform="translate(422 317) scale(.42)"/>
+  </g>
+</svg>

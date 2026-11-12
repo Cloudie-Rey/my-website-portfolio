@@ -1,14 +1,12 @@
 const $ = selector => document.querySelector(selector);
 const T = THREE;
 
-/* ==========================================================================
-   1. Application Content Data (Updated with Reyaa Divakar's CV & Links)
-   ========================================================================== */
+
 const D = {
  resume: {
     title: 'Resume & Education',
     code: 'RESUME.EXE',
-    intro: 'Mechanical Engineering undergraduate at the Colorado School of Mines with a concentration in Automation and Controls, active in robotics research and hardware fabrication.',
+    intro: 'Mechanical Engineering undergraduate at the Colorado School of Mines with a concentration in Automation and Controls, active in robotics research and hardware fabrication.(Documents are always up to date!)',
     cards: [
       ['Education', 'Colorado School of Mines · B.S. Mechanical Engineering (Aug 2026 – May 2029)', 'DEGREE'],
       ['Core Skills', 'Python, MATLAB, C#, Arduino, Raspberry Pi, SolidWorks, OpenCV', 'STACK']
@@ -17,11 +15,11 @@ const D = {
       ['2026–Pres.', 'Undergraduate Research Assistant', 'MIRRORLabs (Mines Interactive Robotics Research)'],
       ['2025', 'Summer Shadow Program Intern', 'Burns & McDonnell'],
       ['2024', 'Aerospace Intern', 'Colorado Space Business Roundtable (CSBR/ASA)'],
-      ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit']
+      ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit'],
     ],
    links: [
-      ['Download Resume', 'resume.pdf'],
-      ['Download CV', 'cv.pdf']
+      ['Download Resume', 'Resume.pdf'],
+      ['Download CV', 'CV.pdf']
     ]
   },
   github: {
@@ -34,13 +32,10 @@ const D = {
       ['TSA UAV Drone', 'Custom drone with mechanical claw payload (3rd Place Districts Bronze).', 'DRONE DESIGN'],
       ['Code Connect Platform', 'Official web platform deployed via Vercel with GitHub version control.', 'WEBGL/JS']
     ],
-    rows: [
-      ['Focus', 'Autonomous Robotics & Sensor Fusion', 'primary'],
-      ['Profile', '<a href="https://github.com/Cloudie-Rey" target="_blank" rel="noopener">github.com/Cloudie-Rey</a>', 'repository']
-    ]
+    link: ['GitHub Profile', 'https://github.com/Cloudie-Rey']
   },
   business: {
-    title: 'Experience & Leadership',
+    title: 'Leadership, Side Hustles, & Ventures',
     code: 'VENTURES.DAT',
     intro: 'Industry internships, non-profit founding, and professional interpretation work.',
     cards: [
@@ -48,22 +43,20 @@ const D = {
       ['Nexus Language', 'Employed as a paid professional on-site Tamil interpreter for schools and developmental screenings.', 'INTERPRETER'],
       ['Jetson Accelerator', 'Selected for a 7% acceptance rate startup accelerator; executed mobile QA testing and MVP strategy.', 'STARTUP INTERN']
     ],
-    rows: [
-      ['Community', 'Tamil Association of Colorado Youth Committee Designer', 'LEAD'],
-      ['Client Acq.', 'FlexContent B2B client research and SEO technical blogging', 'INTERN']
-    ]
   },
   games: {
     title: 'Games & Playable Projects',
     code: 'ARCADE.BIN',
-    intro: 'Award-winning interactive video game design and cooperative puzzle mechanics built in Unity.',
+    intro: "Games I've contributed to or developed.",
     cards: [
       ['Internal Reflection', 'Two-player cooperative puzzle game focusing on communication mechanics.', 'UNITY · TSA 2025'],
       ['State 1st Place', 'Awarded 1st Place at the TSA State Conference for Video Game Design.', 'AWARD'],
       ['National 3rd Place', 'Awarded 3rd Place at the TSA National Conference for Video Game Design.', 'NATIONAL']
     ],
     rows: [
-      ['Platform', 'Unity Game Engine & Digital Animation', 'development']
+      ['The Spellbound Assassins (TSA)', '<a href="https://scratch.mit.edu/projects/1216822994" target="_blank" rel="noopener">Play on Scratch</a>', 'SCRATCH'],
+      ["Alvin's Endless Adventure", '<a href="https://flowlab.io/game/play/2232462" target="_blank" rel="noopener">Play on Flowlab</a>', 'FLOWLAB'],
+      ['Internal Reflection', '<a href="https://play.unity.com/en/games/13111446-5ec6-4932-8b29-29df2e3f5448/internal-reflection" target="_blank" rel="noopener">Play on Unity</a>', 'UNITY']
     ]
   },
   youtube: {
@@ -84,26 +77,30 @@ const D = {
   music: {
     title: 'Spotify & Interests',
     code: 'MUSIC.WAV',
-    intro: 'Technical certifications, research security training, and workshop playlists on Spotify.',
+    intro: 'The music that gets me buildin :D.',
+    embed: 'https://open.spotify.com/embed/playlist/7yAEFdpcnLQORa9ztKNFs6?utm_source=generator&si=1d042863d8e94e9a',
+    link: ['Open Playlist in Spotify', 'https://open.spotify.com/playlist/7yAEFdpcnLQORa9ztKNFs6?si=5d486f2464704351']
+  },
+  funfacts: {
+    title: 'Other Fun Facts',
+    code: 'EXTRA.FACTS',
+    intro: 'I also love sports, fitness, and art!',
     cards: [
-      ['SolidWorks CSWA', 'Mechanical CAD modeling certification track.', 'CAD'],
-      ['Electrical Hardware', '525F Multimeter Electrical Hardware Certification for diagnostics and safety.', 'SAFETY'],
-      ['Trinity College London', 'Initial & Grade Three Electric Keyboard Certifications.', 'MUSIC']
-    ],
-    rows: [
-      ['Platform', '<a href="https://open.spotify.com/user/wqk1adqxm5k3t590fr3vapvk2?si=e0890aedb5d7452c" target="_blank" rel="noopener">Open Spotify Profile</a>', 'audio']
-    ],
-    link: ['Open My Spotify', 'https://open.spotify.com/user/wqk1adqxm5k3t590fr3vapvk2?si=e0890aedb5d7452c']
+      ['Sports Skills', 'Rugby (district team), volleyball (now recreational), martial arts (Taekwondo; self-taught Muay Thai and kickboxing), and basketball (my first sport).', 'SPORTS'],
+      ['Art Skills', 'Charcoal Still Life · Creative Color Pencil · Realism Portraits · Paintings & Digital Art', 'CREATIVE']
+    ]
   },
   contact: {
     title: 'Contact & Transmission',
-    code: 'CHANNEL.ENC',
+    code: 'REACHOUT.ENC',
     intro: 'Get in touch for robotics collaborations, research inquiries, or engineering projects.',
     rows: [
       ['EMAIL', 'reyaadivakar@gmail.com / reyaadivakar_divakar@mines.edu', 'OPEN'],
-      ['LOCATION', 'Parker / Golden, CO', 'LOCAL'],
-      ['GITHUB', '<a href="https://github.com/Cloudie-Rey" target="_blank" rel="noopener">github.com/Cloudie-Rey</a>', 'CODE'],
-      ['LINKEDIN', '<a href="https://linkedin.com/in/reyaa-divakar" target="_blank" rel="noopener">linkedin.com/in/reyaa-divakar</a>', 'CONNECT']
+      ['LOCATION', 'Parker / Golden, CO', 'LOCAL']
+    ],
+    buttons: [
+      ['GitHub', 'https://github.com/Cloudie-Rey'],
+      ['LinkedIn', 'https://linkedin.com/in/reyaa-divakar']
     ]
   }
 };
@@ -117,6 +114,9 @@ const renderSection = key => {
       <p>${s.intro}</p>
       ${s.cards ? `<div class="cards">${s.cards.map(c => `<div class="card"><i>${c[2]}</i><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('')}</div>` : ''}
       ${s.rows ? `<table>${s.rows.map(r => `<tr>${r.map((x, i) => `<td${i ? '' : ' class="k"'}>${x}</td>`).join('')}</tr>`).join('')}</table>` : ''}
+      ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
+      ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
+      ${s.embed ? `<div class="spotify-embed"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
       ${s.link ? `<a class="btn" href="${s.link[1]}" target="_blank" rel="noopener">${s.link[0]}</a>` : ''}
     </div>`;
 };
@@ -126,11 +126,12 @@ const renderSection = key => {
    ========================================================================== */
 const TABS = [
   ['ov', 'Overview'],
-  ['eng', 'Engineering / Code', ['github']],
-  ['biz', 'Experience', ['business']],
-  ['med', 'Media / Games', ['games', 'youtube', 'music']],
   ['res', 'Resume', ['resume']],
-  ['con', 'Contact', ['contact']]
+  ['biz', 'Experience', ['business']],
+  ['eng', 'Technical Projects', ['github']],
+  ['med', 'Creative Projects', ['games', 'youtube', 'music']],
+  ['con', 'Contact', ['contact']],
+  ['fun', 'Other Fun Facts', ['funfacts']]
 ];
 
 const side = $('#side');
@@ -143,15 +144,15 @@ function switchTab(id) {
   if (id === 'ov') {
     panel.innerHTML = `
       <div class="sec hero">
-        <div class="code">// WORKSHOP INDEX</div>
+        <div class="code">// MYSPACE.PY</div>
         <h1>Reyaa Divakar<br>Robotics & Mechanical Engineering.</h1>
-        <p>Undergraduate at Colorado School of Mines. Building autonomous robotics, mechatronics systems, and web platforms.</p>
+        <p>Hi! Welcome to my humble abode! I'm working on learning and creating all the time! Take a look at my work by clicking where ever your cursiosity takes you!</p>
       </div>
-      <div class="stats">
-        <div><b>3.9+</b><span>STEM focus</span></div>
-        <div><b>1st</b><span>TSA State Winner</span></div>
-        <div><b>80+</b><span>Students Taught</span></div>
-        <div><b>5+</b><span>Tech Internships</span></div>
+      <div class="traits" aria-label="Personal strengths">
+        <span>Creative</span>
+        <span>Collaborative</span>
+        <span>Problem Solver</span>
+        <span>Flexible</span>
       </div>
       <div class="sec">
         <table>
@@ -264,22 +265,51 @@ const addRod = (group, start, end, radius, mat) => {
   return rodMesh;
 };
 
+const addBlackLabPlush = (parent, x, y, z, scale = 1) => {
+  const plush = new T.Group();
+  const fur = M(0x171820);
+  const muzzle = M(0x49464a);
+  const nose = M(0x09090c);
+  const eye = M(0xf2e5cf);
+  const paw = new T.SphereGeometry(1, 12, 10);
+  const part = (px, py, pz, sx, sy, sz, material) => {
+    const mesh = add(plush, paw, material, px, py, pz);
+    mesh.scale.set(sx, sy, sz);
+    return mesh;
+  };
+
+  part(0, 0.16, -0.02, 0.2, 0.17, 0.16, fur);
+  part(0, 0.37, 0.02, 0.16, 0.16, 0.14, fur);
+  [-1, 1].forEach(side => {
+    part(side * 0.15, 0.4, 0, 0.075, 0.14, 0.07, fur).rotation.z = side * -0.35;
+    part(side * 0.095, 0.08, 0.07, 0.09, 0.07, 0.12, fur);
+    part(side * 0.07, 0.38, 0.14, 0.025, 0.03, 0.018, eye);
+    part(side * 0.07, 0.38, 0.155, 0.012, 0.018, 0.01, nose);
+  });
+  part(0, 0.31, 0.15, 0.1, 0.065, 0.075, muzzle);
+  part(0, 0.33, 0.215, 0.04, 0.03, 0.025, nose);
+  plush.position.set(x, y, z);
+  plush.scale.setScalar(scale);
+  parent.add(plush);
+  return plush;
+};
+
 /* ==========================================================================
    5. Scene Lighting & Environmental Elements
    ========================================================================== */
-scene.add(new T.AmbientLight(0xdbe8ff, 0.38));
-scene.add(new T.HemisphereLight(0xcfe3ff, 0x8a7a6a, 0.28));
+scene.add(new T.AmbientLight(0xdbe8ff, 0.24));
+scene.add(new T.HemisphereLight(0xcfe3ff, 0x8a7a6a, 0.18));
 
-const dirLight = new T.DirectionalLight(0xffffff, 0.55);
+const dirLight = new T.DirectionalLight(0xffffff, 0.38);
 dirLight.position.set(8, 14, 10);
 scene.add(dirLight);
 
-const centerLight = new T.PointLight(0x7fe9ff, 0.3, 14);
+const centerLight = new T.PointLight(0x7fe9ff, 0.2, 14);
 centerLight.position.set(0, 4, 0);
 scene.add(centerLight);
 
-const wallMaterial = M(0xa9cdf0);
-const trimMaterial = M(0xf2f6fb);
+const wallMaterial = M(0x758bad);
+const trimMaterial = M(0x9caabd);
 const buildWall = (w, h, d, x, y, z, mat = wallMaterial) => add(scene, B(w, h, d), mat, x, y, z, 0);
 
 const woodTexture = createTexture(256, 256, (ctx, w, h) => {
@@ -308,6 +338,24 @@ buildWall(4.8, 1.4, 0.3, 0, 6.3, -6);
 buildWall(18.3, 0.18, 0.08, 0, 0.09, -5.82, trimMaterial);
 buildWall(0.08, 0.18, 15, 8.82, 0.09, 1.5, trimMaterial);
 
+const rgbLedSegments = [];
+const addRgbLedStrip = (axis, length, x, y, z) => {
+  const count = Math.ceil(length / 0.45);
+  const segmentLength = length / count;
+  for (let i = 0; i < count; i++) {
+    const material = new T.MeshBasicMaterial({ color: 0xffffff });
+    const geometry = axis === 'x'
+      ? B(segmentLength + 0.015, 0.045, 0.045)
+      : B(0.045, 0.045, segmentLength + 0.015);
+    const positionX = axis === 'x' ? x - length / 2 + (i + 0.5) * segmentLength : x;
+    const positionZ = axis === 'z' ? z - length / 2 + (i + 0.5) * segmentLength : z;
+    add(scene, geometry, material, positionX, y, positionZ, 0);
+    rgbLedSegments.push({ material, offset: i / count });
+  }
+};
+addRgbLedStrip('x', 18.2, 0, 6.76, -5.82);
+addRgbLedStrip('z', 15, 8.82, 6.76, 1.5);
+
 [
   [4.9, 0.14, 0.22, 0, 2.25],
   [4.9, 0.14, 0.22, 0, 5.55],
@@ -316,41 +364,51 @@ buildWall(0.08, 0.18, 15, 8.82, 0.09, 1.5, trimMaterial);
   [0.08, 3.4, 0.2, 0, 3.9]
 ].forEach(a => buildWall(a[0], a[1], a[2], a[3], a[4], -5.9, trimMaterial));
 
-const skyTexture = createTexture(4, 256, (ctx, w, h) => {
+const windowScenery = createTexture(512, 360, (ctx, w, h) => {
   const grad = ctx.createLinearGradient(0, 0, 0, h);
   grad.addColorStop(0, '#5b8de0');
   grad.addColorStop(0.55, '#b7a6e8');
   grad.addColorStop(1, '#ffd2b8');
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = 'rgba(255,248,241,.85)';
+  [[75, 85, 52, 18], [112, 82, 35, 14], [410, 105, 54, 17], [450, 102, 32, 13]].forEach(([cx, cy, rx, ry]) => {
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.fillStyle = '#6a78b8';
+  ctx.beginPath();
+  ctx.moveTo(0, 235);
+  ctx.lineTo(130, 130);
+  ctx.lineTo(250, 235);
+  ctx.lineTo(360, 145);
+  ctx.lineTo(512, 250);
+  ctx.lineTo(512, 360);
+  ctx.lineTo(0, 360);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = '#8596cf';
+  ctx.beginPath();
+  ctx.moveTo(0, 270);
+  ctx.lineTo(170, 190);
+  ctx.lineTo(315, 280);
+  ctx.lineTo(430, 205);
+  ctx.lineTo(512, 250);
+  ctx.lineTo(512, 360);
+  ctx.lineTo(0, 360);
+  ctx.closePath();
+  ctx.fill();
 });
-
-add(scene, new T.PlaneGeometry(16, 10), new T.MeshBasicMaterial({ map: skyTexture, fog: false }), 0, 3.9, -12, 0);
-add(scene, new T.ConeGeometry(3, 2.4, 4), new T.MeshBasicMaterial({ color: 0x6a78b8, fog: false }), 2.5, 2.9, -11.5, 0);
-
-const cloudTexture = createTexture(128, 128, ctx => {
-  const grad = ctx.createRadialGradient(64, 64, 4, 64, 64, 62);
-  grad.addColorStop(0, 'rgba(255,255,255,.95)');
-  grad.addColorStop(0.55, 'rgba(255,240,250,.5)');
-  grad.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 128, 128);
-});
-
-const clouds = [];
-for (let i = 0; i < 7; i++) {
-  const cloudGroup = new T.Group();
-  for (let j = 0; j < 4; j++) {
-    const sprite = new T.Sprite(new T.SpriteMaterial({ map: cloudTexture, fog: false, depthWrite: false }));
-    sprite.position.set(j * 0.9 - 1.4, R() * 0.4, R() * 0.3);
-    sprite.scale.set(2.5 + R() * 1.5, 1.6 + R(), 1);
-    cloudGroup.add(sprite);
-  }
-  cloudGroup.position.set(-8 + i * 2.4, 2.6 + R() * 2.4, -9 - R() * 2);
-  cloudGroup.userData.v = 0.2 + R() * 0.25;
-  scene.add(cloudGroup);
-  clouds.push(cloudGroup);
-}
+add(
+  scene,
+  new T.PlaneGeometry(4.65, 3.18),
+  new T.MeshBasicMaterial({ map: windowScenery, fog: false }),
+  0,
+  3.9,
+  -5.96,
+  0
+);
 
 /* ==========================================================================
    6. Cables, Floor Clutter & Details
@@ -383,7 +441,7 @@ for (let i = 0; i < 28; i++) {
   );
   mesh.rotation.y = R() * 6;
 }
-buildWall(0.35, 0.3, 4.5, 5.6, 6.6, -3.8, M(0x4a5568));
+buildWall(1.9, 0.3, 4.5, 5.6, 6.6, -3.8, M(0x4a5568));
 
 /* ==========================================================================
    7. Interactive 3D Objects Setup & Registration
@@ -441,9 +499,9 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
 
   for (const offset of [-.8, 0, .8]) {
     addTube([
-      new T.Vector3(5.6 + offset, 6.5, -1.8),
+      new T.Vector3(5.6 + offset, 6.85, -1.8),
       new T.Vector3(5.6 + offset * 1.2, 5.4, -1.7),
-      new T.Vector3(5.6 + offset * 0.8, 3.9, -1.6)
+      new T.Vector3(5.6 + offset * 0.8, 3.2, -1.6)
     ], 0.07, cableDark);
   }
 
@@ -453,12 +511,11 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
 // 2. White Workbench Setup
 {
   const group = new T.Group();
-  const whiteMat = M(0xf4f7fb);
-  const lightMat = M(0xdfe8f3);
+  const whiteMat = M(0xc7d1df);
+  const lightMat = M(0xabb9cc);
   const blueMat = M(0xbcd8f5);
   const darkMat = M(0x1b1f2b);
-  const greenMat = new T.MeshBasicMaterial({ color: 0x5fbf7a });
-  const brightWhiteMat = new T.MeshBasicMaterial({ color: 0xf7fcff });
+  const brightWhiteMat = new T.MeshBasicMaterial({ color: 0xcbd6e5 });
 
   add(group, B(5, 0.2, 2.2), whiteMat, 0, 1.8, -3.2);
   [-1, 1].forEach(z => add(group, B(0.18, 1.8, 0.18), whiteMat, -2.3, 0.9, -3.2 + z * 0.9));
@@ -468,10 +525,51 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     add(group, B(0.5, 0.04, 0.04), M(0x9aa8bb), 1.9, 0.3 + k * 0.42, -2.18);
   }
 
-  add(group, B(4.8, 0.04, 0.04), new T.MeshBasicMaterial({ color: 0xffe2b8 }), 0, 1.69, -2.12, 0);
+  add(group, B(4.8, 0.04, 0.04), new T.MeshBasicMaterial({ color: 0x9b7757 }), 0, 1.69, -2.12, 0);
 
-  add(group, B(0.7, 1.3, 0.7), whiteMat, 3.2, 0.65, -3.4);
-  add(group, B(0.5, 1, 0.02), new T.MeshBasicMaterial({ color: 0x7fefff }), 3.2, 0.7, -3.04, 0);
+  add(group, B(0.7, 1.3, 0.7), whiteMat, 1, 0.65, -2.9);
+  add(group, B(0.5, 1, 0.02), new T.MeshBasicMaterial({ color: 0x7fefff }), 1, 0.7, -2.54, 0);
+
+  const printer = new T.Group();
+  const printerFrameMat = M(0x0d1b3a);
+  const printerBodyMat = M(0x0a142d);
+  add(printer, B(0.95, 0.22, 0.82), printerBodyMat, 0, 0.14, 0);
+  add(printer, B(0.66, 0.19, 0.02), M(0x10151d), 0, 0.14, 0.42);
+  const printerDisplay = createTexture(256, 96, (ctx, w, h) => {
+    ctx.fillStyle = '#101820';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#8fe8dd';
+    ctx.font = '700 24px monospace';
+    ctx.fillText('ELEGOO', 16, 36);
+    ctx.font = '16px monospace';
+    ctx.fillText('NEPTUNE', 16, 66);
+    ctx.fillStyle = '#ffae57';
+    ctx.fillRect(208, 24, 28, 38);
+  });
+  add(
+    printer,
+    new T.PlaneGeometry(0.58, 0.14),
+    new T.MeshBasicMaterial({ map: printerDisplay }),
+    0,
+    0.14,
+    0.432,
+    0
+  );
+  [-0.42, 0.42].forEach(x => add(printer, B(0.055, 1.3, 0.07), printerFrameMat, x, 0.9, -0.16));
+  add(printer, B(0.9, 0.07, 0.08), printerFrameMat, 0, 1.55, -0.16);
+  add(printer, B(0.88, 0.06, 0.08), printerFrameMat, 0, 0.38, -0.16);
+  add(printer, B(0.78, 0.07, 0.08), printerFrameMat, 0, 1.1, -0.02);
+  add(printer, B(0.72, 0.055, 0.56), M(0x15264a), 0, 0.55, 0.06);
+  add(printer, B(0.16, 0.2, 0.14), printerBodyMat, 0, 0.98, 0.04);
+  add(printer, C(0.025, 0.025, 0.09), M(0xd3a765), 0, 0.83, 0.06);
+  add(printer, B(0.16, 0.13, 0.14), M(0xf18a46), 0, 0.65, 0.06);
+  add(printer, B(0.05, 0.25, 0.05), printerFrameMat, 0.31, 1.68, -0.16);
+  const printerSpoolMat = M(0x090c12);
+  add(printer, new T.CylinderGeometry(0.19, 0.19, 0.08, 24), printerSpoolMat, 0.31, 1.82, -0.16).rotation.x = Math.PI / 2;
+  add(printer, new T.TorusGeometry(0.19, 0.02, 8, 24), printerSpoolMat, 0.31, 1.82, -0.11, 0);
+  printer.scale.setScalar(1.08);
+  printer.position.set(3.2, 0, -3.4);
+  group.add(printer);
 
   const monitorsGroup = new T.Group();
   [-1.1, 0.9].forEach((x, i) => {
@@ -484,7 +582,7 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
         grad.addColorStop(1, '#ffd3cf');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
-        ctx.fillStyle = 'rgba(255,255,255,.9)';
+        ctx.fillStyle = 'rgba(255,255,255,.65)';
         for (let k = 0; k < 7; k++) {
           ctx.beginPath();
           ctx.ellipse(20 + k * 37, 105 + (k % 3) * 12, 38, 15, 0, 0, 7);
@@ -504,11 +602,10 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   add(group, new T.SphereGeometry(0.09, 10, 8), whiteMat, 0.7, 1.95, -2.65).scale.set(1, 0.5, 1.4);
 
   add(group, C(0.07, 0.07, 0.13), M(0xffffff), -1.4, 1.97, -2.7);
-  add(group, C(0.13, 0.1, 0.2), whiteMat, -2.15, 2, -2.45);
-  add(group, new T.SphereGeometry(0.17, 10, 8), greenMat, -2.15, 2.25, -2.45, 0);
+  addBlackLabPlush(group, -2.15, 1.9, -2.45, 0.65);
 
-  addRod(group, [-2.35, 1.9, -3.9], [-2.35, 2.7, -3.9], 0.035, whiteMat);
-  addRod(group, [-2.35, 2.7, -3.9], [-1.3, 2.55, -2.95], 0.03, whiteMat);
+  addRod(group, [-2.35, 1.9, -2.95], [-2.35, 2.7, -2.95], 0.035, whiteMat);
+  addRod(group, [-2.35, 2.7, -2.95], [-1.3, 2.55, -2.95], 0.03, whiteMat);
   add(group, C(0.06, 0.06, 0.26), darkMat, -1.3, 2.4, -2.95);
   add(group, C(0.16, 0.16, 0.02, 20), darkMat, -1.3, 2.4, -2.78).rotation.x = Math.PI / 2;
 
@@ -518,19 +615,20 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     [-2.28, 2, -3.05, 0.12]
   ].forEach(a => add(group, new T.SphereGeometry(a[3], 12, 10), brightWhiteMat, a[0], a[1], a[2], 0));
 
-  const deskLight = new T.PointLight(0xdbeeff, 0.6, 4);
+  const deskLight = new T.PointLight(0xdbeeff, 0.18, 4);
   deskLight.position.set(-2.1, 2.4, -2.8);
   group.add(deskLight);
 
+  group.position.z = -1.3;
   group.add(monitorsGroup);
   monitorsGroup.userData.oid = 'mon';
-  registerObject('mon', 'github', 'DUAL-MONITOR WORKBENCH', group, [-0.1, 2.7, -3.4], [-0.1, 3.2, 0.9], 1.6);
+  registerObject('mon', 'github', 'DUAL-MONITOR WORKBENCH', group, [-0.1, 2.7, -4.7], [-0.1, 3.2, -0.4], 1.6);
 }
 
 // 3. Desk Chair & Rug
 {
   const group = new T.Group();
-  const whiteMat = M(0xf4f7fb);
+  const whiteMat = M(0xc7d1df);
   const blueMat = M(0xbcd8f5);
 
   [
@@ -539,7 +637,7 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     [1, -1.4, 0.9],
     [0.2, -0.7, 0.75],
     [-0.5, -2.2, 0.7]
-  ].forEach((r, i) => add(scene, C(r[2], r[2], 0.04, 32), M(0xf3f8ff), r[0], 0.03 + i * 0.002, r[1], 0));
+  ].forEach((r, i) => add(scene, C(r[2], r[2], 0.04, 32), M(0xf3f8ff), r[0], 0.03 + i * 0.002, r[1] - 1.3, 0));
 
   for (let i = 0; i < 5; i++) {
     const angle = i * 1.257;
@@ -568,34 +666,233 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   
   [-1, 1].forEach(side => add(group, new T.SphereGeometry(0.025, 6, 6), M(0x111111), side * 0.07, 1.43, 0.0, 0));
 
-  group.position.set(0.3, 0, -1.9);
-  group.rotation.y = 0.35;
+  group.position.set(0.3, 0, -3.2);
+  group.rotation.y = 0.6;
   scene.add(group);
 }
 
 // 4. Wall Shelves
+const certificateTextures = ['ROBOTICS', 'ACHIEVEMENT'].map(title => createTexture(128, 168, (ctx, w, h) => {
+  ctx.fillStyle = '#c9bea3';
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = '#92784e';
+  ctx.lineWidth = 5;
+  ctx.strokeRect(6, 6, w - 12, h - 12);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#514735';
+  ctx.font = '700 13px monospace';
+  ctx.fillText('CERTIFICATE', w / 2, 42);
+  ctx.fillText('OF', w / 2, 61);
+  ctx.fillStyle = '#756447';
+  ctx.font = '700 15px monospace';
+  ctx.fillText(title, w / 2, 86);
+  ctx.strokeStyle = '#a08b65';
+  ctx.beginPath();
+  ctx.moveTo(24, 108);
+  ctx.lineTo(w - 24, 108);
+  ctx.stroke();
+  ctx.font = '10px monospace';
+  ctx.fillText('AWARDED FOR', w / 2, 130);
+  ctx.fillText('CREATIVITY', w / 2, 145);
+}));
+
+const shelfDrawingTexture = createTexture(128, 160, (ctx, w, h) => {
+  ctx.fillStyle = '#eee5d3';
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = '#857960';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(4, 4, w - 8, h - 8);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#39433c';
+  ctx.font = '700 12px monospace';
+  ctx.fillText('VISION BOARD', w / 2, 25);
+  ctx.strokeStyle = '#b8ab94';
+  ctx.beginPath();
+  ctx.moveTo(14, 34);
+  ctx.lineTo(w - 14, 34);
+  ctx.stroke();
+  ctx.textAlign = 'left';
+  ctx.font = '11px monospace';
+  ['BUILD', 'LEARN', 'CREATE', 'GROW'].forEach((goal, index) => {
+    const y = 57 + index * 21;
+    ctx.strokeStyle = '#718064';
+    ctx.strokeRect(14, y - 9, 10, 10);
+    ctx.fillStyle = '#465044';
+    ctx.fillText(goal, 32, y);
+  });
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#9b765b';
+  ctx.font = '700 11px monospace';
+  ctx.fillText('DREAM BIG', w / 2, 145);
+});
+
 [-3.5, 3.5].forEach((x, k) => {
   [3.1, 4.2].forEach((y, j) => {
     buildWall(1.7, 0.1, 0.45, x, y, -5.75, trimMaterial);
+    add(scene, B(1.6, 0.025, 0.035), new T.MeshBasicMaterial({ color: 0x78d9ff }), x, y - 0.055, -5.5, 0);
+    const shelfLight = new T.PointLight(0xffd5a3, 0.22, 2.5);
+    shelfLight.position.set(x, y - 0.2, -5.15);
+    scene.add(shelfLight);
 
-    if (!j) {
-      add(scene, C(0.12, 0.1, 0.2), trimMaterial, x - 0.55, y + 0.15, -5.75);
-      add(scene, new T.SphereGeometry(0.17, 10, 8), new T.MeshBasicMaterial({ color: 0x5fbf7a }), x - 0.55, y + 0.4, -5.75, 0);
+    if (k === 0 && !j) {
+      [-0.45, 0, 0.45].forEach((offset, index) => {
+        const ribbonMat = M([0xa63d4b, 0x315e9c, 0x7a4d87][index]);
+        const medalMat = M([0xe4bd58, 0xb7c7da, 0xbc7c50][index]);
+        add(scene, B(0.08, 0.2, 0.025), ribbonMat, x + offset, y - 0.1, -5.47);
+        add(scene, C(0.11, 0.11, 0.025, 20), medalMat, x + offset, y - 0.31, -5.45).rotation.x = Math.PI / 2;
+        add(scene, C(0.055, 0.055, 0.028, 16), M(0x4a3c2b), x + offset, y - 0.31, -5.43).rotation.x = Math.PI / 2;
+      });
+      const drawing = add(
+        scene,
+        new T.PlaneGeometry(0.65, 0.75),
+        new T.MeshBasicMaterial({ map: shelfDrawingTexture, side: T.DoubleSide }),
+        x,
+        y + 0.425,
+        -5.82,
+        0
+      );
+    } else if (k === 0) {
+      [-0.45, 0.2].forEach((offset, index) => {
+        add(scene, B(0.46, 0.56, 0.06), M(0x514735), x + offset, y + 0.33, -5.82);
+        add(
+          scene,
+          new T.PlaneGeometry(0.38, 0.48),
+          new T.MeshBasicMaterial({ map: certificateTextures[index] }),
+          x + offset,
+          y + 0.33,
+          -5.785,
+          0
+        );
+      });
+    } else if (!j) {
+      addBlackLabPlush(scene, x - 0.55, y + 0.05, -5.75, 0.9);
       add(scene, new T.SphereGeometry(0.2, 12, 10), M(0xffffff), x, y + 0.2, -5.75);
       add(scene, new T.SphereGeometry(0.14, 12, 10), M(0xffffff), x + 0.17, y + 0.14, -5.75);
       [0, 1, 2].forEach(b => add(scene, B(0.08, 0.3 + b * 0.05, 0.25), M([0xf7b8d2, 0x8ec5f5, 0xffe9a8][b]), x + 0.5 + b * 0.1, y + 0.2, -5.75));
-    } else {
-      [-0.35, 0, 0.35].forEach((offset, b) => add(scene, new T.SphereGeometry(0.13 - b * 0.0, 12, 10), new T.MeshBasicMaterial({ color: 0xf7fcff }), x + offset, y + 0.2, -5.75, 0));
-      add(scene, C(0.1, 0.08, 0.16), trimMaterial, x + 0.6, y + 0.13, -5.75);
+    } else if (k !== 0) {
+      const addShelfFigure = (offset, torsoColor, legColor, helmetColor, maskColor, emblemColor, ninja) => {
+        const figure = new T.Group();
+        const torsoMat = M(torsoColor);
+        const legMat = M(legColor);
+        const helmetMat = M(helmetColor);
+        const maskMat = M(maskColor);
+        const emblemMat = M(emblemColor);
+
+        [-1, 1].forEach(side => add(figure, B(0.075, 0.14, 0.1), legMat, side * 0.042, 0.07, 0));
+        add(figure, B(0.18, 0.17, 0.1), torsoMat, 0, 0.22, 0);
+        [-1, 1].forEach(side => {
+          const arm = add(figure, B(0.07, 0.18, 0.07), torsoMat, side * 0.13, 0.22, 0);
+          arm.rotation.z = side * 0.12;
+          add(figure, new T.SphereGeometry(0.03, 8, 6), helmetMat, side * 0.14, 0.12, 0.01);
+          add(figure, new T.SphereGeometry(0.01, 8, 6), M(0xffffff), side * 0.025, 0.41, 0.069);
+        });
+        add(figure, C(0.075, 0.075, 0.12, 12), M(0xd5b18a), 0, 0.39, 0);
+        add(figure, C(0.082, 0.082, 0.05, 12), helmetMat, 0, 0.47, 0);
+        add(figure, B(0.13, 0.045, 0.018), maskMat, 0, ninja ? 0.36 : 0.415, 0.066);
+        if (ninja) add(figure, B(0.16, 0.035, 0.02), helmetMat, 0, 0.44, 0.06);
+        add(figure, C(0.026, 0.026, 0.015, 8), emblemMat, 0, 0.23, 0.06).rotation.x = Math.PI / 2;
+        figure.position.set(x + offset, y + 0.05, -5.75);
+        scene.add(figure);
+      };
+
+      addShelfFigure(-0.6, 0xb83f45, 0x24252d, 0x2a2029, 0x171820, 0xe7bd57, true);
+      addShelfFigure(-0.18, 0x39864f, 0x202a22, 0x24623c, 0x151a18, 0xd7b244, true);
+
+      const rose = new T.Group();
+      const copperMats = [M(0x8f4b31), M(0xb86640), M(0xd28a5d), M(0xa95535)];
+      const petalShape = new T.Shape();
+      petalShape.moveTo(0, 0);
+      petalShape.bezierCurveTo(-0.04, 0.025, -0.065, 0.075, -0.045, 0.12);
+      petalShape.bezierCurveTo(-0.03, 0.16, 0.025, 0.18, 0.055, 0.14);
+      petalShape.bezierCurveTo(0.08, 0.1, 0.055, 0.05, 0, 0);
+      const petalGeometry = new T.ExtrudeGeometry(petalShape, {
+        depth: 0.012,
+        bevelEnabled: true,
+        bevelSegments: 2,
+        steps: 1,
+        bevelSize: 0.004,
+        bevelThickness: 0.004
+      });
+      [
+        { count: 9, radius: 0.025, scale: 1, z: 0.02 },
+        { count: 7, radius: 0.012, scale: 0.78, z: 0.04 },
+        { count: 5, radius: 0.006, scale: 0.58, z: 0.06 },
+        { count: 3, radius: 0, scale: 0.4, z: 0.08 }
+      ].forEach((layer, layerIndex) => {
+        for (let petalIndex = 0; petalIndex < layer.count; petalIndex++) {
+          const angle = petalIndex * Math.PI * 2 / layer.count + layerIndex * 0.2;
+          const petal = add(
+            rose,
+            petalGeometry,
+            copperMats[(petalIndex + layerIndex) % copperMats.length],
+            Math.cos(angle) * layer.radius,
+            0.39 + Math.sin(angle) * layer.radius,
+            layer.z
+          );
+          petal.scale.setScalar(layer.scale);
+          petal.rotation.z = angle - Math.PI / 2;
+        }
+      });
+      const spiralPoints = Array.from({ length: 16 }, (_, index) => {
+        const progress = index / 15;
+        const angle = progress * Math.PI * 4;
+        const radius = 0.003 + progress * 0.028;
+        return new T.Vector3(Math.cos(angle) * radius, 0.39 + Math.sin(angle) * radius, 0.105);
+      });
+      add(
+        rose,
+        new T.TubeGeometry(new T.CatmullRomCurve3(spiralPoints), 32, 0.006, 5, false),
+        copperMats[2],
+        0,
+        0,
+        0,
+        0
+      );
+      rose.position.set(x + 0.21, y + 0.05 - 0.185, -5.87);
+      scene.add(rose);
+
+      const brickBuild = new T.Group();
+      add(brickBuild, B(0.38, 0.06, 0.22), M(0x28354a), 0, 0.03, 0);
+      add(brickBuild, B(0.3, 0.1, 0.2), M(0x39864f), 0, 0.11, 0);
+      add(brickBuild, B(0.2, 0.12, 0.18), M(0xb83f45), 0, 0.22, 0);
+      add(brickBuild, B(0.34, 0.08, 0.2), M(0x315d9b), 0, 0.32, 0);
+      [-0.11, 0.11].forEach(offset => {
+        add(brickBuild, C(0.025, 0.025, 0.02, 8), M(0xd7b244), offset, 0.37, 0);
+      });
+      brickBuild.position.set(x + 0.61, y + 0.05, -5.75);
+      scene.add(brickBuild);
     }
   });
 
-  addTube([
-    new T.Vector3(x - 0.8, 3.1, -5.7),
-    new T.Vector3(x - 0.9, 2.6, -5.7),
-    new T.Vector3(x - 0.85, 2.1, -5.7)
-  ], 0.03, M(0x4f9e5f));
+  if (k !== 0) {
+    addTube([
+      new T.Vector3(x - 0.8, 3.1, -5.7),
+      new T.Vector3(x - 0.9, 2.6, -5.7),
+      new T.Vector3(x - 0.85, 2.1, -5.7)
+    ], 0.03, M(0x4f9e5f));
+  }
 });
+
+// Student backpack tucked below the shelves beside the lounge TV.
+{
+  const backpack = new T.Group();
+  const navyMat = M(0x172b58);
+  const pocketMat = M(0x172b58);
+  const bagBody = add(backpack, new T.SphereGeometry(1, 16, 12), navyMat, 0, 0.52, 0);
+  bagBody.scale.set(0.38, 0.5, 0.22);
+  add(backpack, B(0.56, 0.34, 0.12), pocketMat, 0, 0.34, 0.2);
+  add(backpack, B(0.48, 0.12, 0.1), navyMat, 0, 0.58, 0.19);
+  add(backpack, B(0.16, 0.08, 0.08), M(0x294579), 0, 0.38, 0.27);
+  [-1, 1].forEach(side => {
+    const strap = add(backpack, new T.SphereGeometry(1, 12, 10), pocketMat, side * 0.28, 0.52, -0.15);
+    strap.scale.set(0.07, 0.38, 0.035);
+  });
+  add(backpack, new T.TorusGeometry(0.12, 0.025, 8, 16, Math.PI), pocketMat, 0, 0.98, 0).rotation.y = Math.PI / 2;
+  backpack.scale.set(1.3, 1.3, 1.15);
+  backpack.position.set(-1.65, 0, -5.43);
+  backpack.rotation.x = -0.12;
+  scene.add(backpack);
+}
 
 // 5. High-Tech Briefcase
 {
@@ -605,9 +902,9 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   add(group, new T.TorusGeometry(0.18, 0.03, 8, 14, Math.PI), M(0x8a96a8), 0, 0.35, 0);
   add(group, B(0.14, 0.1, 0.04), GL, 0.3, 0.12, 0.19, 0);
 
-  group.position.set(1.9, 2.25, -3.1);
+  group.position.set(-3.5, 0.35, -5.25);
   group.rotation.y = -0.35;
-  registerObject('biz', 'business', 'HIGH-TECH BRIEFCASE', group, [1.9, 2.3, -3.1], [2.3, 3.1, -0.6], 1);
+  registerObject('biz', 'business', 'HIGH-TECH BRIEFCASE', group, [-3.5, 0.35, -5.25], [-2.15, 1.8, -1.65], 1);
 }
 
 // 6. Gaming Lounge
@@ -636,7 +933,7 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     ctx.fillRect(0, 128, 256, 3);
   });
 
-  add(group, C(2.3, 2.3, 0.05, 40), M(0xf4f4f0), -5.4, 0.03, -2.6);
+  add(group, C(2.3, 2.3, 0.05, 40), M(0xf4f4f0), -5.4, 0.03, -2.25);
   add(group, B(3.2, 0.55, 0.7), darkMat, -5.4, 0.28, -5.5);
   add(group, B(0.5, 0.32, 0.3), darkMat, -5.4, 0.72, -5.6);
   add(group, B(2.7, 1.55, 0.1), M(0x0c0e14), -5.4, 1.65, -5.6);
@@ -650,21 +947,46 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
   });
 
   [
-    [-6.7, -3, 0x8ec5f5],
-    [-4.2, -3.1, 0xf7b8d2],
-    [-5.5, -1.5, 0xf6f8fc]
+    [-6.7, -2.65, 0x8ec5f5],
+    [-4.2, -2.75, 0xef8a36],
+    [-5.5, -1.15, 0xa8d5a2]
   ].forEach(b => {
     const cushion = add(group, new T.SphereGeometry(0.62, 18, 14), M(b[2]), b[0], 0.45, b[1]);
     cushion.scale.set(1.1, 0.72, 1);
     cushion.rotation.y = R() * 3;
   });
 
+  const controller = new T.Group();
+  const controllerMat = M(0x172b58);
+  const controllerBody = add(controller, new T.SphereGeometry(1, 16, 12), controllerMat, 0, 0.14, 0);
+  controllerBody.scale.set(0.42, 0.11, 0.27);
+  [-1, 1].forEach(side => {
+    const grip = add(controller, new T.SphereGeometry(1, 14, 10), controllerMat, side * 0.29, 0.09, 0.02);
+    grip.scale.set(0.15, 0.1, 0.2);
+  });
+  add(controller, B(0.2, 0.035, 0.06), M(0xb8c5dd), -0.18, 0.23, 0);
+  add(controller, B(0.06, 0.035, 0.2), M(0xb8c5dd), -0.18, 0.23, 0);
+  [-1, 1].forEach(side => {
+    add(controller, new T.SphereGeometry(0.055, 10, 8), M(0x11151f), side * 0.1, 0.24, -0.04);
+  });
+  [
+    [0.19, -0.07, 0xd94e65],
+    [0.27, 0, 0x4aa9ff],
+    [0.19, 0.07, 0x73c76b],
+    [0.35, 0, 0xf2c14e]
+  ].forEach(([x, z, color]) => {
+    add(controller, new T.SphereGeometry(0.035, 10, 8), M(color), x, 0.24, z);
+  });
+  controller.position.set(-4.7, 0.57, -5.45);
+  controller.rotation.set(0, 0, 0);
+  group.add(controller);
+
   const loungeLight = new T.PointLight(0xb8a8ff, 0.8, 8);
   loungeLight.position.set(-5.4, 2.6, -3);
   group.add(loungeLight);
 
   group.position.x = -0.8;
-  registerObject('arc', 'games', 'GAMING LOUNGE', group, [-6.2, 1.6, -5.4], [-4.4, 2.9, 0.8], 2.2);
+  registerObject('arc', 'games', 'GAMING LOUNGE', group, [-5.5, 0.57, -5.45], [-4.4, 2.9, 0.8], 0.9);
 }
 
 // 7. Ring-Light Camera Rig
@@ -747,26 +1069,38 @@ const holoCardGroup = new T.Group();
   beamMesh.userData.noInk = 1;
   holoCardGroup.add(beamMesh);
 
-  holoCardGroup.position.set(-3.4, 0, 1.5);
-  registerObject('card', 'contact', 'HOLOGRAPHIC BUSINESS CARD', holoCardGroup, [-3.4, 1.9, 1.5], [-3.4, 2.4, 4.8], 1.1);
+  holoCardGroup.position.set(-2.9, 0, 4.1);
+  registerObject('card', 'contact', 'HOLOGRAPHIC BUSINESS CARD', holoCardGroup, [-2.9, 1.9, 4.1], [-1.9, 2.4, 7.5], 1.1);
 }
 
 // 9. Headphones -> Spotify Link
 {
   const group = new T.Group();
-  const whiteMat = M(0xf0f4fa);
-  add(group, C(0.16, 0.18, 0.04), new T.MeshBasicMaterial({ color: 0x8ec5f5 }), 0, 0.02, 0, 0);
-  add(group, C(0.025, 0.025, 0.8), M(0xdfe8f3), 0, 0.4, 0);
-  add(group, new T.TorusGeometry(0.3, 0.04, 8, 24, Math.PI), whiteMat, 0, 0.52, 0);
+  const navyMat = M(0x172b58);
+  const rainbow = [0xff3b45, 0xffa52f, 0xffe34d, 0x42d66b, 0x3c9bff, 0xa657ff];
+  add(group, C(0.16, 0.18, 0.04), navyMat, 0, 0.02, 0);
+  add(group, C(0.025, 0.025, 0.8), navyMat, 0, 0.4, 0);
+  add(group, new T.TorusGeometry(0.3, 0.04, 8, 24, Math.PI), navyMat, 0, 0.52, 0);
 
   [-1, 1].forEach(side => {
-    add(group, C(0.14, 0.14, 0.1, 20), whiteMat, side * 0.3, 0.5, 0).rotation.z = Math.PI / 2;
-    add(group, new T.TorusGeometry(0.1, 0.018, 6, 18), new T.MeshBasicMaterial({ color: 0x1db954 }), side * 0.36, 0.5, 0, 0).rotation.y = Math.PI / 2;
+    add(group, C(0.14, 0.14, 0.1, 20), navyMat, side * 0.3, 0.5, 0).rotation.z = Math.PI / 2;
+    rainbow.forEach((color, index) => {
+      const segment = add(
+        group,
+        new T.TorusGeometry(0.1, 0.018, 6, 8, Math.PI / 3),
+        new T.MeshBasicMaterial({ color }),
+        side * 0.36,
+        0.5,
+        0,
+        0
+      );
+      segment.rotation.set(0, Math.PI / 2, index * Math.PI / 3);
+    });
   });
 
-  group.position.set(1.35, 1.9, -2.5);
+  group.position.set(1.9, 1.9, -4.4);
   group.rotation.y = 0.35;
-  registerObject('hp', 'music', 'HEADPHONES // SPOTIFY', group, [1.35, 2.4, -2.5], [1.6, 3, -0.3], 2.7);
+  registerObject('hp', 'music', 'HEADPHONES', group, [1.9, 2.4, -4.4], [1.9, 3, -1.6], 0.55);
 }
 
 // 10. Gym Corner
@@ -835,6 +1169,31 @@ const holoCardGroup = new T.Group();
   rackGroup.rotation.y = -Math.PI / 2;
   group.add(rackGroup);
 
+  const addNikeShoe = (x, z, rotation) => {
+    const shoe = new T.Group();
+    const upperMat = M(0x18243a);
+    const soleMat = M(0xe8e8e2);
+    add(shoe, B(0.28, 0.07, 0.58), soleMat, 0, 0.055, 0);
+    const upper = add(shoe, new T.SphereGeometry(1, 16, 12), upperMat, 0, 0.16, 0.01);
+    upper.scale.set(0.13, 0.11, 0.25);
+    add(shoe, B(0.1, 0.035, 0.18), upperMat, 0, 0.245, -0.015);
+    [-0.065, -0.015, 0.035].forEach(z => add(shoe, B(0.1, 0.012, 0.018), soleMat, 0, 0.265, z));
+    [-1, 1].forEach(side => {
+      const swooshCurve = new T.CatmullRomCurve3([
+        new T.Vector3(side * 0.135, 0.16, -0.16),
+        new T.Vector3(side * 0.145, 0.1, -0.04),
+        new T.Vector3(side * 0.145, 0.12, 0.04),
+        new T.Vector3(side * 0.135, 0.2, 0.16)
+      ]);
+      add(shoe, new T.TubeGeometry(swooshCurve, 14, 0.012, 5, false), soleMat, 0, 0, 0, 0);
+    });
+    shoe.position.set(x, 0, z);
+    shoe.rotation.y = rotation;
+    group.add(shoe);
+  };
+  addNikeShoe(8.68, 4.7, 0.08);
+  addNikeShoe(8.68, 5.38, -0.08);
+
   add(group, B(0.9, 0.05, 0.55), MT(pushBoardTexture), 5.1, 0.09, 5.4).rotation.y = 0.2;
 
   const ballGroup = new T.Group();
@@ -844,7 +1203,7 @@ const holoCardGroup = new T.Group();
 
   ballGroup.position.set(4, 0.21, 6.6);
   ballGroup.rotation.y = 0.5;
-  group.add(ballGroup);
+  registerObject('facts', 'funfacts', 'OTHER FUN FACTS', ballGroup, [4, 0.45, 6.6], [2.4, 2.5, 8.5], 0.8);
 
   scene.add(group);
 }
@@ -927,7 +1286,7 @@ const labelsContainer = $('#labels');
 OBJS.forEach((obj, index) => {
   const labelElem = document.createElement('div');
   labelElem.className = 'lbl';
-  labelElem.innerHTML = `<i></i>0${index + 1} ${obj.label}`;
+  labelElem.innerHTML = `<i></i><span class="lbl-number">${index + 1}</span><span class="lbl-name">${obj.label}</span>`;
   labelElem.onclick = () => focusObject(obj);
   labelsContainer.appendChild(labelElem);
   obj.el = labelElem;
@@ -1037,9 +1396,8 @@ function renderLoop() {
 
   const time = performance.now() / 1000;
 
-  clouds.forEach(cloud => {
-    cloud.position.x += cloud.userData.v * 0.008;
-    if (cloud.position.x > 9) cloud.position.x = -9;
+  rgbLedSegments.forEach(({ material, offset }) => {
+    material.color.setHSL((time * 0.12 + offset) % 1, 0.95, 0.55);
   });
 
   OBJS[0].g.userData.el.intensity = 0.9 + Math.sin(time * 2) * 0.3;
