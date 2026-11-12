@@ -18,8 +18,8 @@ const D = {
       ['2023–2026', 'Founder & Instructor', 'Code Connect Educational Non-Profit'],
     ],
    links: [
-      ['Download Resume', 'Resume.pdf'],
-      ['Download CV', 'CV.pdf']
+      ['Download Resume', 'https://github.com/Cloudie-Rey/my-website-portfolio/blob/main/public/Resume.pdf'],
+      ['Download CV', 'https://github.com/Cloudie-Rey/my-website-portfolio/blob/main/public/CV.pdf']
     ]
   },
   github: {
