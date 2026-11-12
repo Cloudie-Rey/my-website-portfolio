@@ -1016,7 +1016,8 @@ function registerObject(id, key, label, group, anchorPos, cameraPos, labelOffset
     new T.Vector3(-0.095, 1.99, 0.084),
     new T.Vector3(-0.115, 1.993, 0.089)
   ]);
-  add(mug, new T.TubeGeometry(teaStringCurve, 24, 0.0045, 6, false), teaString);
+  const teaStringMesh = add(mug, new T.TubeGeometry(teaStringCurve, 24, 0.0045, 6, false), teaString);
+  teaStringMesh.userData.noInk = true;
   add(mug, B(0.044, 0.035, 0.008), M(0xd8c49e), -0.115, 1.975, 0.083);
   const teaTag = createTexture(64, 48, (ctx, w, h) => {
     ctx.fillStyle = '#d8c49e';
