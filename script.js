@@ -3903,7 +3903,7 @@ function openModal(key) {
   }
   
   // Keep the music toggle permanently in the control bar so layout never breaks
-  $('#object-controls').append(spotifyToggle);
+//  $('#object-controls').append(spotifyToggle);
 
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
   spotifyToggle.classList.toggle('spotify-toggle-near-player', showSpotifyPlayer);
