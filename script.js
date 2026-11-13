@@ -113,8 +113,12 @@ const D = {
 const renderSection = (key, includeSpotifyEmbed = true) => {
   const s = D[key];
   const link = s.link ? `<a class="btn" href="${s.link[1]}" target="_blank" rel="noopener">${s.link[0]}</a>` : '';
+  const musicCardAction = !includeSpotifyEmbed && key === 'music'
+    ? `<div class="spotify-card-action">${link}</div>`
+    : '';
   return `
     <div class="sec">
+      ${musicCardAction}
       <div class="code">// ${s.code}</div>
       <h2>${s.title}</h2>
       <p>${s.intro}</p>
@@ -123,9 +127,8 @@ const renderSection = (key, includeSpotifyEmbed = true) => {
       ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
       ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
       ${includeSpotifyEmbed && s.embed ? `<div class="spotify-embed spotify-embed-inline"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
-      ${key === 'music' ? link : ''}
       ${!includeSpotifyEmbed && key === 'music' ? '<div class="spotify-player-slot"></div>' : ''}
-      ${key === 'music' ? '' : link}
+      ${includeSpotifyEmbed || key !== 'music' ? link : ''}
     </div>`;
 };
 
@@ -1040,6 +1043,23 @@ add(
   -5.96,
   0
 );
+
+const windowParticleTexture = createTexture(256, 180, ctx => ctx.clearRect(0, 0, 256, 180));
+const windowParticlePlane = add(
+  scene,
+  new T.PlaneGeometry(4.65, 3.18),
+  new T.MeshBasicMaterial({
+    map: windowParticleTexture,
+    transparent: true,
+    depthWrite: false,
+    side: T.DoubleSide
+  }),
+  0,
+  3.9,
+  -5.955,
+  0
+);
+windowParticlePlane.visible = false;
 
 /* ==========================================================================
    6. Cables, Floor Clutter & Details
@@ -2729,30 +2749,78 @@ function createHalloweenCobweb(size = 1.15) {
 }
 
 function createWindowParticleSystem(theme, kind, color, count, size, speed, sway) {
-  const positions = new Float32Array(count * 3);
   const particles = [];
   for (let i = 0; i < count; i++) {
-    const x = (R() - 0.5) * 4.4;
-    const y = 2.3 + R() * 3.1;
-    const z = -5.77 + R() * 0.08;
-    positions.set([x, y, z], i * 3);
-    particles.push({ x, y, z, phase: R() * Math.PI * 2, speed: speed * (0.65 + R() * 0.7) });
+    const x = (R() - 0.5) * 4.3;
+    const y = 2.32 + R() * 3.1;
+    particles.push({ x, y, phase: R() * Math.PI * 2, speed: speed * (0.65 + R() * 0.7) });
   }
-  const geometry = new T.BufferGeometry();
-  geometry.setAttribute('position', new T.BufferAttribute(positions, 3));
-  const material = new T.PointsMaterial({
-    color,
-    map: createParticleSprite(kind),
-    size,
-    transparent: true,
-    opacity: 0.9,
-    alphaTest: 0.03,
-    depthWrite: false
+  holidayParticleSystems.push({ theme, kind, color, size, particles, sway });
+}
+
+function drawWindowParticle(ctx, system, particle, x, y, time) {
+  const radius = Math.max(2.5, system.size * 18);
+  const color = `#${system.color.toString(16).padStart(6, '0')}`;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(Math.sin(time + particle.phase) * 0.45);
+  ctx.globalAlpha = 0.9;
+  ctx.fillStyle = color;
+
+  if (system.kind === 'snow') {
+    ctx.shadowColor = color;
+    ctx.shadowBlur = radius;
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 0.55, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (system.kind === 'leaf') {
+    ctx.beginPath();
+    ctx.ellipse(0, 0, radius * 0.58, radius, -0.55, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255, 239, 195, 0.8)';
+    ctx.lineWidth = Math.max(1, radius * 0.09);
+    ctx.beginPath();
+    ctx.moveTo(-radius * 0.45, radius * 0.62);
+    ctx.lineTo(radius * 0.48, -radius * 0.68);
+    ctx.stroke();
+  } else if (system.kind === 'petal') {
+    ctx.beginPath();
+    ctx.ellipse(0, 0, radius * 0.58, radius, 0.45, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (system.kind === 'heart') {
+    ctx.beginPath();
+    ctx.moveTo(0, radius * 0.7);
+    ctx.bezierCurveTo(-radius * 1.3, -radius * 0.2, -radius * 0.9, -radius * 1.25, -radius * 0.15, -radius * 0.75);
+    ctx.bezierCurveTo(0, -radius * 0.58, radius * 0.15, -radius * 0.58, radius * 0.3, -radius * 0.75);
+    ctx.bezierCurveTo(radius * 1.3, -radius * 1.25, radius * 1.3, -radius * 0.2, 0, radius * 0.7);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function updateWindowParticles(time, delta) {
+  const activeSystems = holidayParticleSystems.filter(system => activeHolidayThemes[system.theme]);
+  windowParticlePlane.visible = activeSystems.length > 0;
+  if (!activeSystems.length) return;
+
+  const ctx = windowParticleTexture.image.getContext('2d');
+  ctx.clearRect(0, 0, 256, 180);
+  activeSystems.forEach(system => {
+    system.particles.forEach(particle => {
+      particle.y -= particle.speed * delta;
+      if (particle.y < 2.32) particle.y = 5.42;
+      const x = T.MathUtils.clamp(
+        particle.x + Math.sin(time + particle.phase) * system.sway,
+        -2.2,
+        2.2
+      );
+      const canvasX = ((x + 2.325) / 4.65) * 256;
+      const canvasY = ((5.49 - particle.y) / 3.18) * 180;
+      drawWindowParticle(ctx, system, particle, canvasX, canvasY, time);
+    });
   });
-  const points = new T.Points(geometry, material);
-  points.frustumCulled = false;
-  scene.add(points);
-  holidayParticleSystems.push({ theme, points, positions, particles, sway });
+  windowParticleTexture.needsUpdate = true;
 }
 
 function createFireworks() {
@@ -2937,20 +3005,7 @@ function updateHolidayAnimations(time, delta) {
     });
   }
 
-  holidayParticleSystems.forEach(system => {
-    system.points.visible = Boolean(activeHolidayThemes[system.theme]);
-    if (!system.points.visible) return;
-
-    system.particles.forEach((particle, index) => {
-      particle.y -= particle.speed * delta;
-      if (particle.y < 2.25) particle.y = 5.55;
-      const offset = index * 3;
-      system.positions[offset] = particle.x + Math.sin(time + particle.phase) * system.sway;
-      system.positions[offset + 1] = particle.y;
-      system.positions[offset + 2] = particle.z;
-    });
-    system.points.geometry.attributes.position.needsUpdate = true;
-  });
+  updateWindowParticles(time, delta);
 
   if (birthdayIntroConfetti) {
     if (activeHolidayThemes.birthday && birthdayIntroStartedAt === null) birthdayIntroStartedAt = time;
@@ -3698,16 +3753,13 @@ function buildHolidayDecorations() {
   registerHolidayElement('diwaliLamp', diwaliLamps);
 
   createWindowParticleSystem('christmas', 'snow', 0xe7f4ff, 95, 0.1, 0.52, 0.12);
-  createWindowParticleSystem('thanksgiving', 'leaf', 0xd58b3e, 48, 0.50, 0.42, 0.24);
+  createWindowParticleSystem('thanksgiving', 'leaf', 0xd58b3e, 48, 0.30, 0.42, 0.24);
   createWindowParticleSystem('cherryBlossoms', 'petal', 0xf2b8ca, 58, 0.40, 0.3, 0.2);
   createWindowParticleSystem('valentines', 'heart', 0xf28da2, 38, 0.45, 0.4, 0.18);
 
   applyHolidayDecorations = themes => {
     holidayElements.forEach(({ theme, group }) => {
       group.visible = Boolean(themes[theme]);
-    });
-    holidayParticleSystems.forEach(system => {
-      system.points.visible = Boolean(themes[system.theme]);
     });
     alvinBirthdayRoseMaterials.forEach(material => {
       material.emissive.set(themes.alvinBirthday ? 0x7d3c20 : 0x000000);
