@@ -116,18 +116,22 @@ const renderSection = (key, includeSpotifyEmbed = true) => {
   const musicCardAction = !includeSpotifyEmbed && key === 'music'
     ? `<div class="spotify-card-action">${link}</div>`
     : '';
+  const desktopMusicLink = !includeSpotifyEmbed && key === 'music'
+    ? `<div class="spotify-desktop-link">${link}</div>`
+    : '';
   return `
     <div class="sec">
       <div class="code">// ${s.code}</div>
-      ${musicCardAction}
       <h2>${s.title}</h2>
       <p>${s.intro}</p>
+      ${musicCardAction}
       ${s.cards ? `<div class="cards">${s.cards.map(c => `<div class="card"><i>${c[2]}</i><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('')}</div>` : ''}
       ${s.rows ? `<table>${s.rows.map(r => `<tr>${r.map((x, i) => `<td${i ? '' : ' class="k"'}>${x}</td>`).join('')}</tr>`).join('')}</table>` : ''}
       ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
       ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
       ${includeSpotifyEmbed && s.embed ? `<div class="spotify-embed spotify-embed-inline"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
       ${!includeSpotifyEmbed && key === 'music' ? '<div class="spotify-player-slot"></div>' : ''}
+      ${desktopMusicLink}
       ${includeSpotifyEmbed || key !== 'music' ? link : ''}
     </div>`;
 };

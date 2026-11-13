@@ -386,6 +386,21 @@ main {
   margin: 0;
 }
 
+.spotify-desktop-link {
+  display: none;
+}
+
+@media (min-width: 701px) {
+  .spotify-card-action {
+    display: none;
+  }
+
+  .spotify-desktop-link {
+    display: block;
+    margin: 18px 0;
+  }
+}
+
 #modal {
   position: absolute;
   right: 20px;
