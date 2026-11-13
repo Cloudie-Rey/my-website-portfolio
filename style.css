@@ -729,14 +729,9 @@ tr.go:hover td {
     max-height: min(50dvh, 420px);
   }
 
-  #spotify-player:not(.spotify-player-offscreen) {
-    height: 152px;
-  }
-
-  #spotify-iframe,
   #spotify-iframe iframe {
     width: 100% !important;
-    height: 152px !important;
+    height: 352px !important;
   }
 
   #mb {
@@ -761,7 +756,8 @@ tr.go:hover td {
   }
 
   #object-controls {
-    top: 8px;
+    position: fixed;
+    top: var(--controls-top, 8px);
     bottom: auto;
     right: 8px;
     left: 8px;

@@ -112,6 +112,7 @@ const D = {
 
 const renderSection = (key, includeSpotifyEmbed = true) => {
   const s = D[key];
+  const link = s.link ? `<a class="btn" href="${s.link[1]}" target="_blank" rel="noopener">${s.link[0]}</a>` : '';
   return `
     <div class="sec">
       <div class="code">// ${s.code}</div>
@@ -122,8 +123,9 @@ const renderSection = (key, includeSpotifyEmbed = true) => {
       ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
       ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
       ${includeSpotifyEmbed && s.embed ? `<div class="spotify-embed spotify-embed-inline"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
+      ${key === 'music' ? link : ''}
       ${!includeSpotifyEmbed && key === 'music' ? '<div class="spotify-player-slot"></div>' : ''}
-      ${s.link ? `<a class="btn" href="${s.link[1]}" target="_blank" rel="noopener">${s.link[0]}</a>` : ''}
+      ${key === 'music' ? '' : link}
     </div>`;
 };
 
@@ -3786,6 +3788,16 @@ const NAV_OBJECTS = [...OBJS].sort((a, b) => a.displayNumber - b.displayNumber);
 let tween = null;
 let focusedObjectIndex = -1;
 const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+function updateMobileControlsTop() {
+  $('#object-controls').style.setProperty(
+    '--controls-top',
+    `${$('#v3d').getBoundingClientRect().top + 8}px`
+  );
+}
+
+updateMobileControlsTop();
+new ResizeObserver(updateMobileControlsTop).observe($('header'));
 
 function updateObjectNavigation() {
   const controls = $('#object-controls');
