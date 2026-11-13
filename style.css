@@ -377,7 +377,7 @@ main {
   left: auto;
 }
 
-#object-controls #spotify-toggle.spotify-toggle-near-player {
+#v3d.has-spotify-player #spotify-toggle {
   display: none;
 }
 
@@ -748,9 +748,6 @@ tr.go:hover td {
     line-height: 1.2;
   }
 
-  #object-controls #spotify-toggle.spotify-toggle-near-player {
-    display: none;
-  }
 }
 
 @media (max-width: 700px) {
