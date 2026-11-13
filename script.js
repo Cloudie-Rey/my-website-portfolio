@@ -122,6 +122,7 @@ const renderSection = (key, includeSpotifyEmbed = true) => {
       ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
       ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
       ${includeSpotifyEmbed && s.embed ? `<div class="spotify-embed spotify-embed-inline"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
+      ${!includeSpotifyEmbed && key === 'music' ? '<div class="spotify-player-slot"></div>' : ''}
       ${s.link ? `<a class="btn" href="${s.link[1]}" target="_blank" rel="noopener">${s.link[0]}</a>` : ''}
     </div>`;
 };
@@ -3826,6 +3827,12 @@ function openModal(key) {
   modalContent.innerHTML = renderSection(key, false);
   modalContent.scrollTop = 0;
   const showSpotifyPlayer = key === 'music';
+  if (showSpotifyPlayer) {
+    modalContent.querySelector('.spotify-player-slot').append(spotifyPlayer);
+    $('#object-controls').append(spotifyToggle);
+  } else {
+    $('#v3d').append(spotifyToggle, spotifyPlayer);
+  }
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
   spotifyToggle.classList.toggle('spotify-toggle-near-player', showSpotifyPlayer);
   spotifyPlayer.setAttribute('aria-hidden', String(!showSpotifyPlayer));
@@ -3836,6 +3843,7 @@ function openModal(key) {
 function closeModal() {
   $('#modal').classList.remove('on');
   $('#modal').classList.remove('has-spotify-player');
+  $('#v3d').append(spotifyToggle, spotifyPlayer);
   spotifyPlayer.classList.add('spotify-player-offscreen');
   spotifyToggle.classList.remove('spotify-toggle-near-player');
   spotifyPlayer.setAttribute('aria-hidden', 'true');

@@ -40,9 +40,13 @@
       <div id="object-controls" hidden>
         <button id="back" type="button">← Back to workshop</button>
         <nav id="object-nav" aria-label="Navigate between workshop items">
-          <button id="object-prev" type="button" aria-label="Previous item" title="Previous item">←</button>
+          <button id="object-prev" type="button" aria-label="Previous item" title="Previous item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+          </button>
           <span id="object-position" aria-live="polite"></span>
-          <button id="object-next" type="button" aria-label="Next item" title="Next item">→</button>
+          <button id="object-next" type="button" aria-label="Next item" title="Next item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
         </nav>
       </div>
       <button id="spotify-toggle" aria-pressed="false" disabled>Loading music...</button>

@@ -313,6 +313,20 @@ main {
   backdrop-filter: blur(6px);
 }
 
+#object-nav button svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+#object-nav button svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 #object-position {
   min-width: 38px;
   color: var(--tx);
@@ -356,6 +370,19 @@ main {
   right: 40px;
   bottom: 408px;
   left: auto;
+}
+
+#object-controls #spotify-toggle.spotify-toggle-near-player {
+  position: static;
+}
+
+.spotify-player-slot {
+  margin: 18px 0;
+}
+
+.spotify-player-slot #spotify-player:not(.spotify-player-offscreen) {
+  width: min(100%, 520px);
+  margin: 0;
 }
 
 #modal {
@@ -708,7 +735,8 @@ tr.go:hover td {
 
   #spotify-iframe,
   #spotify-iframe iframe {
-    height: 152px;
+    width: 100% !important;
+    height: 152px !important;
   }
 
   #mb {
@@ -728,31 +756,41 @@ tr.go:hover td {
     padding: 10px;
   }
 
-  #spotify-toggle.spotify-toggle-near-player {
-    right: 32px;
-    bottom: 400px;
-  }
-
   .hint {
     display: none;
   }
 
   #object-controls {
-    top: 56px;
+    top: 8px;
     bottom: auto;
-    left: 12px;
+    right: 8px;
+    left: 8px;
     gap: 5px;
   }
 
-  #back,
-  #object-nav button {
-    font-size: 11px;
+  #back {
+    display: grid;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    font-size: 0;
+  }
+
+  #back::after {
+    content: "←";
+    font-size: 18px;
   }
 
   #object-nav button {
+    font-size: 11px;
     display: grid;
-    width: 40px;
-    height: 40px;
+    box-sizing: border-box;
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
     padding: 0;
     place-items: center;
   }
