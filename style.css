@@ -796,6 +796,18 @@ tr.go:hover td {
     right: 8px;
     left: 8px;
     gap: 5px;
+    justify-content: space-between;
+  }
+
+  #v3d:not(.has-spotify-player) #object-controls {
+    left: 8px;
+    right: 8px;
+  }
+
+  #v3d.has-spotify-player #object-controls {
+    left: 108px;
+    right: 12px;
+    justify-content: center;
   }
 
   #back {
@@ -813,6 +825,10 @@ tr.go:hover td {
     font-size: 18px;
   }
 
+  #object-nav {
+    margin-inline: auto;
+  }
+
   #object-nav button {
     color: var(--cy);
     appearance: none;
@@ -826,6 +842,18 @@ tr.go:hover td {
     height: 44px;
     padding: 0;
     place-items: center;
+  }
+
+  #v3d #spotify-toggle {
+    display: none;
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    z-index: 10;
+  }
+
+  #v3d.has-spotify-player #spotify-toggle {
+    display: inline-flex;
   }
 
   .sw button {

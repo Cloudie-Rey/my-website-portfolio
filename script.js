@@ -130,7 +130,6 @@ const renderSection = (key, includeSpotifyEmbed = true) => {
       ${s.links ? s.links.map(link => `<a class="btn" href="${link[1]}" download>${link[0]}</a>`).join(' ') : ''}
       ${s.buttons ? `<div class="action-buttons">${s.buttons.map(([label, url, size]) => `<a class="btn${size === 'small' ? ' btn-small' : ''}" href="${url}" target="_blank" rel="noopener">${label}</a>`).join('')}</div>` : ''}
       ${includeSpotifyEmbed && s.embed ? `<div class="spotify-embed spotify-embed-inline"><iframe title="Spotify playlist player" src="${s.embed}" width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>` : ''}
-      ${!includeSpotifyEmbed && key === 'music' ? '<div class="spotify-player-slot"></div>' : ''}
       ${desktopMusicLink}
       ${includeSpotifyEmbed || key !== 'music' ? link : ''}
     </div>`;
@@ -3895,12 +3894,17 @@ function openModal(key) {
   modalContent.innerHTML = renderSection(key, false);
   modalContent.scrollTop = 0;
   const showSpotifyPlayer = key === 'music';
+  const controls = $('#object-controls');
+  const nav = $('#object-nav');
+  const back = $('#back');
+
   if (showSpotifyPlayer) {
-    modalContent.querySelector('.spotify-player-slot').append(spotifyPlayer);
-    $('#object-controls').append(spotifyToggle);
+    controls.append(nav, back);
   } else {
-    $('#v3d').append(spotifyToggle, spotifyPlayer);
+    controls.append(back, nav);
   }
+
+  $('#v3d').classList.toggle('has-spotify-player', showSpotifyPlayer);
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
   spotifyToggle.classList.toggle('spotify-toggle-near-player', showSpotifyPlayer);
   spotifyPlayer.setAttribute('aria-hidden', String(!showSpotifyPlayer));
@@ -3911,7 +3915,8 @@ function openModal(key) {
 function closeModal() {
   $('#modal').classList.remove('on');
   $('#modal').classList.remove('has-spotify-player');
-  $('#v3d').append(spotifyToggle, spotifyPlayer);
+  $('#v3d').classList.remove('has-spotify-player');
+  $('#object-controls').append($('#back'), $('#object-nav'));
   spotifyPlayer.classList.add('spotify-player-offscreen');
   spotifyToggle.classList.remove('spotify-toggle-near-player');
   spotifyPlayer.setAttribute('aria-hidden', 'true');
