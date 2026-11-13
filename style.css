@@ -797,16 +797,34 @@ tr.go:hover td {
   }
 /* ===== MOBILE OBJECT CONTROLS ===== */
 
-#object-controls {
+#spotify-toggle {
   position: fixed;
 
   top: max(8px, env(safe-area-inset-top));
   left: 8px;
+  right: auto;
+
+  height: 32px;
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+
+  z-index: 1001;
+}
+
+#object-controls {
+  position: fixed;
+
+  top: max(8px, env(safe-area-inset-top));
+  left: 78px;
   right: 8px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   gap: 8px;
 
@@ -818,19 +836,17 @@ tr.go:hover td {
   z-index: 1000;
 }
 
-/* BACK BUTTON */
-
 #back {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 auto;
+  height: 32px;
+  padding: 0 10px;
 
   gap: 4px;
 
-  height: 32px;
-  padding: 0 10px;
+  flex: 0 0 auto;
 }
 
 #back .back-arrow {
@@ -844,25 +860,19 @@ tr.go:hover td {
   line-height: 1;
 }
 
-/* IMPORTANT: DELETE DUPLICATE BACK LABEL */
 #back .back-label::before {
   content: none;
 }
-
-/* NAVIGATION */
 
 #object-nav {
   display: flex;
   align-items: center;
   gap: 4px;
 
-  padding: 2px 4px;
+  margin-left: auto;
 }
 
 #object-nav button {
-  appearance: none;
-  -webkit-appearance: none;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -881,26 +891,6 @@ tr.go:hover td {
 
 #object-position {
   min-width: 40px;
-  font-size: 10px;
-}
-
-/* MUSIC BUTTON */
-
-#spotify-toggle {
-  position: fixed;
-
-  top: max(8px, env(safe-area-inset-top));
-  right: 8px;
-  left: auto;
-
-  height: 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0 10px;
-
   font-size: 10px;
 }
   .sw button {
