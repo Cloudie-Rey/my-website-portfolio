@@ -795,49 +795,114 @@ tr.go:hover td {
   .hint {
     display: none;
   }
+/* ===== MOBILE OBJECT CONTROLS ===== */
 
-  #object-controls {
-    position: fixed;
-    top: var(--controls-top, 8px);
-    right: auto;
-    left: 50%;
-    width: max-content;
-    transform: translateX(-50%);
-    gap: 5px;
-    justify-content: center;
-    bottom: auto;
-  }
+#object-controls {
+  position: fixed;
 
-  #back {
-     display: flex;
-    flex-direction: row; /* not row-reverse */
-    align-items: center;
-    gap: 4px;
+  top: max(8px, env(safe-area-inset-top));
+  left: 8px;
+  right: 8px;
 
-    height: 32px;
-    padding: 0 10px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  #back .back-arrow {
-    font-size: 12px;
-    line-height: 1;
-  }
+  gap: 8px;
 
-  #object-nav button {
-    color: var(--cy);
-    appearance: none;
-    -webkit-appearance: none;
-    font-size: 11px;
-    display: grid;
-    box-sizing: border-box;
-    flex: 0 0 44px;
-    width: 44px;
-    min-width: 44px;
-    height: 44px;
-    padding: 0;
-    place-items: center;
-  }
+  width: auto;
 
+  transform: none;
+  bottom: auto;
+
+  z-index: 1000;
+}
+
+/* BACK BUTTON */
+
+#back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  gap: 4px;
+
+  height: 32px;
+  padding: 0 10px;
+}
+
+#back .back-arrow {
+  order: -1;
+  font-size: 12px;
+  line-height: 1;
+}
+
+#back .back-label {
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* IMPORTANT: DELETE DUPLICATE BACK LABEL */
+#back .back-label::before {
+  content: none;
+}
+
+/* NAVIGATION */
+
+#object-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 2px 4px;
+}
+
+#object-nav button {
+  appearance: none;
+  -webkit-appearance: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+
+  padding: 0;
+}
+
+#object-nav button svg {
+  width: 14px;
+  height: 14px;
+}
+
+#object-position {
+  min-width: 40px;
+  font-size: 10px;
+}
+
+/* MUSIC BUTTON */
+
+#spotify-toggle {
+  position: fixed;
+
+  top: max(8px, env(safe-area-inset-top));
+  right: 8px;
+  left: auto;
+
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 10px;
+
+  font-size: 10px;
+}
   .sw button {
     padding: 7px 8px;
     font-size: 11px;
