@@ -118,8 +118,8 @@ const renderSection = (key, includeSpotifyEmbed = true) => {
     : '';
   return `
     <div class="sec">
-      ${musicCardAction}
       <div class="code">// ${s.code}</div>
+      ${musicCardAction}
       <h2>${s.title}</h2>
       <p>${s.intro}</p>
       ${s.cards ? `<div class="cards">${s.cards.map(c => `<div class="card"><i>${c[2]}</i><h3>${c[0]}</h3><p>${c[1]}</p></div>`).join('')}</div>` : ''}
