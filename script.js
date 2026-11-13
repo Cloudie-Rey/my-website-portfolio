@@ -3854,6 +3854,8 @@ function updateMobileControlsTop() {
 
 updateMobileControlsTop();
 new ResizeObserver(updateMobileControlsTop).observe($('header'));
+window.addEventListener('resize', updateMobileControlsTop);
+window.addEventListener('scroll', updateMobileControlsTop, { passive: true });
 
 function updateObjectNavigation() {
   const controls = $('#object-controls');
@@ -3895,26 +3897,32 @@ function openModal(key) {
   modalContent.innerHTML = renderSection(key, false);
   modalContent.scrollTop = 0;
   const showSpotifyPlayer = key === 'music';
+  
   if (showSpotifyPlayer) {
     modalContent.querySelector('.spotify-player-slot').append(spotifyPlayer);
-    $('#object-controls').append(spotifyToggle);
-  } else {
-    $('#v3d').append(spotifyToggle, spotifyPlayer);
   }
+  
+  // Keep the music toggle permanently in the control bar so layout never breaks
+  $('#object-controls').append(spotifyToggle);
+
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
   spotifyToggle.classList.toggle('spotify-toggle-near-player', showSpotifyPlayer);
   spotifyPlayer.setAttribute('aria-hidden', String(!showSpotifyPlayer));
   $('#modal').classList.toggle('has-spotify-player', showSpotifyPlayer);
   $('#modal').classList.add('on');
+  updateMobileControlsTop();
 }
 
 function closeModal() {
   $('#modal').classList.remove('on');
   $('#modal').classList.remove('has-spotify-player');
-  $('#v3d').append(spotifyToggle, spotifyPlayer);
+  $('#v3d').append(spotifyPlayer);
+  // Keep spotifyToggle inside controls or safely parked back in #v3d if preferred, 
+  // but keeping it in controls ensures it's always available next to your buttons.
   spotifyPlayer.classList.add('spotify-player-offscreen');
   spotifyToggle.classList.remove('spotify-toggle-near-player');
   spotifyPlayer.setAttribute('aria-hidden', 'true');
+  updateMobileControlsTop();
 }
 
 function resetToHome() {
@@ -3930,7 +3938,6 @@ $('#back').onclick = resetToHome;
 $('#object-prev').onclick = () => moveFocusBy(-1);
 $('#object-next').onclick = () => moveFocusBy(1);
 addEventListener('keydown', e => e.key === 'Escape' && closeModal());
-
 /* ==========================================================================
    11. Raycasting & Object Picking Controls
    ========================================================================== */
