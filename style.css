@@ -823,11 +823,6 @@ tr.go:hover td {
     line-height: 1;
   }
 
-  #back .back-label::before {
-    content: "Back";
-    font-size: 10px;
-  }
-
   #back .back-arrow {
     font-size: 12px;
     line-height: 1;
