@@ -813,18 +813,21 @@ tr.go:hover td {
   #back {
     display: inline-flex;
     flex: 0 0 auto;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 1px;
     box-sizing: border-box;
-    height: 44px;
+    width: 33px;
+    height: 33px;
     margin-top: 4px;
-    padding: 0 14px;
-    font-size: 12px;
+    padding: 0;
+    font-size: 9px;
+    line-height: 1;
   }
 
   #back .back-arrow {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
   }
 
@@ -842,12 +845,22 @@ tr.go:hover td {
     font-size: 11px;
     display: grid;
     box-sizing: border-box;
-    flex: 0 0 44px;
-    width: 44px;
-    min-width: 44px;
-    height: 44px;
+    flex: 0 0 33px;
+    width: 33px;
+    min-width: 33px;
+    height: 33px;
     padding: 0;
     place-items: center;
+  }
+
+  #object-nav button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  #object-position {
+    min-width: 28px;
+    font-size: 9px;
   }
 
   #v3d #spotify-toggle {

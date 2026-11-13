@@ -343,6 +343,7 @@ const homePos = () => HB.clone().multiplyScalar(Math.max(1, 1.5 / cam.aspect));
 
 const ren = new T.WebGLRenderer({ antialias: true, alpha: true });
 ren.setClearColor(0x000000, 0);
+ren.localClippingEnabled = true;
 ren.setPixelRatio(Math.min(devicePixelRatio, 2));
 stage.appendChild(ren.domElement);
 
@@ -2868,7 +2869,13 @@ function createFireworks() {
     alphaTest: 0.03,
     depthWrite: false,
     blending: T.AdditiveBlending,
-    toneMapped: false
+    toneMapped: false,
+    clippingPlanes: [
+      new T.Plane(new T.Vector3(1, 0, 0), 2.325),
+      new T.Plane(new T.Vector3(-1, 0, 0), 2.325),
+      new T.Plane(new T.Vector3(0, 1, 0), -2.31),
+      new T.Plane(new T.Vector3(0, -1, 0), 5.49)
+    ]
   });
   const points = new T.Points(geometry, material);
   points.frustumCulled = false;
