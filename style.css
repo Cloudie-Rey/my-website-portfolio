@@ -818,19 +818,22 @@ tr.go:hover td {
   #back {
     display: inline-flex;
     flex: 0 0 auto;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
+    gap: 2px;
     box-sizing: border-box;
     width: auto;
     height: 41px;
     margin-top: 0;
     padding: 0 12px;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1;
   }
 
   #back .back-arrow {
-    display: none;
+    font-size: 14px;
+    line-height: 1;
   }
 
   #object-nav {
