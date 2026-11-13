@@ -16,7 +16,7 @@ An interactive portfolio built around a 3D workshop. Explore mechanical engineer
 - JavaScript, HTML, and CSS
 - Three.js for the 3D workshop
 - Vite for local development and production builds
-- Cloudflare Pages Functions and Resend for the optional birthday email interaction
+- a Cloudflare Worker and Resend for the optional birthday email interaction
 
 ## Run locally
 

@@ -1,7 +1,29 @@
-const jsonResponse = (body, status) => new Response(JSON.stringify(body), {
+const jsonResponse = (body, status, origin) => new Response(JSON.stringify(body), {
   status,
-  headers: { 'Content-Type': 'application/json; charset=utf-8' }
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    ...(origin && { 'Access-Control-Allow-Origin': origin, Vary: 'Origin' })
+  }
 });
+
+const getAllowedOrigins = env => (env.ALLOWED_ORIGINS ?? '')
+  .split(',')
+  .map(origin => origin.trim())
+  .filter(Boolean);
+
+export function handlePreflight({ request, env }) {
+  const origin = request.headers.get('Origin');
+  if (!getAllowedOrigins(env).includes(origin)) return new Response(null, { status: 403 });
+  return new Response(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Max-Age': '86400',
+      Vary: 'Origin'
+    }
+  });
+}
 
 const releaseReservation = async (rateLimit, key) => {
   try {
@@ -12,18 +34,19 @@ const releaseReservation = async (rateLimit, key) => {
 };
 
 export async function onRequestPost({ request, env }) {
-  const requestUrl = new URL(request.url);
-  if (request.headers.get('Origin') !== requestUrl.origin) {
+  const origin = request.headers.get('Origin');
+  if (!getAllowedOrigins(env).includes(origin)) {
     return jsonResponse({ error: 'Request origin is not allowed.' }, 403);
   }
+  const reply = (body, status) => jsonResponse(body, status, origin);
 
   const { RESEND_API_KEY, BIRTHDAY_FROM_EMAIL, BIRTHDAY_TO_EMAIL, BIRTHDAY_EMAIL_LIMIT } = env;
   if (!RESEND_API_KEY || !BIRTHDAY_FROM_EMAIL || !BIRTHDAY_TO_EMAIL || !BIRTHDAY_EMAIL_LIMIT) {
-    return jsonResponse({ error: 'Birthday email is not configured.' }, 503);
+    return reply({ error: 'Birthday email is not configured.' }, 503);
   }
 
   const clientIp = request.headers.get('CF-Connecting-IP');
-  if (!clientIp) return jsonResponse({ error: 'Unable to identify request source.' }, 400);
+  if (!clientIp) return reply({ error: 'Unable to identify request source.' }, 400);
 
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(clientIp));
   const ipHash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
@@ -32,12 +55,12 @@ export async function onRequestPost({ request, env }) {
 
   try {
     if (await BIRTHDAY_EMAIL_LIMIT.get(rateLimitKey)) {
-      return jsonResponse({ error: 'A birthday email was already sent recently.' }, 429);
+      return reply({ error: 'A birthday email was already sent recently.' }, 429);
     }
     await BIRTHDAY_EMAIL_LIMIT.put(rateLimitKey, 'pending', { expirationTtl: 120 });
   } catch (error) {
     console.error('Birthday email rate limiter is unavailable:', error);
-    return jsonResponse({ error: 'Birthday email is temporarily unavailable.' }, 503);
+    return reply({ error: 'Birthday email is temporarily unavailable.' }, 503);
   }
 
   let providerResponse;
@@ -58,13 +81,13 @@ export async function onRequestPost({ request, env }) {
   } catch (error) {
     console.error('Resend request failed:', error);
     await releaseReservation(BIRTHDAY_EMAIL_LIMIT, rateLimitKey);
-    return jsonResponse({ error: 'Email delivery failed.' }, 502);
+    return reply({ error: 'Email delivery failed.' }, 502);
   }
 
   if (!providerResponse.ok) {
     console.error('Resend rejected the birthday email:', providerResponse.status);
     await releaseReservation(BIRTHDAY_EMAIL_LIMIT, rateLimitKey);
-    return jsonResponse({ error: 'Email delivery failed.' }, 502);
+    return reply({ error: 'Email delivery failed.' }, 502);
   }
 
   try {
@@ -73,5 +96,5 @@ export async function onRequestPost({ request, env }) {
     console.error('Could not persist birthday email rate limit:', error);
   }
 
-  return jsonResponse({ sent: true }, 200);
+  return reply({ sent: true }, 200);
 }

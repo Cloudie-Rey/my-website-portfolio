@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { onRequestPost } from '../functions/api/birthday-email.js';
+import { onRequestPost } from '../worker/src/birthday-email.js';
 
 const createContext = (env, headers = {}) => ({
   request: new Request('https://portfolio.example/api/birthday-email', {
@@ -17,6 +17,7 @@ const createContext = (env, headers = {}) => ({
 const createEnv = () => {
   const entries = new Map();
   return {
+    ALLOWED_ORIGINS: 'https://portfolio.example',
     RESEND_API_KEY: 'test-key',
     BIRTHDAY_FROM_EMAIL: 'birthday@example.com',
     BIRTHDAY_TO_EMAIL: 'owner@example.com',

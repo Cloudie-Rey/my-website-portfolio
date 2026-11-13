@@ -18,13 +18,14 @@ The overrides work while running the Vite development server, including forwarde
 
 ## Birthday email
 
-Clicking the birthday cake sends a fixed notification through a Cloudflare Pages Function and Resend. The recipient and Resend API key are read only by the server; they are not included in the browser bundle.
+Clicking the birthday cake sends a fixed notification through a Cloudflare Worker (`worker/`) and Resend. The recipient and Resend API key are read only by the Worker; they are not included in the browser bundle. The site itself stays on GitHub Pages.
 
-To enable delivery:
+To enable delivery (run from `worker/`):
 
 1. Verify `reyaadivakar.com` with Resend and use `birthday@reyaadivakar.com` as the sender.
-2. In Cloudflare Pages project settings, add `RESEND_API_KEY` and `BIRTHDAY_TO_EMAIL` as secrets, and set `BIRTHDAY_FROM_EMAIL` for both Preview and Production.
-3. Create a Cloudflare KV namespace and bind it to the Pages project as `BIRTHDAY_EMAIL_LIMIT` under Functions. This limits repeat sends from the same IP.
-4. Redeploy after setting the variables and binding.
+2. `npx wrangler kv namespace create BIRTHDAY_EMAIL_LIMIT`, then paste the returned id into `wrangler.toml`. This limits repeat sends from the same IP.
+3. `npx wrangler secret put RESEND_API_KEY` and `npx wrangler secret put BIRTHDAY_TO_EMAIL`.
+4. Check `ALLOWED_ORIGINS` and `BIRTHDAY_FROM_EMAIL` in `wrangler.toml`, then `npx wrangler deploy`.
+5. Set `BIRTHDAY_EMAIL_URL` in `script.js` to the deployed Worker URL.
 
-Run `npm test` to test the function's origin check, Resend request, and rate limit without sending a real email. A live test requires the Cloudflare settings above and a verified sender domain.
+Run `npm test` to test the Worker's origin check, Resend request, and rate limit without sending a real email. A live test requires the Cloudflare settings above and a verified sender domain.

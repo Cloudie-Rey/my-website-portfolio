@@ -4011,6 +4011,9 @@ function showHolidayMessage(message) {
   }, 6500);
 }
 
+// Set this to your deployed Cloudflare Worker URL (see worker/wrangler.toml).
+const BIRTHDAY_EMAIL_URL = 'https://birthday-email.YOUR-SUBDOMAIN.workers.dev';
+
 async function sendBirthdayNotification() {
   if (birthdayEmailSending) return;
 
@@ -4018,10 +4021,7 @@ async function sendBirthdayNotification() {
   showHolidayMessage(`${birthdayMessage} Sending the birthday email...`);
 
   try {
-    const response = await fetch('/api/birthday-email', {
-      method: 'POST',
-      credentials: 'same-origin'
-    });
+    const response = await fetch(BIRTHDAY_EMAIL_URL, { method: 'POST' });
 
     if (response.status === 429) {
       showHolidayMessage(`${birthdayMessage} A birthday email was already sent from this network recently.`);
