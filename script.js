@@ -3845,6 +3845,16 @@ let tween = null;
 let focusedObjectIndex = -1;
 const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
+function updateMobileControlsTop() {
+  $('#object-controls').style.setProperty(
+    '--controls-top',
+    `${$('#v3d').getBoundingClientRect().top + 8}px`
+  );
+}
+
+updateMobileControlsTop();
+new ResizeObserver(updateMobileControlsTop).observe($('header'));
+
 function updateObjectNavigation() {
   const controls = $('#object-controls');
   controls.hidden = focusedObjectIndex < 0;

@@ -746,11 +746,11 @@ tr.go:hover td {
     left: 12px;
     right: 12px;
     top: auto;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 64px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
     width: auto;
     height: min(65vh, 560px);
     height: min(65dvh, 560px);
-    max-height: calc(100dvh - 88px);
+    max-height: calc(100dvh - 24px);
   }
 
   #spotify-iframe iframe {
@@ -798,11 +798,14 @@ tr.go:hover td {
 
   #object-controls {
     position: fixed;
-    top: auto;
-    right: 8px;
-    left: 8px;
+    top: var(--controls-top, 8px);
+    right: auto;
+    left: 50%;
+    width: max-content;
+    transform: translateX(-50%);
     gap: 5px;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    justify-content: center;
+    bottom: auto;
   }
 
   #back {
