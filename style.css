@@ -809,28 +809,30 @@ tr.go:hover td {
   }
 
   #back {
-    display: grid;
-    flex: 0 0 50px;
-    width: 50px;
-    height: 44px;
-    padding: 0;
-    place-items: center;
-    flex-direction: column;
-    gap: 0;
+   display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    height: 32px;
+
+    padding: 0 10px;
+    gap: 4px;
   }
 
   #back .back-label {
-    font-size: 0;
+    font-size: 10;
     line-height: 1;
   }
 
   #back .back-label::before {
     content: "Back";
-    font-size: 9px;
+    font-size: 10px;
   }
 
   #back .back-arrow {
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1;
   }
 
