@@ -1505,7 +1505,7 @@ const shelfDrawingTexture = createTexture(128, 160, (ctx, w, h) => {
         add(scene, C(0.11, 0.11, 0.025, 20), medalMat, x + offset, y - 0.31, -5.45).rotation.x = Math.PI / 2;
         add(scene, C(0.055, 0.055, 0.028, 16), M(0x4a3c2b), x + offset, y - 0.31, -5.43).rotation.x = Math.PI / 2;
       });
-      const drawing = add(
+      add(
         scene,
         new T.PlaneGeometry(0.65, 0.75),
         new T.MeshBasicMaterial({ map: shelfDrawingTexture, side: T.DoubleSide }),
