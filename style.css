@@ -441,6 +441,15 @@ main {
   cursor: pointer;
 }
 
+#modal.has-spotify-player #mb {
+  flex: 0 1 auto;
+  padding-bottom: 0;
+}
+
+#modal.has-spotify-player .spotify-desktop-link {
+  margin-bottom: 12px;
+}
+
 #mb {
   min-height: 0;
   flex: 1 1 auto;
