@@ -958,7 +958,7 @@ addRgbLedStrip('z', 15, 8.82, 6.76, 1.5);
 
 const getHolidayDateOverride = () => {
   const value = new URLSearchParams(location.search).get('holidayDate');
-  if (!isLocalDevelopment || !value) return null;
+  if (!value) return null; // TEMP: live birthday test, restore isLocalDevelopment check
 
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
   if (!match) {
@@ -4011,8 +4011,8 @@ function showHolidayMessage(message) {
   }, 6500);
 }
 
-// Set this to your deployed Cloudflare Worker URL (see worker/wrangler.toml).
-const BIRTHDAY_EMAIL_URL = 'https://birthday-email.YOUR-SUBDOMAIN.workers.dev';
+// Cloudflare Worker that sends the birthday email (see worker/).
+const BIRTHDAY_EMAIL_URL = 'https://birthday-email.reyaadivakar.workers.dev';
 
 async function sendBirthdayNotification() {
   if (birthdayEmailSending) return;

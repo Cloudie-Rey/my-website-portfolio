@@ -4,7 +4,7 @@ compatibility_date = "2025-01-01"
 
 [vars]
 ALLOWED_ORIGINS = "https://reyaadivakar.com,https://www.reyaadivakar.com"
-BIRTHDAY_FROM_EMAIL = "onboarding@resend.dev"
+BIRTHDAY_FROM_EMAIL = "reyaadivakar@gmail.com"
 
 # Create with: npx wrangler kv namespace create BIRTHDAY_EMAIL_LIMIT
 # then paste the returned id below.
