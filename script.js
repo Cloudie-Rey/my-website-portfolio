@@ -958,7 +958,7 @@ addRgbLedStrip('z', 15, 8.82, 6.76, 1.5);
 
 const getHolidayDateOverride = () => {
   const value = new URLSearchParams(location.search).get('holidayDate');
-  if (!value) return null; // TEMP: live birthday test, restore isLocalDevelopment check
+  if (!isLocalDevelopment || !value) return null;
 
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
   if (!match) {
