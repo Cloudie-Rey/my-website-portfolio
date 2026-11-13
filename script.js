@@ -3908,15 +3908,6 @@ function openModal(key) {
   modalContent.innerHTML = renderSection(key, false);
   modalContent.scrollTop = 0;
   const showSpotifyPlayer = key === 'music';
-  const controls = $('#object-controls');
-  const nav = $('#object-nav');
-  const back = $('#back');
-
-  if (showSpotifyPlayer) {
-    controls.append(nav, back);
-  } else {
-    controls.append(back, nav);
-  }
 
   $('#v3d').classList.toggle('has-spotify-player', showSpotifyPlayer);
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
@@ -3930,7 +3921,6 @@ function closeModal() {
   $('#modal').classList.remove('on');
   $('#modal').classList.remove('has-spotify-player');
   $('#v3d').classList.remove('has-spotify-player');
-  $('#object-controls').append($('#back'), $('#object-nav'));
   spotifyPlayer.classList.add('spotify-player-offscreen');
   spotifyToggle.classList.remove('spotify-toggle-near-player');
   spotifyPlayer.setAttribute('aria-hidden', 'true');
