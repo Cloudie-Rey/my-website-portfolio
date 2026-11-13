@@ -21,6 +21,16 @@ html, body {
   padding: 0;
 }
 
+html {
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  height: 100dvh;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -95,6 +105,10 @@ header {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   color: var(--cy);
+}
+
+#menu-toggle {
+  display: none;
 }
 
 main {
@@ -882,6 +896,50 @@ tr.go:hover td {
 
   #v3d.has-spotify-player #spotify-toggle {
     display: none;
+  }
+
+  header {
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  #menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: var(--gl);
+    border: 1px solid var(--cy);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #menu-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #menu-toggle svg path {
+    fill: none;
+    stroke: var(--cy);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .sw {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 8px;
+    margin: 6px 0 0;
+    z-index: 20;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  header.menu-open .sw {
+    display: flex;
   }
 
   .sw button {

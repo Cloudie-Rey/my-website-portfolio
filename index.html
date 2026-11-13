@@ -12,18 +12,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=20261113-phone-controls-10">
+  <link rel="stylesheet" href="style.css?v=20261113-phone-controls-11">
 </head>
 <body>
 
   <!-- Top Navigation Bar -->
   <header>
     <div class="brand"><b>🌩️</b> Reyaa<span>Divakar</span></div>
-    <nav class="sw">
+    <nav class="sw" id="view-switch">
       <button id="b3" class="on">Interactive View</button>
       <button id="bg">Classic View</button>
     </nav>
     <div class="st">● SYSTEMS ONLINE</div>
+    <button id="menu-toggle" type="button" aria-label="Switch view" aria-expanded="false" aria-controls="view-switch">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </header>
 
   <!-- Main Display View Canvas -->
@@ -78,6 +81,6 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
   <!-- Application Logic -->
-  <script type="module" src="script.js?v=20261113-phone-controls-10"></script>
+  <script type="module" src="script.js?v=20261113-phone-controls-11"></script>
 </body>
 </html>

@@ -320,10 +320,17 @@ function setMode(newMode) {
   $('#vgrid').classList.toggle('on', mode === 'grid');
   $('#b3').classList.toggle('on', mode === '3d');
   $('#bg').classList.toggle('on', mode === 'grid');
+  setMenuOpen(false);
+}
+
+function setMenuOpen(open) {
+  $('header').classList.toggle('menu-open', open);
+  $('#menu-toggle').setAttribute('aria-expanded', String(open));
 }
 
 $('#b3').onclick = () => setMode('3d');
 $('#bg').onclick = () => setMode('grid');
+$('#menu-toggle').onclick = () => setMenuOpen(!$('header').classList.contains('menu-open'));
 
 /* ==========================================================================
    4. Three.js 3D Scene Architecture & Helper Functions
