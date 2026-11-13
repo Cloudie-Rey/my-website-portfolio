@@ -10,4 +10,4 @@ BIRTHDAY_FROM_EMAIL = "birthday@reyaadivakar.com"
 # then paste the returned id below.
 [[kv_namespaces]]
 binding = "BIRTHDAY_EMAIL_LIMIT"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "7afd431618d048d680b929012a93f57c"
