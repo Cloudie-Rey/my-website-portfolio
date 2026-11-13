@@ -3822,7 +3822,9 @@ function focusObject(obj) {
 }
 
 function openModal(key) {
-  $('#mb').innerHTML = renderSection(key, false);
+  const modalContent = $('#mb');
+  modalContent.innerHTML = renderSection(key, false);
+  modalContent.scrollTop = 0;
   const showSpotifyPlayer = key === 'music';
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
   spotifyToggle.classList.toggle('spotify-toggle-near-player', showSpotifyPlayer);
