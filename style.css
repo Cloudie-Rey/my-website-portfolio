@@ -716,7 +716,7 @@ tr.go:hover td {
   font-size: 11px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   #object-controls {
     display: contents;
   }
