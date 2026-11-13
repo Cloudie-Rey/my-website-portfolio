@@ -3916,16 +3916,26 @@ function openModal(key) {
     $('#v3d').append(spotifyPlayer);
   }
 
-  // Keep spotifyToggle in its normal top-left home slot; only apply mobile bar layout on smaller screens
-  $('#v3d').append(spotifyToggle);
   spotifyPlayer.classList.toggle('spotify-player-offscreen', !showSpotifyPlayer);
   spotifyToggle.classList.toggle('spotify-toggle-near-player', isMobile);
   spotifyPlayer.setAttribute('aria-hidden', String(!showSpotifyPlayer));
-  $('#modal').classList.toggle('has-spotify-player', showSpotifyPlayer);
+  $('#modal').classList.toggle('has-spotify-player', showSpotifyPlayer && isMobile);
   $('#modal').classList.add('on');
   updateMobileControlsTop();
 }
 
+function closeModal() {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  $('#modal').classList.remove('on');
+  $('#modal').classList.remove('has-spotify-player');
+  $('#v3d').append(spotifyPlayer);
+  spotifyPlayer.classList.add('spotify-player-offscreen');
+  if (!isMobile || focusedObjectIndex < 0) {
+    spotifyToggle.classList.remove('spotify-toggle-near-player');
+  }
+  spotifyPlayer.setAttribute('aria-hidden', 'true');
+  updateMobileControlsTop();
+}
 function closeModal() {
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   $('#modal').classList.remove('on');
