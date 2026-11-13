@@ -809,16 +809,13 @@ tr.go:hover td {
   }
 
   #back {
-   display: flex;
-    flex-direction: row;
+     display: flex;
+    flex-direction: row; /* not row-reverse */
     align-items: center;
-    justify-content: center;
-
-    width: auto;
-    height: 32px;
-
-    padding: 0 10px;
     gap: 4px;
+
+    height: 32px;
+    padding: 0 10px;
   }
 
   #back .back-label {
