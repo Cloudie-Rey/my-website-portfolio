@@ -3618,7 +3618,7 @@ function buildHolidayDecorations() {
   add(alvinBirthdayHat, new T.SphereGeometry(0.035, 8, 6), M(0xffefb0), 0, 0.87, 0.02);
   registerHolidayElement('alvinBirthday', alvinBirthdayHat, deskDogPlush);
 
-  const alvinTinyCake = addDeskCake(workbenchGroup, -1.82, 1.89, -2.45);
+  const alvinTinyCake = addDeskCake(workbenchGroup, -1.82, 1.89, -3);
   alvinTinyCake.scale.setScalar(0.35);
   alvinBirthdayCakeMarkerAnchor = new T.Object3D();
   alvinBirthdayCakeMarkerAnchor.position.set(0, 0.55, 0.14);
